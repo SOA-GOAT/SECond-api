@@ -11,14 +11,13 @@ end
 
 def call_edgar_url(url) # config, url
   HTTP.headers('Accept' => '*/*',
-               'Accept-Encoding' => 'gzip, deflate, br',
                'Connection' => 'keep-alive').get(url)
 end
 
+# 'Accept-Encoding' => 'gzip, deflate, br',
+
 edgar_response = {}
 edgar_results = {}
-
-
 
 ## HAPPY submission request
 submission_url = edgar_api_path("submissions/CIK0000320193.json")
@@ -34,7 +33,7 @@ edgar_results['sicDescription'] = submission['sicDescription']
 edgar_results['name'] = submission['name']
 # should be Apple Inc.
 
-edgar_results['tikers'] = submission['tikers']
+edgar_results['tickers'] = submission['tickers']
 # should be a list ["AAPL"]
 
 ### second layer data ###
