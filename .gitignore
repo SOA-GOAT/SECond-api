@@ -58,3 +58,6 @@ build-iPhoneSimulator/
 # SOA-specific
 config/secrets.yml
 spec/fixtures/
+
+# MacOS
+.DS_Store
