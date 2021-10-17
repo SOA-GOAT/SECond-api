@@ -11,7 +11,7 @@ CORRECT = YAML.safe_load(File.read('spec/fixtures/edgar_results.yml'))
 describe 'Tests Edgar API library' do
   describe 'Submission information' do
     it 'HAPPY: should provide correct submission attributes' do
-      submission = SECond::EdgarApi.new().submission(CIK)
+      submission = SECond::EdgarApi.new.submission(CIK)
       _(submission.sic).must_equal CORRECT['sic']
       _(submission.sic_description).must_equal CORRECT['sicDescription']
       _(submission.name).must_equal CORRECT['name']
@@ -19,7 +19,7 @@ describe 'Tests Edgar API library' do
     end
     it 'SAD: should raise exception on incorrect submission' do
       _(proc do
-        SECond::EdgarApi.new().submission('0000000000')
+        SECond::EdgarApi.new.submission('0000000000')
       end).must_raise SECond::EdgarApi::Errors::NotFound
     end
   end
