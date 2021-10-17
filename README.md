@@ -9,7 +9,7 @@
     <a href="https://github.com/SOA-GOAT/SECond"><strong>Explore the docs »</strong></a>
     <br />
   </p>
-
+</div>
 
 ## About The Project
 
