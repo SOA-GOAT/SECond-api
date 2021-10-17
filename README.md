@@ -2,7 +2,7 @@
   <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
-  <h3 align="center">SECond - A analytic platform of public traded firms for researcher.</h3>
+  <h3 align="center">SECond - A analytic platform of public traded firms for researchers.</h3>
 <p align="center">
     Filter the information you want on SEC in seconds.
     <br />
