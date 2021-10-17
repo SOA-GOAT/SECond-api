@@ -22,6 +22,5 @@ module SECond
     def tickers
       @submission['tickers']
     end
-
   end
 end

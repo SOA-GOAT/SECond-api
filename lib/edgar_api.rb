@@ -18,8 +18,7 @@ module SECond
       404 => Errors::NotFound
     }.freeze
 
-    def initialize()
-    end
+    def initialize; end
 
     def submission(cik)
       submission_req_url = submission_api_path(cik)
