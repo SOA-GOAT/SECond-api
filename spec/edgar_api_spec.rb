@@ -18,9 +18,7 @@ describe 'Tests Edgar API library' do
                         match_requests_on: %i[method uri headers]
   end
 
-  after do
-    VCR.eject_cassette
-  end
+  after { VCR.eject_cassette }
 
   describe 'Submission information' do
     it 'HAPPY: should provide correct submission attributes' do
@@ -33,7 +31,7 @@ describe 'Tests Edgar API library' do
     it 'SAD: should raise exception on incorrect submission' do
       _(proc do
         SECond::EdgarApi.new.submission('0000000000')
-      end).must_raise SECond::EdgarApi::Errors::NotFound
+      end).must_raise SECond::EdgarApi::Response::NotFound
     end
   end
 end

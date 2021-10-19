@@ -25,28 +25,28 @@ http_interactions:
       Content-Length:
       - '157312'
       X-Amzn-Requestid:
-      - d252e221-5a50-4591-81b8-bc70af46b0be
+      - a33626c5-6a6c-49ba-8c1f-45f125afa897
       Access-Control-Allow-Origin:
       - "*"
       X-Amz-Apigw-Id:
-      - Hcr5JERPIAMF5gg=
+      - Hc2DCEOSoAMF3iA=
       X-Amzn-Trace-Id:
-      - Root=1-616e8d07-006c05255e6ae7c17c1c02f4
+      - Root=1-616e9d46-2662e3c97bb387091643534b
       Expires:
-      - Tue, 19 Oct 2021 09:16:55 GMT
+      - Tue, 19 Oct 2021 10:26:14 GMT
       Cache-Control:
       - max-age=0, no-cache, no-store
       Pragma:
       - no-cache
       Date:
-      - Tue, 19 Oct 2021 09:16:55 GMT
+      - Tue, 19 Oct 2021 10:26:14 GMT
       Connection:
       - close
       Strict-Transport-Security:
       - max-age=31536000 ; preload
       Set-Cookie:
-      - ak_bmsc=23A41242364B96AFAB6084B31483C756~000000000000000000000000000000~YAAQLkNKy+5b11R8AQAAeuTWlw1Vikdbiy7QgP0C0s1MytqVvLJa8bmmV1LGa3Oi0BL3wNhroayFrJ1Qe3jbJvK6jwgfga5L9WSuccd6pO4v0hV+Wj2vqfAxD9HUftmHinqJUnVmijCl/tLTmVmQYkNfvF3U1Clrx3Y4isaRs7nDZI6kuYlv63cSxj4UprXPZH1c81Re+5ATwI0zHt7Ijgiqek3xoELW4WhjPYRB4kVM0W1ggU9jUoDEDMqlQHHtr1pnjHWpsWtaHHjprs/1HwR2da1o4psoQSxJUJ5ewk9oOPWgKxYjqCDsFNCR6DE8ilynXaxWdpCPTAF/1nqFxjRgcMn7zD+FjsODOoP/IJgICI2pmxP2gwo=;
-        Domain=.sec.gov; Path=/; Expires=Tue, 19 Oct 2021 11:16:54 GMT; Max-Age=7199;
+      - ak_bmsc=4650637671EDF1AC52533FC6E9A31ED4~000000000000000000000000000000~YAAQLkNKy+J711R8AQAAAlwWmA30EhNaAs1kPDwvVVzbFhbeZFz0PrVFBarjedrj5QZ8JT6e54fyVsL5PYIbIxKsLliYwAc+C8KuA0OYwATou9R2d8g4mJQouTXE8jU9mflam06kkH2o/PnXwDU9vGRv6VWTKMs7vlGKo5u6jnhItQAZVYmWKAZnUI7vQf+YluioqgI9eEk6WEIaCx94oej6frzU8Rey5lPkZ7wjGqqzTuNfhnP171cv3/C3FqfFwGyfYVGVKaeFeHp1WmRkjyDM6ucsXXZxf1vgJPMfUAVIH1r4YkiygxB28gYA2/dNlai57OWPVpA/Nb54HLX5G2TXzplByvqDAUNm9srZwMlRGxDTlihXJAs=;
+        Domain=.sec.gov; Path=/; Expires=Tue, 19 Oct 2021 12:26:14 GMT; Max-Age=7200;
         HttpOnly
     body:
       encoding: ASCII-8BIT
@@ -310,7 +310,7 @@ http_interactions:
         9/22/11 10B5-1 DISPOSITION","FORM 4: J. WILLIAMS 9/16/11 10B5-1 SALE","FORM
         4: B. RAFAEL 9/11/2011 RSU VEST","FORM 4: J. WILLIAMS 9/1/11 10B5-1 SALE","FORM
         4: E. CUE 09/02/2011 RSU GRANT","FORM 3: E. CUE 09/01/11"]},"files":[{"name":"CIK0000320193-submissions-001.json","filingCount":847,"filingFrom":"1994-01-26","filingTo":"2011-09-01"}]}}'
-  recorded_at: Tue, 19 Oct 2021 09:16:55 GMT
+  recorded_at: Tue, 19 Oct 2021 10:26:14 GMT
 - request:
     method: get
     uri: https://data.sec.gov/submissions/CIK0000000000.json
@@ -336,33 +336,33 @@ http_interactions:
       Content-Length:
       - '301'
       X-Amzn-Requestid:
-      - a79b80c3-2722-4ba8-84c3-b3ff9894e767
+      - c508e232-dc11-4083-858f-0da6c22825c0
       Access-Control-Allow-Origin:
       - "*"
       X-Amz-Apigw-Id:
-      - Hcr5UG2poAMFkHw=
+      - Hc2DIEbgIAMFrUw=
       X-Amzn-Trace-Id:
-      - Root=1-616e8d08-56fd2dda34f2ebe429cbdfbe
+      - Root=1-616e9d47-59b4d3f3186925382c8e2a7e
       Expires:
-      - Tue, 19 Oct 2021 09:16:56 GMT
+      - Tue, 19 Oct 2021 10:26:15 GMT
       Cache-Control:
       - max-age=0, no-cache, no-store
       Pragma:
       - no-cache
       Date:
-      - Tue, 19 Oct 2021 09:16:56 GMT
+      - Tue, 19 Oct 2021 10:26:15 GMT
       Connection:
       - close
       Strict-Transport-Security:
       - max-age=31536000 ; preload
       Set-Cookie:
-      - ak_bmsc=23C86C997CAB05EF945BFD1C6F279604~000000000000000000000000000000~YAAQLkNKy/Bb11R8AQAAlujWlw1JUm0kGcviShSkAYXH6lL6bPhIEPR0pWMuMcE9BmZIvqH0IVv0vgTuxA/jE4BF59VPc+/PzcUBuVAP7TGeqLaV7WlbN3mL42ZrmLm63o55xaZUkRwOJE5T01mIZBxLMfrNOlTwS8OfJyOmknNcmN3zseAQGMEQNesRvGoKPGcH4fy8yppKwqP6wqc0a1OZqJTFTZU1cWIL40U3f9dZ72+hch7F0/OS1FWdkfVL6gJWArMvcRuICS3etliu9rzBMh+6YGfuyb1YnEHF+LkbWnTsPKbVMMgpDEbr8KW/P4yZRgidkYHUaLfaQkRgGtXQAFMlHwBDOAanv/DWMOoE+UCbeA9cZVc=;
-        Domain=.sec.gov; Path=/; Expires=Tue, 19 Oct 2021 11:16:56 GMT; Max-Age=7200;
+      - ak_bmsc=F476685B838E7DA00010A9D9B80E1BB6~000000000000000000000000000000~YAAQLkNKy+V711R8AQAAIl4WmA2S2DsDTBE0ELEgw2NkWtsrDfXMQIbOSET+X8Qw6FdhEaRSr1U5tGMZg3p0XtF9WeGG99LJ34AvrMEh5C0Q6shE9Sfu8m7RSBWohku3rOSBqEw1N95U5OvEwQjt6zWvxAveuBdi3T5jC9hc+4KbT1XoJe5oNTYgI2M7IBYX103DlfWHQ7ecFUcnSaNc1RG0V04mjuZSpcDMMzjkMRN1Xga8IT9y9/HEFmoDM0ix59XytTQiLqYp+PSATAchn9GRwdTH+RLAvfuTc5kXP2O+0mNbuvDdk+hEC7pr9Vr6TpKDrG1bm2N2TcziY4qQiW+IoqVTwb6oIM0590Dda60Sa1k8iI6Kz4o=;
+        Domain=.sec.gov; Path=/; Expires=Tue, 19 Oct 2021 12:26:14 GMT; Max-Age=7199;
         HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
-        <Error><Code>NoSuchKey</Code><Message>The specified key does not exist.</Message><Key>submissions/CIK0000000000.json</Key><RequestId>BHE0BBXBGT7AHF3M</RequestId><HostId>3ruHUEIp88mD2WSy6dMUugB7Z5H62xES3CyJkwA11J7r+S4MjMQW4PduG5LYw2scTLySHm0MMlA=</HostId></Error>
-  recorded_at: Tue, 19 Oct 2021 09:16:56 GMT
+        <Error><Code>NoSuchKey</Code><Message>The specified key does not exist.</Message><Key>submissions/CIK0000000000.json</Key><RequestId>KN2WZ5B40MYV3D6Q</RequestId><HostId>g/75121dLReU9722LAex7yD5VyhdTMqZK+XDa/KCz5zJudQrxuwKHp1eN1ADAkVzCGQNxaLI02s=</HostId></Error>
+  recorded_at: Tue, 19 Oct 2021 10:26:15 GMT
 recorded_with: VCR 6.0.0

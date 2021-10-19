@@ -9,7 +9,9 @@ module SECond
     API_ROOT = 'https://data.sec.gov'
 
     module Errors
+      # The Errors class is responsible for 404 NotFound
       class NotFound < StandardError; end
+      # The Errors class is responsible for 401 Unauthorized
       class Unauthorized < StandardError; end # rubocop:disable Layout/EmptyLineBetweenDefs
     end
 
@@ -21,32 +23,54 @@ module SECond
     def initialize; end
 
     def submission(cik)
-      submission_req_url = submission_api_path(cik)
-      begin
-        submission_data = call_submission_url(submission_req_url).parse
-        Submission.new(submission_data)
-      rescue
-        raise(HTTP_ERROR[404])
+      submission_response = Request.new(API_ROOT)
+                                   .submissions(cik).parse
+      Submission.new(submission_response)
+    rescue JSON::ParserError
+      raise(HTTP_ERROR[404])
+    end
+
+    # Sends out HTTP requests to Github
+    class Request
+      def initialize(resource_root)
+        @resource_root = resource_root
+      end
+
+      def submissions(cik)
+        get("#{@resource_root}/submissions/CIK#{cik}.json")
+      end
+
+      def get(url)
+        http_response =
+          HTTP.headers('Accept' => '*/*',
+                       'Connection' => 'keep-alive')
+              .get(url)
+
+        Response.new(http_response).tap do |response|
+          raise(response.error) unless response.successful?
+        end
       end
     end
 
-    private
+    # Decorates HTTP responses from Github with success/error reporting
+    class Response < SimpleDelegator
+      # The Errors class is responsible for 401 Unauthorized
+      Unauthorized = Class.new(StandardError)
+      # The Errors class is responsible for 404 NotFound
+      NotFound = Class.new(StandardError)
 
-    def submission_api_path(cik)
-      "#{API_ROOT}/submissions/CIK#{cik}.json"
-    end
+      HTTP_ERROR = {
+        401 => Unauthorized,
+        404 => NotFound
+      }.freeze
 
-    def call_submission_url(url)
-      result =
-        HTTP.headers('Accept' => '*/*',
-                     'Connection' => 'keep-alive')
-            .get(url)
+      def successful?
+        HTTP_ERROR.keys.include?(code) ? false : true
+      end
 
-      successful?(result) ? result : raise(HTTP_ERROR[result.code])
-    end
-
-    def successful?(result)
-      !HTTP_ERROR.keys.include?(result.code)
+      def error
+        HTTP_ERROR[code]
+      end
     end
   end
 end
