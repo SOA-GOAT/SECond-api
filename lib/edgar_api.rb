@@ -22,14 +22,18 @@ module SECond
 
     def submission(cik)
       submission_req_url = submission_api_path(cik)
-      submission_data = call_submission_url(submission_req_url).parse
-      Submission.new(submission_data, self)
+      begin
+        submission_data = call_submission_url(submission_req_url).parse
+        Submission.new(submission_data)
+      rescue
+        raise(HTTP_ERROR[404])
+      end
     end
 
     private
 
     def submission_api_path(cik)
-      "#{API_ROOT}/CIK#{cik}.json"
+      "#{API_ROOT}/submissions/CIK#{cik}.json"
     end
 
     def call_submission_url(url)
