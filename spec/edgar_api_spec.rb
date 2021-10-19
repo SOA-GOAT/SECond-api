@@ -20,17 +20,17 @@ describe 'Tests Edgar API library' do
 
   after { VCR.eject_cassette }
 
-  describe 'Submission information' do
-    it 'HAPPY: should provide correct submission attributes' do
-      submission = SECond::EdgarApi.new.submission(CIK)
-      _(submission.sic).must_equal CORRECT['sic']
-      _(submission.sic_description).must_equal CORRECT['sicDescription']
-      _(submission.name).must_equal CORRECT['name']
-      _(submission.tickers).must_equal CORRECT['tickers']
+  describe 'Firm information' do
+    it 'HAPPY: should provide correct firm attributes' do
+      firm = SECond::EdgarApi.new.firm(CIK)
+      _(firm.sic).must_equal CORRECT['sic']
+      _(firm.sic_description).must_equal CORRECT['sicDescription']
+      _(firm.name).must_equal CORRECT['name']
+      _(firm.tickers).must_equal CORRECT['tickers']
     end
-    it 'SAD: should raise exception on incorrect submission' do
+    it 'SAD: should raise exception on incorrect firm' do
       _(proc do
-        SECond::EdgarApi.new.submission('0000000000')
+        SECond::EdgarApi.new.firm('0000000000')
       end).must_raise SECond::EdgarApi::Response::NotFound
     end
   end

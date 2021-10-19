@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'http'
-require_relative 'submission'
+require_relative 'firm'
 
 module SECond
   # Library for EDGAR API
@@ -22,10 +22,10 @@ module SECond
 
     def initialize; end
 
-    def submission(cik)
-      submission_response = Request.new(API_ROOT)
-                                   .submissions(cik).parse
-      Submission.new(submission_response)
+    def firm(cik)
+      firm_response = Request.new(API_ROOT)
+                             .firms(cik).parse
+      Firm.new(firm_response)
     rescue JSON::ParserError
       raise(HTTP_ERROR[404])
     end
@@ -36,7 +36,7 @@ module SECond
         @resource_root = resource_root
       end
 
-      def submissions(cik)
+      def firms(cik)
         get("#{@resource_root}/submissions/CIK#{cik}.json")
       end
 
