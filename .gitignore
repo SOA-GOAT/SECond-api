@@ -57,7 +57,10 @@ build-iPhoneSimulator/
 
 # SOA-specific
 config/secrets.yml
-spec/fixtures/
 
 # MacOS
 .DS_Store
+
+# SimpleCov
+coverage/*
+!coverage/.resultset.json
