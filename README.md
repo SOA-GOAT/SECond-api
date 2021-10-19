@@ -13,7 +13,7 @@
 
 ## About The Project
 
-The EDGAR system of SEC contains all the required **fillings** of the US public traded **firms**, and these **fillings **are an important data source for both finance researchers and investors. However, the functionalities of the system are very basic, thus we want to build a platform to provide more advanced analytic features especially for researcher, using the **EDGAR API** provided by the SEC.
+The EDGAR system of SEC contains all the required **fillings** of the US public traded **firms**, and these **fillings** are an important data source for both finance researchers and investors. However, the functionalities of the system are very basic, thus we want to build a platform to provide more advanced analytic features especially for researcher, using the **EDGAR API** provided by the SEC.
 
 
 
