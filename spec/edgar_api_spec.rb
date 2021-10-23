@@ -18,7 +18,9 @@ describe 'Tests Edgar API library' do
                         match_requests_on: %i[method uri headers]
   end
 
-  after { VCR.eject_cassette }
+  after do
+    VCR.eject_cassette
+  end
 
   describe 'Firm information' do
     it 'HAPPY: should provide correct firm attributes' do
