@@ -65,7 +65,8 @@ module SECond
       }.freeze
 
       def successful?
-        HTTP_ERROR.keys.include?(code) ? false : true
+        # HTTP_ERROR.keys.include?(code) ? false : true
+        !HTTP_ERROR.keys.include?(code)
       end
 
       def error
