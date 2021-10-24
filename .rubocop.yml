@@ -1,5 +1,5 @@
 ---
-# Apply latest style guide and new cops
+# Apply latest style guide and  cops
 AllCops:
   TargetRubyVersion: 3.0
   NewCops: enable

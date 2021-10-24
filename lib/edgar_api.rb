@@ -25,7 +25,7 @@ module SECond
     def firm(cik)
       firm_response = Request.new(API_ROOT)
                              .firms(cik).parse
-      Firm.new(firm_response)
+      Firm.new(firm_response) # self causes error
     rescue JSON::ParserError
       raise(HTTP_ERROR[404])
     end
