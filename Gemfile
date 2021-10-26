@@ -24,3 +24,6 @@ gem 'rake'
 gem 'flog'
 gem 'reek'
 gem 'rubocop'
+
+# pry QQ
+gem 'pry'
