@@ -7,25 +7,25 @@ module SECond
   module Edgar  
     # Library for EDGAR API
     class EdgarApi
-      API_ROOT = 'https://data.sec.gov'
+      
       def initialize; end
 
-      def firm(cik)
-        firm_response = Request.new(API_ROOT)
-                              .firms(cik).parse
-        Firm.new(firm_response) # self causes error
-      rescue JSON::ParserError
-        raise(HTTP_ERROR[404])
+      def submission_data(cik)
+      #   firm_response = Request.new(API_ROOT)
+      #                         .firms(cik).parse
+      #   Firm.new(firm_response) # self causes error
+      # rescue JSON::ParserError
+      #   raise(HTTP_ERROR[404])
+        Request.new(API_ROOT).submission(cik).parse
       end
 
-      # Sends out HTTP requests to Github
+      # Sends out HTTP requests to Edgar
       class Request
-        def initialize(resource_root)
-          @resource_root = resource_root
-        end
+        SUBMISSION_PATH = 'https://data.sec.gov/submissions/'.freeze
+        def initialize; end
 
-        def firms(cik)
-          get("#{@resource_root}/submissions/CIK#{cik}.json")
+        def submission(cik)
+          get("#{@SUBMISSION_PATH}CIK#{cik}.json")
         end
 
         def get(url)
@@ -40,7 +40,7 @@ module SECond
         end
       end
 
-      # Decorates HTTP responses from Github with success/error reporting
+      # Decorates HTTP responses from Edgar with success/error reporting
       class Response < SimpleDelegator
         # The Errors class is responsible for 401 Unauthorized
         Unauthorized = Class.new(StandardError)
