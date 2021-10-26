@@ -11,7 +11,7 @@ module SECond
     class Firm < Dry::Struct
       include Dry.Types
 
-      attribute :sic,               Strict::Integer
+      attribute :sic,               Strict::String
       attribute :sic_description,   Strict::String
       attribute :name,              Strict::String
       attribute :tickers,           Strict::Array

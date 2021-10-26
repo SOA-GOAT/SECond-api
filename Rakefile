@@ -10,7 +10,7 @@ end
 
 desc 'run tests'
 task :spec do
-  sh 'ruby spec/edgar_api_spec.rb'
+  sh 'ruby spec/gateway_edgar_api_spec.rb'
 end
 
 namespace :vcr do

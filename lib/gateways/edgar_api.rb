@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'http'
-require_relative 'firm'
+# require_relative 'firm'
 
 module SECond
   module Edgar  
@@ -16,7 +16,7 @@ module SECond
       #   Firm.new(firm_response) # self causes error
       # rescue JSON::ParserError
       #   raise(HTTP_ERROR[404])
-        Request.new(API_ROOT).submission(cik).parse
+        Request.new().submission(cik).parse
       end
 
       # Sends out HTTP requests to Edgar
@@ -25,7 +25,7 @@ module SECond
         def initialize; end
 
         def submission(cik)
-          get("#{@SUBMISSION_PATH}CIK#{cik}.json")
+          get("#{SUBMISSION_PATH}CIK#{cik}.json")
         end
 
         def get(url)
