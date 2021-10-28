@@ -3,9 +3,9 @@
 require 'roda'
 require 'yaml'
 
-module CodePraise
+module SECond
   # Configuration for the App
   class App < Roda
-    CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
+    # CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
   end
 end

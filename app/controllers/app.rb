@@ -25,8 +25,8 @@ module SECond
             firm_cik = routing.params['cik']
 
 
-            routing.halt 400 unless (firm_cik.is_a? Integer &&
-                                     firm_cik.to_s.size <= 10)
+            routing.halt 400 unless (firm_cik.is_a? Integer) &&
+                                    (firm_cik.to_s.size <= 10)
 
             firm_cik = "%010d" % firm_cik
             routing.redirect "firm/#{firm_cik}"
