@@ -23,7 +23,7 @@ module SECond
       # Extracts entity specific elements from data structure
       class DataMapper
         def initialize(data, gateway_class)
-          # Argument: gateway_class NOT USED since only 
+          # Argument: gateway_class NOT USED since only one mapper here
           @data = data
         end
 
