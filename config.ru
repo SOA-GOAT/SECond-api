@@ -1,5 +1,4 @@
 # frozen_string_literal: true
 
-require_relative './init.rb'
+require_relative './init'
 run SECond::App.freeze.app
-

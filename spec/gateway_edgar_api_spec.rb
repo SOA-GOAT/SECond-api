@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-# require 'minitest/autorun'
-# require 'minitest/rg'
-# require 'yaml'
-# require_relative '../lib/gateways/edgar_api'
 require_relative 'spec_helper'
 
 describe 'Tests Edgar API library' do
