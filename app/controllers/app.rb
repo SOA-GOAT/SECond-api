@@ -35,9 +35,7 @@ module SECond
         routing.on String do |firm_cik|
           # GET /firm/firm_cik
           routing.get do
-            edgar_firm = Edgar::FirmMapper
-                         .new
-                         .find(firm_cik)
+            edgar_firm = Edgar::FirmMapper.new.find(firm_cik)
 
             view 'firm', locals: { firm: edgar_firm }
           end
