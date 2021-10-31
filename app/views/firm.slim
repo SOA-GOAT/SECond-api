@@ -1,0 +1,33 @@
+.container.top-buffer
+  .row.d-flex.justify-content-center
+    h2
+      span.edgar.firm
+        = firm.name
+  .container.d-flex.flex-column.bg-light.rounded.custom-container-width.top-buffer
+    table.table
+      thead
+      tbody
+        tr
+          th
+            span Firm:
+          td
+            span
+              = firm.name
+        tr
+          th
+            span SIC:
+          td
+            span
+              = firm.sic
+        tr
+          th
+            span SIC Description:
+          td 
+            span 
+              = firm.sic_description
+        tr
+          th
+            span Tickers:
+          td
+            - firm.tickers.each do |ticker|
+              = ticker
