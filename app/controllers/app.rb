@@ -22,13 +22,13 @@ module SECond
         routing.is do
           # POST /firm/
           routing.post do
-            firm_cik = routing.params['cik']
+            firm_cik = routing.params['firm_cik']
 
 
-            routing.halt 400 unless (firm_cik.is_a? Integer) &&
-                                    (firm_cik.to_s.size <= 10)
+            routing.halt 400 unless (firm_cik.is_a? String) &&
+                                    (firm_cik.size <= 10)
 
-            firm_cik = "%010d" % firm_cik
+            firm_cik = "%010d" % firm_cik.to_i
             routing.redirect "firm/#{firm_cik}"
           end
         end
