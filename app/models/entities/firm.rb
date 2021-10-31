@@ -3,8 +3,6 @@
 require 'dry-types'
 require 'dry-struct'
 
-# require_relative 'member.rb'
-
 module SECond
   module Entity
     # Domain entity for any firms

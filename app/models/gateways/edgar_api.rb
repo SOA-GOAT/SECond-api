@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'http'
-# require_relative 'firm'
-
 module SECond
   module Edgar
     # Library for EDGAR API

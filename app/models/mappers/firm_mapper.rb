@@ -1,7 +1,5 @@
 # frozen_string_literal: false
 
-# require_relative 'member_mapper.rb'
-
 module SECond
   module Edgar
     # Data Mapper: Edgar Submissions -> Firm entity
