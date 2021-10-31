@@ -24,11 +24,10 @@ module SECond
           routing.post do
             firm_cik = routing.params['firm_cik']
 
-
             routing.halt 400 unless (firm_cik.is_a? String) &&
                                     (firm_cik.size <= 10)
 
-            firm_cik = "%010d" % firm_cik.to_i
+            firm_cik = format('%010d', firm_cik.to_i)
             routing.redirect "firm/#{firm_cik}"
           end
         end
@@ -37,8 +36,8 @@ module SECond
           # GET /firm/firm_cik
           routing.get do
             edgar_firm = Edgar::FirmMapper
-              .new()
-              .find(firm_cik)
+                         .new
+                         .find(firm_cik)
 
             view 'firm', locals: { firm: edgar_firm }
           end
