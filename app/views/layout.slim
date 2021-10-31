@@ -3,15 +3,16 @@ html
   head
     title SECond
 
-    / Bootstrap CSS and theme (United Theme)
+    / Bootstrap CSS and theme (Darkly Theme)
+
     link{
-      href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/cerulean/bootstrap.min.css"
-      rel="stylesheet" integrity="sha384-6PpWmaLt7GOhVYBzVUBXgwhaV2S6iHthYodyuX2lCQlqAmt6RHXOh+wbLF6hunfO"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css"
+      integrity="sha384-qF/QmIAj5ZaYFAeQcrQ6bfVMAh4zZlrGwTPY7T/M+iTTLJqJBJjwwnsE5Y0mV7QK"
       crossorigin="anonymous"
     }
-
     / Custom CSS
-    / link rel='stylesheet' href='/presentation/assets/css/style.css'
+    link rel='stylesheet' href='assets/css/style.css'
     == assets(:css)
   body
     / Popper
@@ -39,4 +40,4 @@ html
         == yield
 
       footer
-        = "SECond. One day, a boat sailed to the sea. What did the boat say to the sea? A: It said nothing. It just waved. We cannot warrant full correctness of all content. SECond may use cookies for sessions but does not track users."
+        = "We cannot warrant full correctness of all content. SECond may use cookies for sessions but does not track users."
