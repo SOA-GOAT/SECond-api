@@ -1,20 +1,33 @@
-.container
-  .row
+.container.top-buffer
+  .row.d-flex.justify-content-center
     h2
       span.edgar.firm
         = firm.name
-  .container
-    .row
-      .col-lg-1.col-md-2.col-sm-2
-        span.project.attribute SIC:
-      .col-lg-11.col-md-10.col-sm-6
-        span.project.detail
-          = firm.sic
-    .row.top-buffer
-      .col-lg-1.col-md-2.col-sm-2
-        span.project.attribute Tickers:
-      .col-lg-11.col-md-10.col-sm-6
-        .row
-          - firm.tickers.each do |ticker|
-            .col-sm-12
+  .container.d-flex.flex-column.bg-light.rounded.custom-container-width.top-buffer
+    table.table
+      thead
+      tbody
+        tr
+          th
+            span Firm:
+          td
+            span
+              = firm.name
+        tr
+          th
+            span SIC:
+          td
+            span
+              = firm.sic
+        tr
+          th
+            span SIC Description:
+          td 
+            span 
+              = firm.sic_description
+        tr
+          th
+            span Tickers:
+          td
+            - firm.tickers.each do |ticker|
               = ticker

@@ -3,6 +3,20 @@ h1 {
   text-align: center;
 }
 
+h3 {
+  text-align: center;
+  color: #5e5e5e; 
+}
+
+h4{
+  text-align: center;
+  color: #959595;
+ }
+
+.container.custom-container-width {
+  max-width: 40%;
+}
+
 .text-underline-hover {
   text-decoration: none;
 }
@@ -27,6 +41,10 @@ h1 {
 
 .firm.name {
   
+}
+
+.hcenter {
+  text-align: center;
 }
 
 .vcenter {
@@ -60,6 +78,7 @@ h1 {
 }
 
 footer {
+  text-align: center;
   padding: 0.5in;
   font-size:11px;
   color:rgb(100, 100, 100);
