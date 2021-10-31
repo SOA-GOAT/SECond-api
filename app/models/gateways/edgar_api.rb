@@ -1,19 +1,27 @@
 # frozen_string_literal: true
 
+require 'http'
+# require_relative 'firm'
+
 module SECond
-  module Edgar
+  module Edgar  
     # Library for EDGAR API
     class EdgarApi
+      
       def initialize; end
 
       def submission_data(cik)
-        Request.new.submission(cik).parse
+      #   firm_response = Request.new(API_ROOT)
+      #                         .firms(cik).parse
+      #   Firm.new(firm_response) # self causes error
+      # rescue JSON::ParserError
+      #   raise(HTTP_ERROR[404])
+        Request.new().submission(cik).parse
       end
 
       # Sends out HTTP requests to Edgar
       class Request
-        # rubocop: do not .freeze immutable object
-        SUBMISSION_PATH = 'https://data.sec.gov/submissions/'
+        SUBMISSION_PATH = 'https://data.sec.gov/submissions/'.freeze
         def initialize; end
 
         def submission(cik)
@@ -23,7 +31,8 @@ module SECond
         def get(url)
           http_response =
             HTTP.headers('Accept' => '*/*',
-                         'Connection' => 'keep-alive').get(url)
+                        'Connection' => 'keep-alive')
+                .get(url)
 
           Response.new(http_response).tap do |response|
             raise(response.error) unless response.successful?
