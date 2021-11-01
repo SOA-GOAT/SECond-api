@@ -64,3 +64,6 @@ config/secrets.yml
 # SimpleCov
 coverage/*
 !coverage/.resultset.json
+
+# Ignore database files.
+*.db
