@@ -16,7 +16,7 @@ module SECond
       attribute :sic,               Strict::String
       attribute :sic_description,   Strict::String
       attribute :name,              Strict::String
-      attribute :tickers,           Strict::Array
+      attribute :tickers,           Strict::Array.of(String)
       attribute :submissions,       Strict::Array.of(Submission)
 
       def to_attr_hash

@@ -16,5 +16,8 @@ module SECond
 
       plugin :timestamps, update_on_create: true
     end
+    def self.find_or_create(submission_info)
+      first(accession_number: submission_info[:accession_number]) || create(submission_info)
+    end
   end
 end

@@ -21,10 +21,10 @@ module SECond
       #   rebuild_entity(db_project)
       # end
       def self.find(entity)
-          find_sic(entity.sic)
+          find_cik(entity.cik)
       end
-      def self.find_sic(sic)
-          db_record = Database::FirmOrm.first(sic: sic)
+      def self.find_cik(cik)
+          db_record = Database::FirmOrm.first(cik: cik)
           rebuild_entity(db_record)
       end
 
@@ -58,9 +58,11 @@ module SECond
             Database::FirmOrm.create(@entity.to_attr_hash)
         end
         def call
-          submission = Submissions.db_find_or_create(@entity.cik)
+          # submission = Submissions.db_find_or_create(@entity)
+
           create_firm.tap do |db_firm|
-            db_firm.update(submission: submission)
+            # db_firm.update(submission: submission)
+
             @entity.submissions.each do |submission|
               db_firm.add_submission(Submission.db_find_or_create(submission))
             end

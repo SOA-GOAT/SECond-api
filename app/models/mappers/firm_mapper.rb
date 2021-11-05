@@ -40,7 +40,7 @@ module SECond
         end
 
         def cik
-          format('%010d', @data['cik'].to_i)
+          @data['cik']
         end
 
         def sic

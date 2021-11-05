@@ -31,6 +31,7 @@ module SECond
           Submissions.rebuild_entity(db_submission)
         end
       end
+      
       def self.db_find_or_create(entity)
         Database::SubmissionOrm.find_or_create(entity.to_attr_hash)
       end

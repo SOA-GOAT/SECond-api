@@ -17,7 +17,7 @@ module SECond
       attribute :form_type,         Strict::String
       attribute :filing_date,       Strict::String
       attribute :reporting_date,    Strict::String
-      attribute :size,              Strict::String
+      attribute :size,              Strict::Integer
 
       def to_attr_hash
         to_hash.reject { |key, _| %i[id].include? key }

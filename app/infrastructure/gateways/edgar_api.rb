@@ -36,10 +36,7 @@ module SECond
         def initialize; end
 
         def firm(cik)
-          get("#{SUBMISSION_PATH}CIK#{cik}.json")
-        end
-
-        def submission(cik)
+          cik = format('%010d', cik.to_i)
           get("#{SUBMISSION_PATH}CIK#{cik}.json")
         end
 
