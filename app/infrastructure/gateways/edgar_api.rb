@@ -9,8 +9,24 @@ module SECond
     class EdgarApi
       def initialize; end
 
+      def firm_data(cik)
+        Request.new.firm(cik).parse
+      end
+
       def submission_data(cik)
-        Request.new.submission(cik).parse
+        raw_data = Request.new.firm(cik).parse
+
+        # attribute of recent filings
+        recent = raw_data['filings']['recent']
+
+        # get attribute of old filings 
+        old_files = raw_data['filings']['files']
+        old_files.each do |files|
+          filename = files['name']
+          old = Request.new.get("https://data.sec.gov/submissions/#{filename}").parse
+          recent.merge!(old) { |key, old_value, new_value| old_value + new_value }
+        end
+        recent
       end
 
       # Sends out HTTP requests to Edgar
@@ -18,6 +34,10 @@ module SECond
         # Rubocop: Do not .freeze immutable object
         SUBMISSION_PATH = 'https://data.sec.gov/submissions/'
         def initialize; end
+
+        def firm(cik)
+          get("#{SUBMISSION_PATH}CIK#{cik}.json")
+        end
 
         def submission(cik)
           get("#{SUBMISSION_PATH}CIK#{cik}.json")

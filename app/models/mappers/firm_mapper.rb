@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-# require_relative 'member_mapper.rb'
+require_relative 'submission_mapper.rb'
 
 module SECond
   module Edgar
@@ -12,7 +12,7 @@ module SECond
       end
 
       def find(cik)
-        data = @gateway.submission_data(cik)
+        data = @gateway.firm_data(cik)
         build_entity(data)
       end
 
@@ -50,6 +50,10 @@ module SECond
 
         def tickers
           @data['tickers']
+        end
+
+        def submissions
+          @submission_mapper.load_several(@data['cik'])
         end
       end
     end
