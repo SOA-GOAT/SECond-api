@@ -8,7 +8,7 @@ Sequel.migration do
       primary_key :id
       foreign_key :firm_id, :firms
 
-      String      :accession_number, unique: true
+      String      :accession_number, unique: true # yo
       String      :form_type
       String      :filing_date
       String      :reporting_date
