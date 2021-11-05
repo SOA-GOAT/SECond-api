@@ -17,6 +17,7 @@ module SECond
 
         Entity::Submission.new(
           id:               db_record.id,
+          cik:              db_record.cik,
           accession_number: db_record.accession_number,
           form_type:        db_record.form_type,
           filing_date:      db_record.filing_date,

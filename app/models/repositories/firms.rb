@@ -48,9 +48,8 @@ module SECond
 
           Entity::Submission.new(
             db_record.to_hash.merge(
-              ### Check available attributes when submission.rb entity is done
               firm: Submissions.rebuild_entity(db_record.firm),
-              # contributors: Members.rebuild_many(db_record.contributors)
+              submissions: Submissions.rebuild_many(db_record.submissions)
             )
           )
         end
@@ -66,13 +65,13 @@ module SECond
           end
 
           def call
-            submission = Submissions.db_find_or_create(@entity.sic)
+            submission = Submissions.db_find_or_create(@entity.cik)
 
             create_firm.tap do |db_firm|
               db_firm.update(submission: submission)
 
-              # @entity.contributors.each do |contributor|
-              #   db_project.add_contributor(Members.db_find_or_create(contributor))
+              @entity.submissions.each do |submission|
+                db_firm.add_submission(Submission.db_find_or_create(submission))
             end
           end
         end
