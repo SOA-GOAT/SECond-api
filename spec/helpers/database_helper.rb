@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'database_cleaner'
+# require 'database_cleaner'
 
 # Helper to clean database during test runs
 module DatabaseHelper
