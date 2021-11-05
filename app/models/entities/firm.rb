@@ -12,6 +12,7 @@ module SECond
       include Dry.Types
 
       attribute :id,                Integer.optional
+      attribute :cik,               Strict::String
       attribute :sic,               Strict::String
       attribute :sic_description,   Strict::String
       attribute :name,              Strict::String

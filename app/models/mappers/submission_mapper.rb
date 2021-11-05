@@ -10,7 +10,7 @@ module SECond
       end
 
       def load_several(cik)
-        submission_hash = @gateway.submissions_data(cik)
+        submission_hash = @gateway.submission_data(cik)
         keys = submission_hash.keys
         size = submission_hash['accessionNumber'].size
         size.each do |index|

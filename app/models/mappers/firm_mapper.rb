@@ -17,23 +17,30 @@ module SECond
       end
 
       def build_entity(data)
-        DataMapper.new(data).build_entity # , @gateway_class
+        DataMapper.new(data, @gateway_class).build_entity
       end
 
       # Extracts entity specific elements from data structure
       class DataMapper
-        def initialize(data)
-          # , gateway_class NOT USED yet
+        def initialize(data, gateway_class)
           @data = data
+          @submission_mapper = SubmissionMapper.new(gateway_class)
         end
 
         def build_entity
           SECond::Entity::Firm.new(
+            id: nil,
+            cik: cik,
             sic: sic,
             sic_description: sic_description,
             name: name,
-            tickers: tickers
+            tickers: tickers,
+            submissions: submissions
           )
+        end
+
+        def cik
+          format('%010d', @data['cik'].to_i)
         end
 
         def sic

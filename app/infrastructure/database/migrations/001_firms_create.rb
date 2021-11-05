@@ -7,7 +7,7 @@ Sequel.migration do
     create_table(:firms) do
       primary_key :id 
 
-      Integer     :cik, unique: true
+      String     :cik, unique: true
       String      :name, null: false
       String      :sic, null: false
       String      :sic_description
