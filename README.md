@@ -28,3 +28,10 @@ The EDGAR system of SEC contains all the required **fillings** of the US public 
 
 - EDGAR - financial reports of public traded firms in US
 
+
+## Database tables in an entity-relationship diagram
+<div align="center">
+  <img src="images/database.png" alt="db" width="80" height="80">
+  <img src="images/db.png" alt="db2" width="80" height="80">
+</div>
+
