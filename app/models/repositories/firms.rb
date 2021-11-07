@@ -48,7 +48,7 @@ module SECond
         Entity::Firm.new(
           db_record.to_hash.merge(
             # firm: Submissions.rebuild_entity(db_record.firm),
-            submissions: Submissions.rebuild_many(db_record.submissions)
+            filings: Submissions.rebuild_many(db_record.filings)
           )
         )
       end
@@ -69,8 +69,8 @@ module SECond
           create_firm.tap do |db_firm|
             # db_firm.update(submission: submission)
 
-            @entity.submissions.each do |submission|
-              db_firm.add_submission(Submissions.db_find_or_create(submission))
+            @entity.filings.each do |filing|
+              db_firm.add_filing(Submissions.db_find_or_create(filing))
             end
           end
         end

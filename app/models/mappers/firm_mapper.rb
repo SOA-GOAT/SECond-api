@@ -35,7 +35,7 @@ module SECond
             sic_description: sic_description,
             name: name,
             tickers: tickers,
-            submissions: submissions
+            filings: filings
           )
         end
 
@@ -59,7 +59,7 @@ module SECond
           @data['tickers'].join(' ')
         end
 
-        def submissions
+        def filings
           @submission_mapper.load_several(@data['cik'])
         end
       end

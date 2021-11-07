@@ -30,8 +30,8 @@ describe 'Integration Tests of Edgar API and Database' do
       _(rebuilt.tickers).must_equal(firm.tickers)
 
       # wait to debug
-      firm.submissions.each do |submission|
-        found = rebuilt.submissions.find do |potential|
+      firm.filings.each do |submission|
+        found = rebuilt.filings.find do |potential|
           potential.accession_number == submission.accession_number
         end
 

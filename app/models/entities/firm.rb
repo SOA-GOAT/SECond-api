@@ -17,10 +17,10 @@ module SECond
       attribute :sic_description,   Strict::String
       attribute :name,              Strict::String
       attribute :tickers,           Strict::String
-      attribute :submissions,       Strict::Array.of(Submission)
+      attribute :filings,           Strict::Array.of(Submission)
 
       def to_attr_hash
-        to_hash.reject { |key, _| %i[id submissions].include? key }
+        to_hash.reject { |key, _| %i[id filings].include? key }
       end
     end
   end
