@@ -31,7 +31,8 @@ The EDGAR system of SEC contains all the required **fillings** of the US public 
 
 ## Database tables in an entity-relationship diagram
 <div align="center">
-  <img src="images/database.png" alt="db" width="80" height="80">
-  <img src="images/db.png" alt="db2" width="80" height="80">
+  <img src="images/database.png" alt="db" width=50%>
 </div>
-
+<div>
+  <img src="images/db.png" alt="db2" width=50%>
+</div>
