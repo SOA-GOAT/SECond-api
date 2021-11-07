@@ -16,10 +16,10 @@ module SECond
       #              left_key: :project_id, right_key: :member_id
 
       plugin :timestamps, update_on_create: true
-    end
 
-    def self.find_or_create(submission_info)
-      first(accession_number: submission_info[:accession_number]) || create(submission_info)
+      def self.find_or_create(submission_info)
+        first(accession_number: submission_info[:accession_number]) || create(submission_info)
+      end
     end
   end
 end

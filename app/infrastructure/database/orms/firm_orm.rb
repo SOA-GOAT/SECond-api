@@ -18,7 +18,7 @@ module SECond
       plugin :timestamps, update_on_create: true
 
       def self.find_or_create(firm_info)
-        first(name: firm_info[:name]) || create(firm_info)
+        first(cik: firm_info[:cik]) || create(firm_info)
       end
     end
   end
