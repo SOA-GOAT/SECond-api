@@ -33,6 +33,6 @@ The EDGAR system of SEC contains all the required **fillings** of the US public 
 <div align="center">
   <img src="images/database.png" alt="db" width=50%>
 </div>
-<div>
+<div align="center">
   <img src="images/db.png" alt="db2" width=50%>
 </div>
