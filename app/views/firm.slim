@@ -29,5 +29,5 @@
           th
             span Tickers:
           td
-            - firm.tickers.each do |ticker|
+            - firm.tickers.split.each do |ticker|
               = ticker

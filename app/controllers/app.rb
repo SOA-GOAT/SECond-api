@@ -7,15 +7,19 @@ module SECond
   # Web App
   class App < Roda
     plugin :render, engine: 'slim', views: 'app/views'
-    plugin :assets, css: 'style.css', path: 'app/views/assets'
+    plugin :public, root: 'app/views/public'
+    plugin :assets, path: 'app/views/assets',
+                    css: 'style.css', js: 'table_row_click.js'
     plugin :halt
 
-    route do |routing|
+    route do |routing| # rubocop:disable Metrics/BlockLength
       routing.assets # load CSS
+      routing.public
 
       # GET /
       routing.root do
-        view 'home'
+        edgar_firm = Repository::For.klass(Entity::Firm).all
+        view 'home', locals: { firm: edgar_firm }
       end
 
       routing.on 'firm' do
@@ -28,6 +32,16 @@ module SECond
                                     (firm_cik.size <= 10)
 
             firm_cik = format('%010d', firm_cik.to_i)
+
+            # Get submission from Firm
+            firm = Edgar::FirmMapper
+              .new
+              .find(firm_cik)
+
+            # Add submission to database
+            Repository::For.entity(firm).create(firm)
+
+            # Redirect viewer to submission page
             routing.redirect "firm/#{firm_cik}"
           end
         end
@@ -35,8 +49,11 @@ module SECond
         routing.on String do |firm_cik|
           # GET /firm/firm_cik
           routing.get do
-            edgar_firm = Edgar::FirmMapper.new.find(firm_cik)
+            # Get firm from database
+            edgar_firm = Repository::For.klass(Entity::Firm)
+              .find_cik(firm_cik)
 
+            # Show viewer the firm
             view 'firm', locals: { firm: edgar_firm }
           end
         end

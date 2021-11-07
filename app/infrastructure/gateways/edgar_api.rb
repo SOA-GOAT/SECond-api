@@ -9,8 +9,25 @@ module SECond
     class EdgarApi
       def initialize; end
 
+      def firm_data(cik)
+        Request.new.firm(cik).parse
+      end
+
       def submission_data(cik)
-        Request.new.submission(cik).parse
+        raw_data = Request.new.firm(cik).parse
+
+        # attribute of recent filings
+        filings = raw_data['filings']
+        recent = filings['recent']
+
+        # get attribute of old filings
+        old_files = filings['files']
+        old_files.each do |files|
+          filename = files['name']
+          old = Request.new.get("https://data.sec.gov/submissions/#{filename}").parse
+          recent.merge!(old) { |_key, old_value, new_value| old_value + new_value }
+        end
+        recent
       end
 
       # Sends out HTTP requests to Edgar
@@ -19,7 +36,8 @@ module SECond
         SUBMISSION_PATH = 'https://data.sec.gov/submissions/'
         def initialize; end
 
-        def submission(cik)
+        def firm(cik)
+          cik = format('%010d', cik.to_i)
           get("#{SUBMISSION_PATH}CIK#{cik}.json")
         end
 
