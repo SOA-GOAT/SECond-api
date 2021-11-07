@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-# require_relative 'member_mapper.rb'
+require_relative 'submission_mapper'
 
 module SECond
   module Edgar
@@ -12,28 +12,35 @@ module SECond
       end
 
       def find(cik)
-        data = @gateway.submission_data(cik)
+        data = @gateway.firm_data(cik)
         build_entity(data)
       end
 
       def build_entity(data)
-        DataMapper.new(data).build_entity # , @gateway_class
+        DataMapper.new(data, @gateway_class).build_entity
       end
 
       # Extracts entity specific elements from data structure
       class DataMapper
-        def initialize(data)
-          # , gateway_class NOT USED yet
+        def initialize(data, gateway_class)
           @data = data
+          @submission_mapper = SubmissionMapper.new(gateway_class)
         end
 
         def build_entity
           SECond::Entity::Firm.new(
+            id: nil,
+            cik: cik,
             sic: sic,
             sic_description: sic_description,
             name: name,
-            tickers: tickers
+            tickers: tickers,
+            filings: filings
           )
+        end
+
+        def cik
+          format('%010d', @data['cik'].to_i)
         end
 
         def sic
@@ -49,7 +56,11 @@ module SECond
         end
 
         def tickers
-          @data['tickers']
+          @data['tickers'].join(' ')
+        end
+
+        def filings
+          @submission_mapper.load_several(@data['cik'])
         end
       end
     end
