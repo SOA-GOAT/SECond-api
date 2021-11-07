@@ -42,9 +42,10 @@ module SECond
       def self.rebuild_entity(db_record)
           return nil unless db_record
 
-          Entity::Submission.new(
+          Entity::Firm.new(
             db_record.to_hash.merge(
-              firm: Submissions.rebuild_entity(db_record.firm),
+              #firm: Submissions.rebuild_entity(db_record.firm),
+              tickers: db_record.tickers,
               submissions: Submissions.rebuild_many(db_record.submissions)
             )
           )
@@ -64,7 +65,7 @@ module SECond
             # db_firm.update(submission: submission)
 
             @entity.submissions.each do |submission|
-              db_firm.add_submission(Submission.db_find_or_create(submission))
+              db_firm.add_submission(Submissions.db_find_or_create(submission))
             end
           end
         end

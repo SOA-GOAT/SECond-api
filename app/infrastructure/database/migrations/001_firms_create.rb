@@ -11,7 +11,7 @@ Sequel.migration do
       String      :name, null: false
       String      :sic, null: false
       String      :sic_description
-      Array       :tickers # Not sure if Sequel supports Array.
+      String      :tickers # Not sure if Sequel supports Array.
 
       DateTime :created_at
       DateTime :updated_at

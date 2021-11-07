@@ -7,7 +7,7 @@ module SECond
     # Object Relational Mapper for Submission Entities
     class SubmissionOrm < Sequel::Model(:submissions)
       many_to_one :firm,
-                  class: :'SECond::Database::SubmissionOrm'
+                  class: :'SECond::Database::FirmOrm'
 
     #   many_to_many :contributors,
     #                class: :'CodePraise::Database::MemberOrm',

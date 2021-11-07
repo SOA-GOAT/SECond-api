@@ -56,7 +56,7 @@ module SECond
         end
 
         def tickers
-          @data['tickers']
+          @data['tickers'].join(' ')
         end
 
         def submissions

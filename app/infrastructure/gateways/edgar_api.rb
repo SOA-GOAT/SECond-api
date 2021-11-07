@@ -44,7 +44,7 @@ module SECond
           http_response =
             HTTP.headers('Accept' => '*/*',
                          'Connection' => 'keep-alive').get(url)
-          puts url
+                         
           Response.new(http_response).tap do |response|
             raise(response.error) unless response.successful?
           end
