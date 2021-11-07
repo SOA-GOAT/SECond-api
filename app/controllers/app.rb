@@ -34,12 +34,12 @@ module SECond
             firm_cik = format('%010d', firm_cik.to_i)
 
             # Get submission from Firm
-            submission = Edgar::FirmMapper
+            firm = Edgar::FirmMapper
               .new
               .find(firm_cik)
 
             # Add submission to database
-            Repository::For.entity(submission).create(submission)
+            Repository::For.entity(firm).create(firm)
 
             # Redirect viewer to submission page
             routing.redirect "firm/#{firm_cik}"
@@ -49,7 +49,7 @@ module SECond
         routing.on String do |firm_cik|
           # GET /firm/firm_cik
           routing.get do
-            # Get project from database
+            # Get firm from database
             edgar_firm = Repository::For.klass(Entity::Firm)
               .find_cik(firm_cik)
 

@@ -48,7 +48,6 @@ module SECond
         Entity::Firm.new(
           db_record.to_hash.merge(
             # firm: Submissions.rebuild_entity(db_record.firm),
-            tickers: db_record.tickers,
             submissions: Submissions.rebuild_many(db_record.submissions)
           )
         )
