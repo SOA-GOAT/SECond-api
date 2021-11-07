@@ -5,3 +5,14 @@
   exclude_paths:
     - _snippets
     - spec/fixtures/project_info.rb # one-time test fixture creator
+  
+  directories:
+    "app/infrastructure/gateways":
+      NestedIterators:
+        enabled: false
+      UtilityFunction:
+        enabled: false
+
+    "app/models/mappers":
+      NestedIterators:
+        enabled: false

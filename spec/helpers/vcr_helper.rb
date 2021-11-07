@@ -9,9 +9,9 @@ module VcrHelper
   EDGAR_CASSETTE = 'edgar_api'
 
   def self.setup_vcr
-    VCR.configure do |c|
-      c.cassette_library_dir = CASSETTES_FOLDER
-      c.hook_into :webmock
+    VCR.configure do |config|
+      config.cassette_library_dir = CASSETTES_FOLDER
+      config.hook_into :webmock
     end
   end
 

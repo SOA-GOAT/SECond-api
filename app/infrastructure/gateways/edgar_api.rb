@@ -17,10 +17,11 @@ module SECond
         raw_data = Request.new.firm(cik).parse
 
         # attribute of recent filings
-        recent = raw_data['filings']['recent']
+        filings = raw_data['filings']
+        recent = filings['recent']
 
         # get attribute of old filings
-        old_files = raw_data['filings']['files']
+        old_files = filings['files']
         old_files.each do |files|
           filename = files['name']
           old = Request.new.get("https://data.sec.gov/submissions/#{filename}").parse
