@@ -5,8 +5,8 @@ require 'webmock'
 
 # Setting up VCR
 module VcrHelper
-  CASSETTES_FOLDER = 'spec/fixtures/cassettes'.freeze
-  EDGAR_CASSETTE = 'edgar_api'.freeze
+  CASSETTES_FOLDER = 'spec/fixtures/cassettes'
+  EDGAR_CASSETTE = 'edgar_api'
 
   def self.setup_vcr
     VCR.configure do |c|
@@ -16,7 +16,6 @@ module VcrHelper
   end
 
   def self.configure_vcr_for_github
-
     VCR.insert_cassette(
       EDGAR_CASSETTE,
       record: :new_episodes,

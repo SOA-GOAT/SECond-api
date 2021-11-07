@@ -4,7 +4,7 @@ module SECond
   module Repository
     # Repository for Submissions
     class Submissions
-      def self.find_id(entity)
+      def self.find_id(id)
         rebuild_entity Database::SubmissionOrm.first(id: id)
       end
 
@@ -16,13 +16,13 @@ module SECond
         return nil unless db_record
 
         Entity::Submission.new(
-          id:               db_record.id,
-          cik:              db_record.cik,
+          id: db_record.id,
+          cik: db_record.cik,
           accession_number: db_record.accession_number,
-          form_type:        db_record.form_type,
-          filing_date:      db_record.filing_date,
-          reporting_date:   db_record.reporting_date,
-          size:             db_record.size
+          form_type: db_record.form_type,
+          filing_date: db_record.filing_date,
+          reporting_date: db_record.reporting_date,
+          size: db_record.size
         )
       end
 
@@ -31,7 +31,7 @@ module SECond
           Submissions.rebuild_entity(db_submission)
         end
       end
-      
+
       def self.db_find_or_create(entity)
         Database::SubmissionOrm.find_or_create(entity.to_attr_hash)
       end

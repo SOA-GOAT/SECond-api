@@ -22,7 +22,6 @@ module SECond
       def to_attr_hash
         to_hash.reject { |key, _| %i[id submissions].include? key }
       end
-
     end
   end
 end

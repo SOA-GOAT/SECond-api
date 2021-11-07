@@ -19,12 +19,12 @@ module SECond
         # attribute of recent filings
         recent = raw_data['filings']['recent']
 
-        # get attribute of old filings 
+        # get attribute of old filings
         old_files = raw_data['filings']['files']
         old_files.each do |files|
           filename = files['name']
           old = Request.new.get("https://data.sec.gov/submissions/#{filename}").parse
-          recent.merge!(old) { |key, old_value, new_value| old_value + new_value }
+          recent.merge!(old) { |_key, old_value, new_value| old_value + new_value }
         end
         recent
       end
@@ -44,7 +44,7 @@ module SECond
           http_response =
             HTTP.headers('Accept' => '*/*',
                          'Connection' => 'keep-alive').get(url)
-                         
+
           Response.new(http_response).tap do |response|
             raise(response.error) unless response.successful?
           end

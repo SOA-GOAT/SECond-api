@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-require_relative 'submission_mapper.rb'
+require_relative 'submission_mapper'
 
 module SECond
   module Edgar

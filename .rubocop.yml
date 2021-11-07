@@ -20,4 +20,3 @@ Metrics/BlockLength:
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented
-  

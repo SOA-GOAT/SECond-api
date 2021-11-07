@@ -12,14 +12,14 @@ module SECond
                     css: 'style.css', js: 'table_row_click.js'
     plugin :halt
 
-    route do |routing|
+    route do |routing| # rubocop:disable Metrics/BlockLength
       routing.assets # load CSS
       routing.public
 
       # GET /
-      routing.root do # rubocop:disable Metrics/BlockLength
-        projects = Repository::For.klass(Entity::Firm).all
-        view 'home', locals: { firm: edgar_firm } # change it later!
+      routing.root do
+        edgar_firm = Repository::For.klass(Entity::Firm).all
+        view 'home', locals: { firm: edgar_firm }
       end
 
       routing.on 'firm' do

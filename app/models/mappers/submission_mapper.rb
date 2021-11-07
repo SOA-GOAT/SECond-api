@@ -39,7 +39,7 @@ module SECond
             form_type: form_type,
             filing_date: filing_date,
             reporting_date: reporting_date,
-            size: size 
+            size: size
           )
         end
 

@@ -10,10 +10,10 @@ module SECond
                   class: :'SECond::Database::SubmissionOrm',
                   key: :firm_id
 
-    #   many_to_many :contributed_projects,
-    #                class: :'CodePraise::Database::ProjectOrm',
-    #                join_table: :projects_members,
-    #                left_key: :member_id, right_key: :project_id
+      # many_to_many :contributed_projects,
+      #              class: :'CodePraise::Database::ProjectOrm',
+      #              join_table: :projects_members,
+      #              left_key: :member_id, right_key: :project_id
 
       plugin :timestamps, update_on_create: true
 

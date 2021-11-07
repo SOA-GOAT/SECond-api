@@ -5,7 +5,7 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:firms) do
-      primary_key :id 
+      primary_key :id
 
       String      :cik, unique: true
       String      :name, null: false

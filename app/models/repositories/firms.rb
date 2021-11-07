@@ -20,44 +20,50 @@ module SECond
       #     .first
       #   rebuild_entity(db_project)
       # end
+
       def self.find(entity)
-          find_cik(entity.cik)
+        find_cik(entity.cik)
       end
+
       def self.find_cik(cik)
-          db_record = Database::FirmOrm.first(cik: cik)
-          rebuild_entity(db_record)
+        db_record = Database::FirmOrm.first(cik: cik)
+        rebuild_entity(db_record)
       end
 
       def self.find_name(name)
-          db_record = rebuild_entity Database::FirmOrm.first(name: name)
-          rebuild_entity(db_record)
+        db_record = rebuild_entity Database::FirmOrm.first(name: name)
+        rebuild_entity(db_record)
       end
-      
-      def self.create(entity)
-          raise 'Firm already exists' if find(entity)
-  
-          db_firm = PersistFirm.new(entity).call
-          rebuild_entity(db_firm)
-      end
-      def self.rebuild_entity(db_record)
-          return nil unless db_record
 
-          Entity::Firm.new(
-            db_record.to_hash.merge(
-              #firm: Submissions.rebuild_entity(db_record.firm),
-              tickers: db_record.tickers,
-              submissions: Submissions.rebuild_many(db_record.submissions)
-            )
-          )
+      def self.create(entity)
+        raise 'Firm already exists' if find(entity)
+
+        db_firm = PersistFirm.new(entity).call
+        rebuild_entity(db_firm)
       end
+
+      def self.rebuild_entity(db_record)
+        return nil unless db_record
+
+        Entity::Firm.new(
+          db_record.to_hash.merge(
+            # firm: Submissions.rebuild_entity(db_record.firm),
+            tickers: db_record.tickers,
+            submissions: Submissions.rebuild_many(db_record.submissions)
+          )
+        )
+      end
+
       # Helper class to persist firm and its submissions to database
       class PersistFirm
         def initialize(entity)
-            @entity = entity
+          @entity = entity
         end
+
         def create_firm
-            Database::FirmOrm.create(@entity.to_attr_hash)
+          Database::FirmOrm.create(@entity.to_attr_hash)
         end
+
         def call
           # submission = Submissions.db_find_or_create(@entity)
 
