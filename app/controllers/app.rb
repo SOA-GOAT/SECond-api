@@ -33,15 +33,15 @@ module SECond
 
             firm_cik = format('%010d', firm_cik.to_i)
 
-            # Get submission from Firm
+            # Get filing from Firm
             firm = Edgar::FirmMapper
               .new
               .find(firm_cik)
 
-            # Add submission to database
+            # Add filing to database
             Repository::For.entity(firm).create(firm)
 
-            # Redirect viewer to submission page
+            # Redirect viewer to filing page
             routing.redirect "firm/#{firm_cik}"
           end
         end
