@@ -16,9 +16,9 @@ module SECond
         #   @subfolders = subfolder_contributions
         end
   
-        # def line_count
-        #   files.map(&:line_count).sum
-        # end
+        def aver_firm_readability
+          filings.map(&:filing_rdbscore).average
+        end
   
         # def lines
         #   files.map(&:lines).reduce(&:+)

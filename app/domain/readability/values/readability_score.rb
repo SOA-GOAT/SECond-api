@@ -3,16 +3,25 @@
 module SECond
   module Value
     # Value of credits shared by contributors for file, files, or folder
-    class Lengthy < SimpleDelegator
+    class ReadabilityScore < SimpleDelegator
       # rubocop:disable Style/RedundantSelf
       def initialize
          super(Types::HashedIntegers.new)
       end
 
-      def add_readable(sentence)
-        self[sentence] += sentence.readability
+      # def add_score(sentence)
+      #   self[sentence] += sentence.readability_score
+      # end
+      
+      def readability_score
+        aver_sentence_length^2 / 35
       end
 
+      def aver_sentence_length
+        total = 0
+        sentences.each {|sentence| total += sentence.sentence_length}
+        total / sentences.size
+      end
       # def +(other)
       #   (self.contributors + other.contributors).uniq
       #     .each_with_object(Value::CreditShare.new) do |contributor, total|
@@ -20,21 +29,6 @@ module SECond
       #     end
       # end
 
-      # def by_email(email)
-      #   contributor = self.select do |contrib, _|
-      #     contrib.email == email
-      #   end.keys.first
-
-      #   by_contributor(contributor)
-      # end
-
-      # def by_contributor(contributor)
-      #   self[contributor]
-      # end
-
-      # def contributors
-      #   self.keys
-      # end
       # rubocop:enable Style/RedundantSelf
     end
   end

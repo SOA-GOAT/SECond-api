@@ -16,38 +16,17 @@ module SECond
         # ].freeze
 
         # paragraphs是filing有幾段
-        attr_reader :paragraphs
+        attr_reader :sentences
   
-        def initialize(paragraphs:)
+        def initialize(sentences:)
           # @file_path = Value::FilePath.new(file_path)
-          @paragraphs = paragraphs
+          @sentences = sentences
         end
-  
-        # def language
-        #   file_path.language
-        # end
-  
-        # def credit_share
-        #   return Value::CreditShare.new if not_wanted
-  
-        #   @credit_share ||=
-        #     lines.each_with_object(Value::CreditShare.new) do |line, credit|
-        #       credit.add_credit(line)
-        #     end
-        # end
-  
-        # def contributors
-        #   credit_share.keys
-        # end
-  
-        # def not_wanted
-        #   !wanted
-        # end
-  
-        # def wanted
-        #   WANTED_LANGUAGES.include?(language)
-        # end
+
+        def filing_rdbscore
+            score = Value:: ReadabilityScore.new(sentences)
+            score.readability_score
+        end
       end
     end
   end
-  
