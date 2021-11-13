@@ -4,7 +4,7 @@ require_relative 'filing_readability_mapper'
 
 module SECond
   module Mapper
-    # Summarizes contributions for an entire folder
+    # Summarizes readability for an entire firm
     class FirmReadability
       attr_reader :filings
 
@@ -19,8 +19,8 @@ module SECond
       end
 
       def filings_summaries
-        @contributions_reports.map do |file_report|
-          Mapper::FilingReadability.new(file_report).build_entity
+        @filings.map do |filing|
+          Mapper::FilingReadability.new(filing).build_entity
         end
       end
     end

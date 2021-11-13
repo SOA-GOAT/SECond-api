@@ -53,6 +53,14 @@ module SECond
             edgar_firm = Repository::For.klass(Entity::Firm)
               .find_cik(firm_cik)
 
+            # Download 10-Ks from project information
+            api = Edgar::EdgarApi.new
+            firm_filings = edgar_firm.filings.select { |filing| filing.form_type.include? "10-K"}
+            firm_filings.each do |filing|
+              api.download_submission_url(firm_cik, filing.accession_number)
+              # firm_filings.download! unless firm_filings.exists_locally?
+            end
+
             # Show viewer the firm
             view 'firm', locals: { firm: edgar_firm }
           end

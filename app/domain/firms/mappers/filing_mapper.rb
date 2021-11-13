@@ -39,6 +39,7 @@ module SECond
             form_type: form_type,
             filing_date: filing_date,
             reporting_date: reporting_date,
+            primary_document: primary_document,
             size: size
           )
         end
@@ -63,6 +64,10 @@ module SECond
 
         def reporting_date
           @data['reportDate']
+        end
+
+        def primary_document
+          @data['primary_document']
         end
 
         def size

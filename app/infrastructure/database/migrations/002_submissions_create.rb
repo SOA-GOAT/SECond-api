@@ -13,6 +13,7 @@ Sequel.migration do
       String      :form_type
       String      :filing_date
       String      :reporting_date
+      String      :primary_document
       Integer     :size
 
       DateTime :created_at

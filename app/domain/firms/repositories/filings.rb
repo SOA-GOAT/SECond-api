@@ -22,6 +22,7 @@ module SECond
           form_type: db_record.form_type,
           filing_date: db_record.filing_date,
           reporting_date: db_record.reporting_date,
+          primary_document: db_record.primary_document,
           size: db_record.size
         )
       end

@@ -11,7 +11,7 @@ module SECond
                   class: :'SECond::Database::FirmOrm'
 
       # many_to_many :contributors,
-      #              class: :'CodePraise::Database::MemberOrm',
+      #              class: :'SECond::Database::MemberOrm',
       #              join_table: :projects_members,
       #              left_key: :project_id, right_key: :member_id
 

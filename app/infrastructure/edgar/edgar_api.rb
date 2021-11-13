@@ -30,6 +30,22 @@ module SECond
         recent
       end
 
+      def download_submission_url(cik, accession_number)
+        path = 'app/infrastructure/edgar/10Kstore'
+        download_path = 'https://www.sec.gov/Archives/edgar/data'
+        accession_number_compact = accession_number.gsub '-', ''
+
+        url = "#{download_path}/#{cik}/#{accession_number_compact}/#{accession_number}.txt"
+        submission = Request.new.get(url)
+
+        filepath = "#{path}/#{cik}"
+        Dir.mkdir(filepath) unless Dir.exist?(filepath)
+
+        open("#{filepath}/#{accession_number}.txt", "wb") do |file|
+          file.write(submission.body)
+        end
+      end
+
       # Sends out HTTP requests to Edgar
       class Request
         # Rubocop: Do not .freeze immutable object

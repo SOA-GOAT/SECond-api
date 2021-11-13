@@ -11,14 +11,14 @@ describe 'Test Readability score Mapper and Gateway' do
     VcrHelper.configure_vcr_for_github
     DatabaseHelper.wipe_database
 
-    # gh_project = CodePraise::Github::ProjectMapper
+    # gh_project = SECond::Github::ProjectMapper
     #   .new(GITHUB_TOKEN)
     #   .find(USERNAME, PROJECT_NAME)
 
-    # project = CodePraise::Repository::For.entity(gh_project)
+    # project = SECond::Repository::For.entity(gh_project)
     #   .create(gh_project)
 
-    # @gitrepo = CodePraise::GitRepo.new(project)
+    # @gitrepo = SECond::GitRepo.new(project)
     # @gitrepo.clone! unless @gitrepo.exists_locally?
   end
 
@@ -27,7 +27,7 @@ describe 'Test Readability score Mapper and Gateway' do
   end
 
   it 'HAPPY: should get contributions summary for entire repo' do
-    root = CodePraise::Mapper::Contributions.new(@gitrepo).for_folder('')
+    root = SECond::Mapper::Contributions.new(@gitrepo).for_folder('')
     _(root.subfolders.count).must_equal 10
     _(root.base_files.count).must_equal 2
 
@@ -40,7 +40,7 @@ describe 'Test Readability score Mapper and Gateway' do
   end
 
   it 'HAPPY: should get accurate contributions summary for specific folder' do
-    forms = CodePraise::Mapper::Contributions.new(@gitrepo).for_folder('forms')
+    forms = SECond::Mapper::Contributions.new(@gitrepo).for_folder('forms')
 
     _(forms.subfolders.count).must_equal 1
     _(forms.subfolders.count).must_equal 1
