@@ -36,7 +36,6 @@ describe 'Integration Tests of Edgar API and Database' do
         end
 
         _(found.accession_number).must_equal filing.accession_number
-        # not checking email as it is not always provided
       end
     end
   end
