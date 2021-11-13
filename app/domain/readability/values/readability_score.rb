@@ -6,7 +6,7 @@ module SECond
     class ReadabilityScore < SimpleDelegator
       # rubocop:disable Style/RedundantSelf
       def initialize
-         super(Types::HashedIntegers.new)
+        #  super(Types::HashedIntegers.new)
       end
 
       # def add_score(sentence)
