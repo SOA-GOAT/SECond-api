@@ -40,5 +40,5 @@ The EDGAR system of SEC contains all the required **fillings** of the US public 
 
 ## Object Graph
 <div align="center">
-  <img src="images/objectgrapg.png" alt="ObjectGraph" width=50%>
+  <img src="images/objectgraph.png" alt="ObjectGraph" width=50%>
 </div>
