@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'submissions'
+require_relative 'filings'
 
 module SECond
   module Repository
@@ -47,13 +47,13 @@ module SECond
 
         Entity::Firm.new(
           db_record.to_hash.merge(
-            # firm: Submissions.rebuild_entity(db_record.firm),
-            filings: Submissions.rebuild_many(db_record.filings)
+            # firm: filings.rebuild_entity(db_record.firm),
+            filings: Filings.rebuild_many(db_record.filings)
           )
         )
       end
 
-      # Helper class to persist firm and its submissions to database
+      # Helper class to persist firm and its filings to database
       class PersistFirm
         def initialize(entity)
           @entity = entity
@@ -64,13 +64,13 @@ module SECond
         end
 
         def call
-          # submission = Submissions.db_find_or_create(@entity)
+          # filing = filings.db_find_or_create(@entity)
 
           create_firm.tap do |db_firm|
-            # db_firm.update(submission: submission)
+            # db_firm.update(filing: filing)
 
             @entity.filings.each do |filing|
-              db_firm.add_filing(Submissions.db_find_or_create(filing))
+              db_firm.add_filing(Filings.db_find_or_create(filing))
             end
           end
         end

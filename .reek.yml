@@ -3,8 +3,9 @@
     IrresponsibleModule:
       enabled: false
   exclude_paths:
-    - _snippets
     - spec/fixtures/project_info.rb # one-time test fixture creator
+    - _snippets
+    - app/infrastructure/git/repostore/
   
   directories:
     "app/infrastructure/gateways":
