@@ -23,7 +23,7 @@ module SECond
       end
 
       def select_10K
-        firm_filings.filings.select { |filing| filing.form_type.include? "10-K"}
+        @firm_filings.select { |filing| filing.form_type.include? "10-K"}
       end
 
       def download_10K
