@@ -32,7 +32,12 @@ module SECond
                                     (firm_cik.size <= 10)
 
             firm_cik = format('%010d', firm_cik.to_i)
-
+            
+            edgar_firm = Repository::For.klass(Entity::Firm).find_cik(firm_cik) 
+            if edgar_firm.nil? == false
+              routing.redirect "firm/#{firm_cik}"
+            end
+            
             # Get filing from Firm
             firm = Edgar::FirmMapper
               .new
@@ -62,8 +67,12 @@ module SECond
             firm_filings.download! unless firm_filings.exists_locally?
             # end
 
+            # Compile readability for firm specified by cik
+            firm_rdb = Mapper::Readability
+              .new.for_firm(firm_cik)
+
             # Show viewer the firm
-            view 'firm', locals: { firm: edgar_firm }
+            view 'firm', locals: { firm: edgar_firm, firm_rdb: firm_rdb }
           end
         end
       end
