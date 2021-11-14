@@ -19,7 +19,7 @@ module SECond
       end
       
       def sentence_length
-        sentence.size
+        @sentence.size
       end
     end
   end

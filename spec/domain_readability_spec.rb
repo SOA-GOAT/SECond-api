@@ -26,34 +26,17 @@ describe 'Test Readability score Mapper and Gateway' do
     VcrHelper.eject_vcr
   end
 
-  it 'HAPPY: should get readability summary for entire repo' do
-    root = SECond::Mapper::Readability.new().for_firm(@firm.cik)
-    _(root.size).must_equal 10
-    _(root.base_files.count).must_equal 2
-
-    _(root.base_files.first.file_path.filename).must_equal 'README.md'
-    _(root.subfolders.first.path).must_equal 'controllers'
-
-    _(root.subfolders.map(&:credit_share).reduce(&:+) +
-      root.base_files.map(&:credit_share).reduce(&:+))
-      .must_equal(root.credit_share)
+  it 'HAPPY: should get readability summary for entire firm' do
+    root = SECond::Mapper::Readability.new.for_firm(@firm.cik)
+    _(root.size).must_equal 31
+    _(root.sentences.size).must_equal 1413718 
+    _(root.aver_firm_readability).must_equal 128
   end
 
-  it 'HAPPY: should get accurate readability summary for specific folder' do
-    forms = SECond::Mapper::Readability.new(@firm).for_firm('')
-
-    _(forms.subfolders.count).must_equal 1
-    _(forms.subfolders.count).must_equal 1
-
-    _(forms.base_files.count).must_equal 2
-
-    count = forms['url_request.rb'].credit_share.by_email 'b37582000@gmail.com'
-    _(count).must_equal 5
-
-    count = forms['url_request.rb'].credit_share.by_email 'orange6318@hotmail.com'
-    _(count).must_equal 2
-
-    count = forms['init.rb'].credit_share.by_email 'b37582000@gmail.com'
-    _(count).must_equal 4
+  it 'HAPPY: should get accurate readability summary for filings' do
+    # averageforms = SECond::Mapper::Readability.new(@firm).for_firm('')
+    filing = root.filings[0]
+    _(filing.size).must_equal 97082 
+    _(filing.filing_rdbscore).must_equal 107 
   end
 end

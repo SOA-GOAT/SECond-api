@@ -9,10 +9,9 @@ module SECond
 
       def for_firm(cik) # To be rename...
         edgar_firm = Repository::For.klass(Entity::Firm).find_cik(cik)
-
-        Mapper::FirmReadability.new(
-          filings: @firm.filings
-        ).build_entity
+        tenk_filings = edgar_firm.filings.select { |filing| filing.form_type.include? "10-K"} 
+        
+        Mapper::FirmReadability.new(tenk_filings).build_entity
       end
     end
   end

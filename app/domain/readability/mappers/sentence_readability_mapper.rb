@@ -21,9 +21,9 @@ module SECond
       #   )
       # end
 
-      def build_entity
+      def to_entity
         Entity::SentenceReadability.new(
-          sentence: sentence
+          sentence: @sentence
         )
       end
 

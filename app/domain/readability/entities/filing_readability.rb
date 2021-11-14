@@ -23,12 +23,12 @@ module SECond
       end
 
       def filing_rdbscore
-          score = Value::ReadabilityScore.new(sentences)
-          score.readability_score
+        score = Value::ReadabilityScore.new(@sentences)
+        score.readability_score
       end
 
       def size
-        sentences.size
+        @sentences.size
       end
     end
   end

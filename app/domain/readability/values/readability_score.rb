@@ -5,7 +5,8 @@ module SECond
     # Value of credits shared by contributors for file, files, or folder
     class ReadabilityScore < SimpleDelegator
       # rubocop:disable Style/RedundantSelf
-      def initialize
+      def initialize(sentences)
+        @sentences = sentences
         #  super(Types::HashedIntegers.new)
       end
 
@@ -19,8 +20,8 @@ module SECond
 
       def aver_sentence_length
         total = 0
-        sentences.each {|sentence| total += sentence.sentence_length}
-        total / sentences.size
+        @sentences.each {|sentence| total += sentence.size} # size should be sentence_length
+        total / @sentences.size
       end
       # def +(other)
       #   (self.contributors + other.contributors).uniq

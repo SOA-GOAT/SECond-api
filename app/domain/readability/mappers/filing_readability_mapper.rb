@@ -29,10 +29,10 @@ module SECond
         content.split(/\.|\?|\!/)
       end
 
-      def sentences_summaries(line_reports)
+      def sentences_summaries
         sentences = get_sentences
         sentences.each do |sentence|
-          SentenceReadability.new(sentence).build_entity
+          Mapper::SentenceReadability.new(sentence).to_entity
         end
       end
     end

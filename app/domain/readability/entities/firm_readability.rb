@@ -17,15 +17,16 @@ module SECond
       end
 
       def aver_firm_readability
-        filings.map(&:filing_rdbscore).average
+        scores = @filings.map(&:filing_rdbscore)
+        scores.sum / scores.size
       end
 
       def sentences
-        filings.map(&:sentences).reduce(:+)
+        @filings.map(&:sentences).reduce(:+)
       end
 
       def size
-        filings.size
+        @filings.size
       end
 
       # def credit_share
