@@ -12,7 +12,7 @@ require 'minitest/rg'
 require 'vcr'
 require 'webmock'
 
-require_relative '../init'
+require_relative '../../init'
 
 CIK = '0000320193'
 CORRECT = YAML.safe_load(File.read('spec/fixtures/edgar_results.yml'))
