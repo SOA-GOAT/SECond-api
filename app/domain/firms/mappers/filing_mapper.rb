@@ -67,7 +67,7 @@ module SECond
         end
 
         def primary_document
-          @data['primary_document']
+          @data['primaryDocument']
         end
 
         def size

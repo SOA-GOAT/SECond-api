@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module SECond
-  # Maps over local and remote git repo infrastructure
+  # Maps over local edgar submission infrastructure
   class FirmFiling
     class Errors
       NoFirmSubmissionFound = Class.new(StandardError)
@@ -9,10 +9,10 @@ module SECond
       CannotOverwriteLocalFirmSubmission = Class.new(StandardError)
     end
 
-    def initialize(repo, config = SECond::App.config)
-      @repo = repo
-      remote = Submission::RemoteFirmSubmission.new(@repo.http_url)
-      @local = Submission::LocalFirmSubmission.new(remote, config.REPOSTORE_PATH)
+    def initialize(firm, config = SECond::App.config)
+      @firm = firm
+      # remote = Submission::RemoteFirmSubmission.new(@firm.http_url)
+      @local = Submission::LocalFirmSubmissions.new(firm.filings, config.TENKSTORE_PATH)
     end
 
     def local
@@ -30,10 +30,11 @@ module SECond
 
     # Deliberately :reek:MissingSafeMethod for file system changes
     def download!
-      raise Errors::TooLargeToDownload if @repo.too_large?
+      
+      # raise Errors::TooLargeToDownload if @firm.too_large?
       raise Errors::CannotOverwriteLocalFirmSubmission if exists_locally?
 
-      @local.clone_remote { |line| yield line if block_given? }
+      @local.download_10K # { |line| yield line if block_given? }
     end
   end
 end

@@ -17,7 +17,7 @@ module SECond
       attribute :form_type,         Strict::String
       attribute :filing_date,       Strict::String
       attribute :reporting_date,    Strict::String
-      attribute :primary_document,  Strict::String
+      attribute :primary_document,  String.optional
       attribute :size,              Strict::Integer
 
       def to_attr_hash
