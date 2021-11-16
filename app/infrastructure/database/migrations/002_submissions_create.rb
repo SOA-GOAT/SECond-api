@@ -4,7 +4,7 @@ require 'sequel'
 
 Sequel.migration do
   change do
-    create_table(:submissions) do
+    create_table(:filings) do
       primary_key :id
       foreign_key :firm_id, :firms
 
@@ -13,6 +13,7 @@ Sequel.migration do
       String      :form_type
       String      :filing_date
       String      :reporting_date
+      String      :primary_document
       Integer     :size
 
       DateTime :created_at

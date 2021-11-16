@@ -8,7 +8,7 @@ require 'dry-struct'
 module SECond
   module Entity
     # Domain entity for any firms
-    class Submission < Dry::Struct
+    class Filing < Dry::Struct
       include Dry.Types
 
       attribute :id,                Integer.optional
@@ -17,6 +17,7 @@ module SECond
       attribute :form_type,         Strict::String
       attribute :filing_date,       Strict::String
       attribute :reporting_date,    Strict::String
+      attribute :primary_document,  String.optional
       attribute :size,              Strict::Integer
 
       def to_attr_hash

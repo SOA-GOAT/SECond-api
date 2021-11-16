@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-require_relative 'spec_helper'
+require_relative 'helpers/spec_helper'
 require_relative 'helpers/vcr_helper'
 require_relative 'helpers/database_helper'
 
@@ -30,13 +30,12 @@ describe 'Integration Tests of Edgar API and Database' do
       _(rebuilt.tickers).must_equal(firm.tickers)
 
       # wait to debug
-      firm.filings.each do |submission|
+      firm.filings.each do |filing|
         found = rebuilt.filings.find do |potential|
-          potential.accession_number == submission.accession_number
+          potential.accession_number == filing.accession_number
         end
 
-        _(found.accession_number).must_equal submission.accession_number
-        # not checking email as it is not always provided
+        _(found.accession_number).must_equal filing.accession_number
       end
     end
   end

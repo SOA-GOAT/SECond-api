@@ -22,17 +22,23 @@ The EDGAR system of SEC contains all the required **fillings** of the US public 
 - Investors and researchers can collect financial filings with advanced search criteria (e.g., keywords, sections).
 - Provide summary information of target filings by textual analysis.
 
-
+## Our Goal
+-Readability Analytics: Analyze **length** of each sentences in filings to get **readability score** to each filing and calculate the **average readability score** for a firm. The scores show the level of readbility of a firm’s financial documents.
 
 ## Data Source
 
 - EDGAR - financial reports of public traded firms in US
 
 
-## Database tables in an entity-relationship diagram
+## Database Tables in an Entity-Relationship Diagram
 <div align="center">
   <img src="images/database.png" alt="db" width=50%>
 </div>
 <div align="center">
   <img src="images/db.png" alt="db2" width=50%>
+</div>
+
+## Object Graph
+<div align="center">
+  <img src="images/object_graph.png" alt="ObjectGraph" width=50%>
 </div>

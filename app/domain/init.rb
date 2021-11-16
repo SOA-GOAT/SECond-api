@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
-%w[domain infrastructure controllers].each do |folder|
+folders = %w[firms readability]
+folders.each do |folder|
   require_relative "#{folder}/init"
 end
