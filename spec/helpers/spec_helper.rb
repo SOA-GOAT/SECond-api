@@ -20,3 +20,8 @@ CORRECT = YAML.safe_load(File.read('spec/fixtures/edgar_results.yml'))
 
 CASSETTES_FOLDER = 'spec/fixtures/cassettes'
 CASSETTE_FILE = 'edgar_api'
+
+# Helper method for acceptance tests
+def homepage
+    SECond::App.config.APP_HOST
+end

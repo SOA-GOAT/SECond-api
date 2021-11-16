@@ -118,7 +118,7 @@ describe 'Acceptance Tests' do
       SECond::Repository::For.entity(firm).create(firm)
 
       # WHEN: user goes directly to the project page
-      @browser.goto "http://localhost:9000/project/firm/#{CIK}"
+      @browser.goto "http://localhost:9000/firm/#{CIK}"
 
       # THEN: they should see the firm details
       _(@browser.h2.text).must_include FIRM_NAME
