@@ -34,13 +34,11 @@
   .container.d-flex.flex-column.bg-light.rounded.custom-container-width.top-buffer
     table.table id="filings_table"
       thead
-        tr
-          th.filing.att Accession Number
-          th.filing.att Form Type
-          th.filing.att Filing Date
-          th.filing.att Reporting Date
-          / th.filing.att Readability Score
-          th.filing.att Size
+        th.filing.att Accession Number
+        th.filing.att Form Type
+        th.filing.att Filing Date
+        th.filing.att Reporting Date
+        th.filing.att Size
       tbody
         - firm.filings.each do |filing, index|
           tr

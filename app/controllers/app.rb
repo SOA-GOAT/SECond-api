@@ -35,9 +35,10 @@ module SECond
           flash.now[:notice] = 'Add a firm cik to get started'
         end
 
-        edgar_firm = Repository::For.klass(Entity::Firm).all
-        view 'home', locals: { firm: edgar_firm }
-      end
+        viewable_firms = Views::FirmsList.new(firms)
+        
+        view 'home', locals: { firms: viewable_firms}
+     end
 
       routing.on 'firm' do
         routing.is do
@@ -56,6 +57,7 @@ module SECond
               edgar_firm = Repository::For.klass(Entity::Firm).find_cik(firm_cik) 
 
               if edgar_firm.nil? == false
+                session[:watching].insert(0, firm_cik).uniq!
                 routing.redirect "firm/#{firm_cik}"
               end
 
@@ -81,7 +83,7 @@ module SECond
               flash[:error] = 'Having trouble creating firm'
               routing.redirect '/'
             end
-            # Add new project to watched set in cookies
+            # Add new firm to watched set in cookies
             session[:watching].insert(0, firm_cik).uniq!
 
             # Redirect viewer to filing page
@@ -128,9 +130,10 @@ module SECond
               flash[:error] = 'Could not find that firm'
               routing.redirect '/'
             end
-
+            firm = Views::Firm.new(edgar_firm)
+            firm_rdbr = Views::FirmReadability.new(firm_rdb)
             # Show viewer the firm
-            view 'firm', locals: { firm: edgar_firm, firm_rdb: firm_rdb }
+            view 'firm', locals: { firm: firm, firm_rdb: firm_rdb }
           end
         end
       end

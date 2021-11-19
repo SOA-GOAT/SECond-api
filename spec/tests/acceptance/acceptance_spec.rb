@@ -10,11 +10,11 @@ require 'watir'
 
 describe 'Acceptance Tests' do
   before do
-   # DatabaseHelper.wipe_database
+    DatabaseHelper.wipe_database
    # @headless = Headless.new
    # @browser = Watir::Browser.new
     options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--headless')
+    #options.add_argument('--headless')
     # options.add_argument('--no-sandbox')
     # options.add_argument('--disable-gpu')
     # options.add_argument('--disable-dev-shm-usage')
@@ -25,7 +25,7 @@ describe 'Acceptance Tests' do
 
   after do
     @browser.close
-    @headless.destroy
+    #@headless.destroy
   end
 
   describe 'Homepage' do
@@ -38,7 +38,7 @@ describe 'Acceptance Tests' do
         # _(@browser.h1(id: 'main_header').text).must_equal 'SECond'
         _(@browser.text_field(id: 'firm-cik-input').present?).must_equal true
         _(@browser.button(id: 'cik-submit').present?).must_equal true
-        #_(@browser.table(id: 'projects_table').exists?).must_equal false
+        _(@browser.table(id: 'firms_table').exists?).must_equal false
 
         _(@browser.div(id: 'flash_bar_success').present?).must_equal true
         _(@browser.div(id: 'flash_bar_success').text.downcase).must_include 'start'
@@ -53,7 +53,7 @@ describe 'Acceptance Tests' do
         @browser.goto homepage
 
         # THEN: they should not see any firms
-        #_(@browser.table(id: 'firms_table').exists?).must_equal false
+        _(@browser.table(id: 'firms_table').exists?).must_equal false
       end
     end
 
@@ -111,10 +111,10 @@ describe 'Acceptance Tests' do
 
         # WHEN: they revisit the homepage and delete the firm
         @browser.goto homepage
-        #@browser.button(id: 'firm[0].delete').click # not yet!
+        @browser.button(id: 'firm[0].delete').click # not yet!
 
         # THEN: they should not find any firms
-        #_(@browser.table(id: 'firms_table').exists?).must_equal false
+        _(@browser.table(id: 'firms_table').exists?).must_equal false
       end
     end
   end
@@ -132,19 +132,14 @@ describe 'Acceptance Tests' do
       _(@browser.h2.text).must_include FIRM_NAME
 
       filing_columns = @browser.table(id: 'filings_table').thead.ths.select do |col|
-        col.attribute(:class).split.sort == %w[filing att]
+        col.attribute(:class).split.sort == %w[att filing]
       end
 
       _(filing_columns.count).must_equal 5
 
       _(filing_columns.map(&:text).sort)
-        .must_equal ['Accession Number', 'Form Type', 'Filing Date', 'Reporting Date', 'Size']
+        .must_equal ["Accession Number", "Filing Date", "Form Type", "Reporting Date", "Size"]
 
-      filing_rows = @browser.table(id: 'filings_table').trs.select do |row|
-        row.td(class: %w[filing value]).present?
-      end
-
-      # _(filing_rows.count).must_equal 10
     end
 
   #   it '(HAPPY) should be able to traverse to subfolders' do
