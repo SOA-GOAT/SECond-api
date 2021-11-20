@@ -24,7 +24,8 @@ module SECond
       end
 
       def get_cik
-        "#{cik}"
+        # "#{cik}"
+        cik.to_s
       end
     end
   end

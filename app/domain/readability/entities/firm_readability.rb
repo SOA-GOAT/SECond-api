@@ -12,8 +12,8 @@ module SECond
         # super(Types::HashedArrays.new)
 
         @filings = filings
-      #   @base_files = assign_base_files
-      #   @subfolders = subfolder_contributions
+        # @base_files = assign_base_files
+        # @subfolders = subfolder_contributions
       end
 
       def aver_firm_readability

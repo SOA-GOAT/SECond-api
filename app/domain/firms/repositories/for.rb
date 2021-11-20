@@ -8,7 +8,7 @@ module SECond
     # Finds the right repository for an entity object or class
     module For
       ENTITY_REPOSITORY = {
-        Entity::Firm => Firms,
+        Entity::Firm   => Firms,
         Entity::Filing => Filings
       }.freeze
 
