@@ -41,7 +41,7 @@ module SECond
         filepath = "#{path}/#{cik}"
         Dir.mkdir(filepath) unless Dir.exist?(filepath)
 
-        open("#{filepath}/#{accession_number}.txt", "wb") do |file|
+        open("#{filepath}/#{accession_number}.txt", 'wb') do |file|
           file.write(submission.body)
         end
       end
@@ -59,7 +59,7 @@ module SECond
 
         def get(url)
           http_response =
-            HTTP.headers('Accept' => '*/*',
+            HTTP.headers('Accept'     => '*/*',
                          'Connection' => 'keep-alive').get(url)
 
           Response.new(http_response).tap do |response|

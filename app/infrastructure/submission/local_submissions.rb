@@ -23,13 +23,13 @@ module SECond
       end
 
       def select_10K
-        @firm_filings.select { |filing| filing.form_type.include? "10-K"}
+        @firm_filings.select { |filing| filing.form_type.include? '10-K' }
       end
 
       def download_10K
         api = Edgar::EdgarApi.new
-        select_10K.each do |tenK|
-          api.download_submission_url(@cik, tenK.accession_number)
+        select_10K.each do |tenk|
+          api.download_submission_url(@cik, tenk.accession_number)
         end
         # @remote.local_clone(@edgar_10K_path) { |line| yield line if block_given? }
         self

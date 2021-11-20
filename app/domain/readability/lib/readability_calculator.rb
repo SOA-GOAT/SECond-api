@@ -11,6 +11,7 @@ module SECond
       def aver_word_count
         # return 0 if size == 0 # for files with no creditable lines
         return 0 if size.zero? # for files with no creditable lines
+
         word_count / size
       end
 
