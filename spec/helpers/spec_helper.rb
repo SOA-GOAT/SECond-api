@@ -23,5 +23,5 @@ CASSETTE_FILE = 'edgar_api'
 
 # Helper method for acceptance tests
 def homepage
-    SECond::App.config.APP_HOST
+  SECond::App.config.APP_HOST
 end

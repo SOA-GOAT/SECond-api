@@ -11,10 +11,10 @@ require 'watir'
 describe 'Acceptance Tests' do
   before do
     DatabaseHelper.wipe_database
-   # @headless = Headless.new
-   # @browser = Watir::Browser.new
+    # @headless = Headless.new
+    # @browser = Watir::Browser.new
     options = Selenium::WebDriver::Chrome::Options.new
-    #options.add_argument('--headless')
+    # options.add_argument('--headless')
     # options.add_argument('--no-sandbox')
     # options.add_argument('--disable-gpu')
     # options.add_argument('--disable-dev-shm-usage')
@@ -25,7 +25,7 @@ describe 'Acceptance Tests' do
 
   after do
     @browser.close
-    #@headless.destroy
+    # @headless.destroy
   end
 
   describe 'Homepage' do
@@ -91,13 +91,13 @@ describe 'Acceptance Tests' do
         @browser.goto homepage
 
         # WHEN: they add a firm cik that is valid but non-existent
-        sad_cik = "0000000000"
+        sad_cik = '0000000000'
         @browser.text_field(id: 'firm-cik-input').set(sad_cik)
         @browser.button(id: 'cik-submit').click
 
         # THEN: they should see a warning message
         _(@browser.div(id: 'flash_bar_danger').present?).must_equal true
-        _(@browser.div(id: 'flash_bar_danger').text.downcase).must_include 'trouble' #'could not find'
+        _(@browser.div(id: 'flash_bar_danger').text.downcase).must_include 'trouble' # 'could not find'
       end
     end
 
@@ -138,8 +138,7 @@ describe 'Acceptance Tests' do
       _(filing_columns.count).must_equal 5
 
       _(filing_columns.map(&:text).sort)
-        .must_equal ["Accession Number", "Filing Date", "Form Type", "Reporting Date", "Size"]
-
+        .must_equal ['Accession Number', 'Filing Date', 'Form Type', 'Reporting Date', 'Size']
     end
 
   #   it '(HAPPY) should be able to traverse to subfolders' do
@@ -190,6 +189,6 @@ describe 'Acceptance Tests' do
   #     # THEN: user should see a warning message
   #     _(@browser.div(id: 'flash_bar_danger').present?).must_equal true
   #     _(@browser.div(id: 'flash_bar_danger').text.downcase).must_include 'could not find'
-  #   end
+  # end
   end
 end
