@@ -29,7 +29,8 @@ module SECond
 
       # Database Setup
       DB = Sequel.connect(ENV['DATABASE_URL'])
-      def self.DB() = DB # rubocop:disable Naming/MethodName :reek:UncommunicativeMethodName
+      # This method smells of :reek:UncommunicativeMethodName
+      def self.DB() = DB # rubocop:disable Naming/MethodName
     end
     # rubocop:enable Lint/ConstantDefinitionInBlock
   end

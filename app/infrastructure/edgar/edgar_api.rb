@@ -56,6 +56,7 @@ module SECond
           get("#{SUBMISSION_PATH}CIK#{cik}.json")
         end
 
+        # :reek:FeatureEnvy
         def get(url)
           http_response =
             HTTP.headers('Accept'     => '*/*',

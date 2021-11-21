@@ -12,7 +12,8 @@ module SECond
         # super(Types::HashedArrays.new)
         super @filings = filings
       end
-
+      
+       # :reek:FeatureEnvy
       def aver_firm_readability
         scores = @filings.map(&:filing_rdbscore)
         scores.sum / scores.size

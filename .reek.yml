@@ -2,18 +2,30 @@
   detectors:
     IrresponsibleModule:
       enabled: false
+    TooManyStatements:
+      exclude:
+        - SECond::Edgar::FilingMapper#load_several
+        - SECond::Edgar::EdgarApi#download_submission_url
+        - SECond::Edgar::EdgarApi#submission_data
+    UtilityFunction:
+      enabled: false
+    MissingSafeMethod:
+      exclude:
+        - SECond::FirmFiling
+        - SECond::Submission::LocalFirmSubmissions
+
   exclude_paths:
     - _snippets
     - spec/fixtures/firm_info.rb # one-time test fixture creator
     - app/infrastructure/edgar/10Kstore
-  
+
   directories:
-    "app/infrastructure/gateways":
+    "app/infrastructure/edgar":
       NestedIterators:
         enabled: false
       UtilityFunction:
         enabled: false
 
-    "app/models/mappers":
+    "app/domain/firms/mappers":
       NestedIterators:
         enabled: false

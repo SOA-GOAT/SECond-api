@@ -6,7 +6,7 @@ module Views
   # View for a a list of firm entities
   class FirmsList
     def initialize(firms)
-      @firms = firms.map.with_index { |firm, i| Firm.new(firm, i) }
+      @firms = firms.map.with_index { |firm, index| Firm.new(firm, index) }
     end
 
     def each
