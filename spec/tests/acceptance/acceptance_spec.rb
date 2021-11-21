@@ -12,9 +12,9 @@ describe 'Acceptance Tests' do
   before do
     DatabaseHelper.wipe_database
     # @headless = Headless.new
-    # @browser = Watir::Browser.new
+    @browser = Watir::Browser.new
 
-    options = Selenium::WebDriver::Chrome::Options.new
+    # options = Selenium::WebDriver::Chrome::Options.new
     # options.add_argument('--headless')
     # options.add_argument('--no-sandbox')
     # options.add_argument('--disable-gpu')
@@ -22,7 +22,7 @@ describe 'Acceptance Tests' do
     # options.add_argument('--profile-directory=Default')
     # options.add_argument('--user-data-dir=~/.config/google-chrome')
 
-    @browser = Watir::Browser.new :chrome, options => options
+    # @browser = Watir::Browser.new :chrome, options => options
   end
 
   after do
