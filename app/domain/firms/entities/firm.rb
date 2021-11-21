@@ -22,6 +22,10 @@ module SECond
       def to_attr_hash
         to_hash.reject { |key, _| %i[id filings].include? key }
       end
+
+      def formatted_cik
+        cik.to_s
+      end
     end
   end
 end

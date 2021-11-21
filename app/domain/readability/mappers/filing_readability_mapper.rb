@@ -18,7 +18,7 @@ module SECond
 
       private
 
-      def get_sentences
+      def split_into_sentences
         # read a filing
         path = 'app/infrastructure/edgar/10Kstore'
         filing_path = "#{path}/#{@filing.cik}/#{@filing.accession_number}.txt"
@@ -26,11 +26,11 @@ module SECond
 
         # convert fiiling into sentnces
         content = file.read
-        content.split(/\.|\?|\!/)
+        content.split(/\.|\?|!/)
       end
 
       def sentences_summaries
-        sentences = get_sentences
+        sentences = split_into_sentences
         sentences.each do |sentence|
           Mapper::SentenceReadability.new(sentence).to_entity
         end

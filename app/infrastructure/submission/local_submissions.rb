@@ -14,49 +14,34 @@ module SECond
       ONLY_FOLDERS = '**/'
       FILES_AND_FOLDERS = '**/*'
 
-      attr_reader :edgar_10K_path
+      attr_reader :edgar_tenk_path
 
-      def initialize(firm_filings, tenKstore_path)
+      def initialize(firm_filings, tenkstore_path)
         @firm_filings = firm_filings
         @cik = firm_filings[0].cik
-        @edgar_10K_path = [tenKstore_path, @cik].join('/')
+        @edgar_tenk_path = [tenkstore_path, @cik].join('/')
       end
 
-      def select_10K
-        @firm_filings.select { |filing| filing.form_type.include? "10-K"}
+      def select_tenk
+        @firm_filings.select { |filing| filing.form_type.include? '10-K' }
       end
 
-      def download_10K
+      def download_tenk
         api = Edgar::EdgarApi.new
-        select_10K.each do |tenK|
-          api.download_submission_url(@cik, tenK.accession_number)
+        select_tenk.each do |tenk|
+          api.download_submission_url(@cik, tenk.accession_number)
         end
-        # @remote.local_clone(@edgar_10K_path) { |line| yield line if block_given? }
+        # @remote.local_clone(@edgar_tenk_path) { |line| yield line if block_given? }
         self
       end
 
-      # def files
-      #   raise_unless_setup
-
-      #   @files ||= in_repo do
-      #     Dir.glob(FILES_AND_FOLDERS).select do |path|
-      #       File.file?(path) && (path =~ CODE_FILENAME_MATCH)
-      #     end
-      #   end
-      # end
-
-      # def in_repo(&block)
-      #   raise_unless_setup
-      #   Dir.chdir(@edgar_10K_path) { yield block }
-      # end
-
       def exists?
-        Dir.exist? @edgar_10K_path
+        Dir.exist? @edgar_tenk_path
       end
 
       # Deliberately :reek:MissingSafeMethod delete
       def delete!
-        FileUtils.rm_rf(@edgar_10K_path)
+        FileUtils.rm_rf(@edgar_tenk_path)
       end
 
       private
@@ -66,7 +51,7 @@ module SECond
       end
 
       def wipe
-        FileUtils.rm_rf @edgar_10K_path
+        FileUtils.rm_rf @edgar_tenk_path
       end
     end
   end

@@ -9,7 +9,7 @@ AllCops:
     - '**/*.rb'
   Exclude:
     - '_snippets/*'
-    - 'app/infrastructure/git/repostore/**/*'
+    - 'app/infrastructure/edgar/10Kstore/**/*'
 
 # Ignore block length where unavoidable (e.g., frameworks using blocks)
 Metrics/BlockLength:
@@ -20,6 +20,11 @@ Metrics/BlockLength:
     - app/controllers/**/*.rb # Roda's nested controllers require large blocks
     - spec/**/* # Minitest's nested test structure requires large blocks
     - Rakefile # Rake namespaces produce large blocks
+
+Metrics/MethodLength:
+  Enabled: true
+  Exclude:
+    - app/domain/firms/repositories/filings.rb # Rebuild filing entity requires large blocks
 
 Layout/MultilineMethodCallIndentation:
   Enabled: true
@@ -39,3 +44,9 @@ Style/SymbolArray:
   Exclude:
     - Rakefile
     - app/infrastructure/database/migrations/*.rb
+
+Style/ExplicitBlockArgument:
+  Enabled: true
+  Exclude:
+    - app/presentation/view_objects/firms_list.rb
+    - app/presentation/view_objects/filing_list.rb

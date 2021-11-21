@@ -23,7 +23,7 @@ The EDGAR system of SEC contains all the required **fillings** of the US public 
 - Provide summary information of target filings by textual analysis.
 
 ## Our Goal
--Readability Analytics: Analyze **length** of each sentences in filings to get **readability score** to each filing and calculate the **average readability score** for a firm. The scores show the level of readbility of a firm’s financial documents.
+- Readability Analytics: Analyze **length** of each sentences in filings to get **readability score** to each filing and calculate the **average readability score** for a firm. The scores show the level of readbility of a firm’s financial documents.
 
 ## Data Source
 

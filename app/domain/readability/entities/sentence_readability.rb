@@ -17,7 +17,7 @@ module SECond
       def initialize(sentence:)
         @sentence = sentence
       end
-      
+
       def sentence_length
         @sentence.size
       end

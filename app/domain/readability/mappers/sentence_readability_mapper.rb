@@ -26,7 +26,6 @@ module SECond
           sentence: @sentence
         )
       end
-
     end
 
     # BlameCodeString = Struct.new(:code) do

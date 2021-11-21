@@ -4,6 +4,7 @@ require 'roda'
 require 'figaro'
 require 'sequel'
 require 'yaml'
+require 'delegate' # needed until Rack 2.3 fixes delegateclass bug
 
 module SECond
   # Configuration for the App
@@ -15,10 +16,12 @@ module SECond
       # Environment variables setup
       Figaro.application = Figaro::Application.new(
         environment: environment,
-        path: File.expand_path('config/secrets.yml')
+        path: File.expand_path('config/secrets_example.yml')
       )
       Figaro.load
       def self.config() = Figaro.env
+
+      use Rack::Session::Cookie, secret: config.SESSION_SECRET
 
       configure :development, :test do
         ENV['DATABASE_URL'] = "sqlite://#{config.DB_FILENAME}"
@@ -26,7 +29,8 @@ module SECond
 
       # Database Setup
       DB = Sequel.connect(ENV['DATABASE_URL'])
-      def self.DB() = DB # rubocop:disable Naming/MethodName :reek:UncommunicativeMethodName
+      # This method smells of :reek:UncommunicativeMethodName
+      def self.DB() = DB # rubocop:disable Naming/MethodName
     end
     # rubocop:enable Lint/ConstantDefinitionInBlock
   end

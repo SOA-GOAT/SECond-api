@@ -9,6 +9,7 @@ module SECond
         @gateway = @gateway_class.new
       end
 
+      # :reek:FeatureEnvy
       def load_several(cik)
         filing_hash = @gateway.submission_data(cik)
         keys = filing_hash.keys
