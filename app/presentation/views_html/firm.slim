@@ -34,27 +34,25 @@
   .container.d-flex.flex-column.bg-light.rounded.custom-container-width.top-buffer
     table.table id="filings_table"
       thead
-        tr
-          th Accession Number
-          th Form Type
-          th Filing Date
-          th Reporting Date
-          / th Readability Score
-          th Size
+        th.filing.att Accession Number
+        th.filing.att Form Type
+        th.filing.att Filing Date
+        th.filing.att Reporting Date
+        th.filing.att Size
       tbody
         - firm.filings.each do |filing, index|
           tr
-            td
+            td.filing.value
               span #{filing.accession_number}
-            td
+            td.filing.value
               span #{filing.form_type}
-            td
+            td.filing.value
               span #{filing.filing_date}
-            td
+            td.filing.value
               span #{filing.reporting_date}
-            / td
+            / td.filing.value
             /   span #{firm_rdb.aver_firm_readability}
-            td
+            td.filing.value
               span #{filing.size}
             / - filing.keys.each do |key|
             /   td

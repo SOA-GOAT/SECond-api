@@ -1,0 +1,50 @@
+.container
+  a href="/"
+    img {
+      src='https://github.com/SOA-GOAT/SECond/raw/main/images/logo.png'
+      height='400' class='mx-auto d-block' 
+    } /
+  h3 A analytic platform of public traded firms for researchers.
+  h4 Filter the information you want on SEC in seconds. 
+  form role="form" action="/firm" method='POST' id='show-firm-form'
+    .row.vertical-align.query-bar
+      .col-md-2.col-sm-3
+        .text-right Firm CIK:
+      .col-md-8.col-sm-6
+        input { 
+          type='text' name='firm_cik'
+          id='firm-cik-input' class="form-control"
+          placeholder="e.g. 0000320193 or 320193"
+        }
+      .col-md-2.col-sm-3
+        button { 
+          type='submit' id='cik-submit' class='submit' 
+          value='submit' class="btn btn-success" 
+        } Show Firm's Filings
+    .row
+      .col-md-12.blank-row
+  - if firms.any?
+    table class="table table-hover" id="firms_table"
+      thead
+        tr
+          th
+          th CIK
+          th Firm Name
+          th Tickers
+      tbody
+        - firms.each do |firm|
+          tr class="table-row project_row" data-href=firm.firm_link id="#{firm.index_str}.row"
+            td id='delete_project'
+              form role='form' method='post' action=firm.firm_link
+                input type='hidden' name='_method' value='delete'
+                button type="submit" class="btn btn-sm btn-link" id="#{firm.index_str}.delete"
+                  i class="fas fa-trash-alt"
+            td id='td_cik'
+              span class="firm_cik" id="#{firm.index_str}.cik"
+                = firm.cik
+            td id='td_name'
+              span class="firm_name" id="#{firm.index_str}.name"
+                = firm.name
+            td id='td_tickers'
+              span class="firm_tickers" id="#{firm.index_str}.tickers"
+                = firm.tickers

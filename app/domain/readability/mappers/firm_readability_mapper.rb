@@ -14,7 +14,7 @@ module SECond
 
       def build_entity
         Entity::FirmReadability.new(
-          filings: filings_summaries,
+          filings: filings_summaries
         )
       end
 

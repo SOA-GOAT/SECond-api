@@ -5,15 +5,6 @@ module SECond
     # Entity for file contributions
     class FilingReadability
       include Mixins::ReadabilityCalculator
-
-      # WANTED_LANGUAGES = [
-      #   Value::CodeLanguage::Ruby,
-      #   Value::CodeLanguage::Python,
-      #   Value::CodeLanguage::Javascript,
-      #   Value::CodeLanguage::Css,
-      #   Value::CodeLanguage::Html,
-      #   Value::CodeLanguage::Markdown
-      # ].freeze
       # paragraphs 是 filing 有幾段
       attr_reader :sentences
 

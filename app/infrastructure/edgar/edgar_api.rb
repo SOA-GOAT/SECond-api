@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'http'
-# require_relative 'firm'
 
 module SECond
   module Edgar
@@ -41,7 +40,7 @@ module SECond
         filepath = "#{path}/#{cik}"
         Dir.mkdir(filepath) unless Dir.exist?(filepath)
 
-        open("#{filepath}/#{accession_number}.txt", "wb") do |file|
+        File.open("#{filepath}/#{accession_number}.txt", 'wb') do |file|
           file.write(submission.body)
         end
       end
@@ -57,9 +56,10 @@ module SECond
           get("#{SUBMISSION_PATH}CIK#{cik}.json")
         end
 
+        # :reek:FeatureEnvy
         def get(url)
           http_response =
-            HTTP.headers('Accept' => '*/*',
+            HTTP.headers('Accept'     => '*/*',
                          'Connection' => 'keep-alive').get(url)
 
           Response.new(http_response).tap do |response|

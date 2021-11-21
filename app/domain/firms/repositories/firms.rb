@@ -30,6 +30,12 @@ module SECond
         rebuild_entity(db_record)
       end
 
+      def self.find_ciks(ciks)
+        ciks.map do |cik|
+          find_cik(cik)
+        end.compact
+      end
+
       def self.find_name(name)
         db_record = rebuild_entity Database::FirmOrm.first(name: name)
         rebuild_entity(db_record)
