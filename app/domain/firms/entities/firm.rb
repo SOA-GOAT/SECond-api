@@ -23,8 +23,7 @@ module SECond
         to_hash.reject { |key, _| %i[id filings].include? key }
       end
 
-      def get_cik
-        # "#{cik}"
+      def formatted_cik
         cik.to_s
       end
     end

@@ -6,7 +6,7 @@ module Views
   # View for a a list of filing entities
   class FilingsList
     def initialize(filings)
-      @filings = filings.map.with_index { |filing, i| Firm.new(filing, i) }
+      @filings = filings.map.with_index { |filing, index| Firm.new(filing, index) }
     end
 
     def each

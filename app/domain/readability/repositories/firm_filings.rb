@@ -33,7 +33,7 @@ module SECond
       # raise Errors::TooLargeToDownload if @firm.too_large?
       raise Errors::CannotOverwriteLocalFirmSubmission if exists_locally?
 
-      @local.download_10K # { |line| yield line if block_given? }
+      @local.download_tenk # { |line| yield line if block_given? }
     end
   end
 end

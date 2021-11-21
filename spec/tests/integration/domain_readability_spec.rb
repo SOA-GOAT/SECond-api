@@ -29,14 +29,14 @@ describe 'Test Readability score Mapper and Gateway' do
 
   it 'HAPPY: should get readability summary for entire firm' do
     _(@root.size).must_equal 31
-    _(@root.sentences.size).must_equal 1413718
-    _(@root.aver_firm_readability).must_equal 128
+    _(@root.sentences.size).must_equal 1_413_718
+    _(@root.aver_firm_readability).must_equal 617
   end
 
   it 'HAPPY: should get accurate readability summary for filings' do
     # averageforms = SECond::Mapper::Readability.new(@firm).for_firm('')
     filing = @root.filings[0]
-    _(filing.size).must_equal 97082
-    _(filing.filing_rdbscore).must_equal 107
+    _(filing.size).must_equal 97_082
+    _(filing.filing_rdbscore).must_equal 327
   end
 end

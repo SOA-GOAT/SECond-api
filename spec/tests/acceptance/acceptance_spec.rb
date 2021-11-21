@@ -13,6 +13,7 @@ describe 'Acceptance Tests' do
     DatabaseHelper.wipe_database
     # @headless = Headless.new
     # @browser = Watir::Browser.new
+
     options = Selenium::WebDriver::Chrome::Options.new
     # options.add_argument('--headless')
     # options.add_argument('--no-sandbox')
@@ -20,7 +21,8 @@ describe 'Acceptance Tests' do
     # options.add_argument('--disable-dev-shm-usage')
     # options.add_argument('--profile-directory=Default')
     # options.add_argument('--user-data-dir=~/.config/google-chrome')
-    @browser = Watir::Browser.new :chrome, :options => options
+
+    @browser = Watir::Browser.new :chrome, options => options
   end
 
   after do
@@ -141,54 +143,52 @@ describe 'Acceptance Tests' do
         .must_equal ['Accession Number', 'Filing Date', 'Form Type', 'Reporting Date', 'Size']
     end
 
-  #   it '(HAPPY) should be able to traverse to subfolders' do
-  #     project = SECond::Edgar::FirmMapper
-  #       .new(GITHUB_TOKEN)
-  #       .find(USERNAME, PROJECT_NAME)
+    #  it '(HAPPY) should be able to traverse to subfolders' do
+    #    project = SECond::Edgar::FirmMapper
+    #      .new(GITHUB_TOKEN)
+    #      .find(USERNAME, PROJECT_NAME)
 
-  #     SECond::Repository::For.entity(project).create(project)
+    #    SECond::Repository::For.entity(project).create(project)
 
-  #     @browser.goto "http://localhost:9000/project/#{USERNAME}/#{PROJECT_NAME}"
+    #    @browser.goto "http://localhost:9000/project/#{USERNAME}/#{PROJECT_NAME}"
 
-  #     folder_rows = @browser.table(id: 'filings_table').trs.select do |row|
-  #       row.td(class: %w[folder name]).present?
-  #     end
+    #    folder_rows = @browser.table(id: 'filings_table').trs.select do |row|
+    #      row.td(class: %w[folder name]).present?
+    #    end
 
-  #     views_folder = folder_rows.last.tds.find do |column|
-  #       column.link.href.include? 'views_objects'
-  #     end
+    #   views_folder = folder_rows.last.tds.find do |column|
+    #     column.link.href.include? 'views_objects'
+    #   end
 
-  #     views_folder.link.click
+    #   views_folder.link.click
 
-  #     _(@browser.h2.text).must_include USERNAME
-  #     _(@browser.h2.text).must_include PROJECT_NAME
+    #   _(@browser.h2.text).must_include USERNAME
+    #   _(@browser.h2.text).must_include PROJECT_NAME
 
-  #     folder_rows = @browser.table(id: 'filings_table').trs.select do |row|
-  #       row.td(class: %w[folder name]).present?
-  #     end
+    #   folder_rows = @browser.table(id: 'filings_table').trs.select do |row|
+    #     row.td(class: %w[folder name]).present?
+    #   end
 
-  #     filing_rows = @browser.table(id: 'filings_table').trs.select do |row|
-  #       row.td(class: %w[file name]).present?
-  #     end
+    #   filing_rows = @browser.table(id: 'filings_table').trs.select do |row|
+    #     row.td(class: %w[file name]).present?
+    #   end
 
-  #     _(folder_rows).must_be_empty
-  #     _(filing_rows.count).must_equal 5
-  #   end
+    #   _(folder_rows).must_be_empty
+    #   _(filing_rows.count).must_equal 5
 
-  #   it '(BAD) should report error if subfolder does not exist' do
-  #     # GIVEN a project that exists
-  #     project = SECond::Edgar::FirmMapper
-  #       .new(GITHUB_TOKEN)
-  #       .find(USERNAME, PROJECT_NAME)
+    #    '(BAD) should report error if subfolder does not exist' do
+    #   # GIVEN a project that exists
+    #   project = SECond::Edgar::FirmMapper
+    #     .new(GITHUB_TOKEN)
+    #     .find(USERNAME, PROJECT_NAME)
 
-  #     SECond::Repository::For.entity(project).create(project)
+    #   SECond::Repository::For.entity(project).create(project)
 
-  #     # WHEN user goes to a non-existent folder of the project
-  #     @browser.goto "http://localhost:9000/project/#{USERNAME}/#{PROJECT_NAME}/bad_folder"
+    #   # WHEN user goes to a non-existent folder of the project
+    #   @browser.goto "http://localhost:9000/project/#{USERNAME}/#{PROJECT_NAME}/bad_folder"
 
-  #     # THEN: user should see a warning message
-  #     _(@browser.div(id: 'flash_bar_danger').present?).must_equal true
-  #     _(@browser.div(id: 'flash_bar_danger').text.downcase).must_include 'could not find'
-  # end
+    #   # THEN: user should see a warning message
+    #   _(@browser.div(id: 'flash_bar_danger').present?).must_equal true
+    #   _(@browser.div(id: 'flash_bar_danger').text.downcase).must_include 'could not find'
   end
 end
