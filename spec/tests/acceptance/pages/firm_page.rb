@@ -12,11 +12,17 @@ class FirmPage
 
   h2(:firm_title, id: 'firm-fullname')
   table(:firm_table, id: 'firm-table')
-  table(:filings_table, id: 'filing-table')
+  table(:filings_table, id: 'filings-table')
 
   def filing_columns
-    filings_table.thead.ths.select do |col|
-      col.attribute(:class).split.sort == %w[att filing]
-    end
+    # row_str = filings_table_element.split(/\n/)[0] # "Accession Number Form Type Filing Date Reporting Date Size"
+    # row_str.
+
+    # filing_columns = filings_table_element.thead.ths.select do |col|
+    #   col.attribute(:class).split.sort == %w[att filing]
+    # end
+    # filing_columns
+
+    filings_table_element.thead.ths.text
   end
 end
