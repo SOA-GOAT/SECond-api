@@ -33,8 +33,8 @@ describe 'Homepage Acceptance Tests' do
       # WHEN: they visit the home page
       visit HomePage do |page|
         # THEN: they should see basic headers, no firms and a welcome message
-        _(page.title_heading).must_equal 'SECond'
-        _(page.url_input_element.present?).must_equal true
+        # _(page.title_heading).must_equal 'SECond'
+        _(page.cik_input_element.present?).must_equal true
         _(page.add_button_element.present?).must_equal true
         _(page.firms_table_element.exists?).must_equal false
 
