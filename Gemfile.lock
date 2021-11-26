@@ -182,6 +182,7 @@ GEM
     yml_reader (0.7)
 
 PLATFORMS
+  arm64-darwin-20
   arm64-darwin-21
 
 DEPENDENCIES
