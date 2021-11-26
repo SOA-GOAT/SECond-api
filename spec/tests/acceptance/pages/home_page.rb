@@ -47,14 +47,14 @@ class HomePage
     firms_table_element.rows - 1
   end
 
-  def add_new_firm(cik)
-    self.cik_input = cik
+  def add_new_firm(firm_cik)
+    self.cik_input = firm_cik
     self.add_button
   end
 
   def listed_firm(firm)
     {
-      cik: firm.cik,
+      firm_cik: firm.cik,
       name: firm.name,
       tickers: firm.tickers,
     }
