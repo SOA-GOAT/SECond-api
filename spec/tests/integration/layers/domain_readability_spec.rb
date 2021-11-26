@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../../helpers/spec_helper'
-require_relative '../../helpers/database_helper'
-require_relative '../../helpers/vcr_helper'
+require_relative '../../../helpers/spec_helper'
+require_relative '../../../helpers/database_helper'
+require_relative '../../../helpers/vcr_helper'
 
 describe 'Test Readability score Mapper and Gateway' do
   VcrHelper.setup_vcr

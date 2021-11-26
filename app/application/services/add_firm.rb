@@ -16,7 +16,7 @@ module SECond
 
       def format_cik(input)
         if input.success?
-          firm_cik = format('%010d', input.to_i)
+          firm_cik = format('%010d', input[:firm_cik].to_i)
           Success(firm_cik: firm_cik)
         else
           Failure("CIK #{input.errors.messages.first}")

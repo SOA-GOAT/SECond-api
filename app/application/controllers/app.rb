@@ -14,24 +14,31 @@ module SECond
     plugin :public, root: 'app/presentation/public'
     plugin :assets, path: 'app/presentation/assets',
                     css: 'style.css' # , js: 'table_row.js'
+
     use Rack::MethodOverride # for other HTTP verbs (with plugin all_verbs)
+
     route do |routing|
       routing.assets # load CSS
-      routing.public
 
       # GET /
       routing.root do
         # Get cookie viewer's previously seen firms
         session[:watching] ||= []
 
-        # Load previously viewed projects
-        firms = Repository::For.klass(Entity::Firm)
-          .find_ciks(session[:watching])
+        result = Service::ListFirms.new.call(session[:watching])
 
-        session[:watching] = firms.map(&:formatted_cik)
-        flash.now[:notice] = 'Add a firm cik to get started' if firms.none?
+        if result.failure?
+          flash[:error] = result.failure
+          viewable_firms = []
+        else
+          firms = result.value!
+          if firms.none?
+            flash.now[:notice] = 'Add a firm cik to get started'
+          end
+          session[:watching] = firms.map(&:formatted_cik)
+          viewable_firms = Views::FirmsList.new(firms)
+        end
 
-        viewable_firms = Views::FirmsList.new(firms)
         view 'home', locals: { firms: viewable_firms }
       end
 
@@ -39,89 +46,46 @@ module SECond
         routing.is do
           # POST /firm/
           routing.post do
-            firm_cik = routing.params['firm_cik']
+            cik_request = Forms::NewFirm.new.call(routing.params)
+            firm_made = Service::AddFirm.new.call(cik_request)
 
-            if firm_cik.size > 10
-              flash[:error] = 'CIK exceeds 10-digit length'
+            if firm_made.failure?
+              flash[:error] = firm_made.failure
               routing.redirect '/'
             end
 
-            firm_cik = format('%010d', firm_cik.to_i)
-
-            begin
-              edgar_firm = Repository::For.klass(Entity::Firm).find_cik(firm_cik)
-
-              if edgar_firm.nil? == false
-                session[:watching].insert(0, firm_cik).uniq!
-                routing.redirect "firm/#{firm_cik}"
-              end
-            rescue StandardError
-              flash[:error] = 'Having trouble accessing the database'
-              routing.redirect '/'
-            end
-
-            begin
-              # Get firm from Edgar
-              firm = Edgar::FirmMapper.new.find(firm_cik)
-
-              if firm.nil?
-                flash[:error] = 'Firm not found'
-                routing.redirect '/'
-              end
-              # Add firm to database
-              Repository::For.entity(firm).create(firm)
-            rescue StandardError
-              flash[:error] = 'Having trouble creating firm'
-              routing.redirect '/'
-            end
-
-            # Add new firm to watched set in cookies
-            session[:watching].insert(0, firm_cik).uniq!
-
-            # Redirect viewer to filing page
-            routing.redirect "firm/#{firm_cik}"
+            firm = firm_made.value!
+            session[:watching].insert(0, firm.cik).uniq!
+            flash[:notice] = 'Firm added to your list'
+            routing.redirect "firm/#{firm.formatted_cik}"
           end
         end
 
         routing.on String do |firm_cik|
-          # DELETE /project/{owner_name}/{project_name}
+          # DELETE /firm/{firm_cik}
           routing.delete do
             session[:watching].delete(firm_cik)
             routing.redirect '/'
           end
 
-          # GET /firm/firm_cik
+          # GET /firm/{firm_cik}
           routing.get do
-            # Get firm from database
-            begin
-              edgar_firm = Repository::For.klass(Entity::Firm)
-                .find_cik(firm_cik)
-            rescue StandardError
-              flash[:error] = 'Having trouble accessing the database'
+
+            session[:watching] ||= []
+
+            result = Service::InspectFirm.new.call(
+              watched_list: session[:watching],
+              requested: firm_cik
+            )
+
+            if result.failure?
+              flash[:error] = result.failure
               routing.redirect '/'
             end
 
-            # Download 10-Ks from firm information
-            begin
-              firm_filings = FirmFiling.new(edgar_firm)
-              firm_filings.download! unless firm_filings.exists_locally?
-            rescue StandardError
-              flash[:error] = 'Could not download filings'
-              routing.redirect '/'
-            end
-
-            # Compile readability for firm specified by cik
-            begin
-              firm_rdb = Mapper::Readability
-                .new.for_firm(firm_cik)
-            rescue StandardError
-              flash[:error] = 'Could not find that firm'
-              routing.redirect '/'
-            end
-
-            firm = Views::Firm.new(edgar_firm)
-            firm_rdb = Views::FirmReadability.new(firm_rdb)
-
+            inspected = result.value!
+            firm = Views::Firm.new(inspected[:firm])
+            firm_rdb = Views::FirmReadability.new(inspected[:firm_rdb])
             # Show viewer the firm
             view 'firm', locals: { firm: firm, firm_rdb: firm_rdb }
           end

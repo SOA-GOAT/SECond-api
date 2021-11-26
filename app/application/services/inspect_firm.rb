@@ -5,18 +5,18 @@ require 'dry/transaction'
 module SECond
   module Service
     # Analyzes contributions to a project
-    class InspectFirmInCookies
+    class InspectFirm
       include Dry::Transaction
 
       step :ensure_watched_firm
       step :retrieve_remote_firm
       step :download_remote
-      step :appraise_contributions
+      step :calculate_readability
 
       private
 
       def ensure_watched_firm(input)
-        if input[:watched_list].include? input[:requested].firm_cik
+        if input[:watched_list].include? input[:requested]
           Success(input)
         else
           Failure('Please first request this firm to be added to your list')
@@ -24,7 +24,7 @@ module SECond
       end
 
       def retrieve_remote_firm(input)
-        input[:firm] = Repository::For.klass(Entity::Firm).find_cik(input[:requested].firm_cik)
+        input[:firm] = Repository::For.klass(Entity::Firm).find_cik(input[:requested])
 
         input[:firm] ? Success(input) : Failure('Firm not found')
       rescue StandardError
@@ -41,9 +41,9 @@ module SECond
         Failure('Could not download this firms filings')
       end
 
-      def appraise_contributions(input)
+      def calculate_readability(input)
         input[:firm_rdb] = Mapper::Readability
-          .new.for_firm(input[:requested].firm_cik)
+          .new.for_firm(input[:requested])
         Success(input)
       rescue StandardError
         Failure('Could not find that firm readability')
