@@ -61,14 +61,14 @@ module SECond
             end
 
             begin
-              # Get filing from Firm
+              # Get firm from Edgar
               firm = Edgar::FirmMapper.new.find(firm_cik)
 
               if firm.nil?
                 flash[:error] = 'Firm not found'
                 routing.redirect '/'
               end
-              # Add filing to database
+              # Add firm to database
               Repository::For.entity(firm).create(firm)
             rescue StandardError
               flash[:error] = 'Having trouble creating firm'
