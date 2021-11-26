@@ -8,7 +8,7 @@ describe 'Test Readability score Mapper and Gateway' do
   VcrHelper.setup_vcr
 
   before do
-    VcrHelper.configure_vcr_for_github
+    VcrHelper.configure_vcr_for_edgar
     DatabaseHelper.wipe_database
 
     edgar_firm = SECond::Edgar::FirmMapper

@@ -5,7 +5,7 @@ require_relative '../../helpers/vcr_helper'
 
 describe 'Tests Edgar API library' do
   before do
-    VcrHelper.configure_vcr_for_github
+    VcrHelper.configure_vcr_for_edgar
   end
 
   after do

@@ -51,7 +51,7 @@ describe 'Homepage Acceptance Tests' do
       # WHEN: user goes to the homepage
       visit HomePage do |page|
         # THEN: they should not see any firms
-        _(page.projects_table_element.exists?).must_equal false
+        _(page.firms_table_element.exists?).must_equal false
       end
     end
   end
@@ -112,7 +112,7 @@ describe 'Homepage Acceptance Tests' do
         page.add_new_firm(bad_cik)
 
         # THEN: they should see a warning message
-        _(page.warning_message.downcase).must_include 'invalid'
+        _(page.warning_message.downcase).must_include 'trouble'
       end
     end
 

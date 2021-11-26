@@ -10,9 +10,9 @@ class HomePage
   div(:success_message, id: 'flash_bar_success')
 
   # h1(:title_heading, id: 'main_header')
-  text_field(:cik_input, id: 'cik_input')
-  button(:add_button, id: 'cik_submit')
-  table(:firms_table, id: 'firms_table')
+  text_field(:cik_input, id: 'firm-cik-input')
+  button(:add_button, id: 'cik-submit')
+  table(:firms_table, id: 'firms-table')
 
   indexed_property(
     :firms,

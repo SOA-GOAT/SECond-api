@@ -8,7 +8,7 @@ describe 'Integration Tests of Edgar API and Database' do
   VcrHelper.setup_vcr
 
   before do
-    VcrHelper.configure_vcr_for_github
+    VcrHelper.configure_vcr_for_edgar
   end
 
   after do
