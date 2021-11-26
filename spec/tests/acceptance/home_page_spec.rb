@@ -41,16 +41,6 @@ describe 'Homepage Acceptance Tests' do
         _(page.success_message_element.present?).must_equal true
         _(page.success_message.downcase).must_include 'start'
       end
-
-
-      # @browser.goto homepage
-
-      # _(@browser.text_field(id: 'firm-cik-input').present?).must_equal true
-      # _(@browser.button(id: 'cik-submit').present?).must_equal true
-      # _(@browser.table(id: 'firms_table').exists?).must_equal false
-
-      # _(@browser.div(id: 'flash_bar_success').present?).must_equal true
-      # _(@browser.div(id: 'flash_bar_success').text.downcase).must_include 'start'
     end
 
     it '(HAPPY) should not see firms they did not request' do
@@ -63,8 +53,6 @@ describe 'Homepage Acceptance Tests' do
         # THEN: they should not see any firms
         _(page.projects_table_element.exists?).must_equal false
       end
-
-      # _(@browser.table(id: 'firms_table').exists?).must_equal false
     end
   end
 
@@ -76,12 +64,10 @@ describe 'Homepage Acceptance Tests' do
         # WHEN: they add a firm URL and submit
         good_cik = CIK
         page.add_new_firm(good_cik)
-        # @browser.text_field(id: 'firm-cik-input').set(good_cik)
-        # @browser.button(id: 'cik-submit').click
 
         # THEN: they should find themselves on the project's page
         @browser.url.include? 'firm'
-        @browser.url.include? good_cik
+        @browser.url.include? CIK
       end
     end
 
@@ -97,7 +83,7 @@ describe 'Homepage Acceptance Tests' do
         # THEN: they should see their firm's details listed
         _(page.firms_table_element.exists?).must_equal true
         _(page.num_firms).must_equal 1
-        _(page.first_firm.text).must_include good_cik
+        _(page.first_firm.text).must_include CIK
       end
     end
 
