@@ -19,30 +19,30 @@ describe 'Firm Page Acceptance Tests' do
     # @headless.destroy
   end
 
-  # it '(HAPPY) should see firm content if firm exists' do
-  #   # GIVEN: user has requested and created a firm
-  #   visit HomePage do |page|
-  #     good_cik = CIK
-  #     page.add_new_firm(good_cik)
-  #   end
+  it '(HAPPY) should see firm content if firm exists' do
+    # GIVEN: user has requested and created a firm
+    visit HomePage do |page|
+      good_cik = CIK
+      page.add_new_firm(good_cik)
+    end
 
-  #   # WHEN: user goes to the project page
-  #   visit(FirmPage, using_params: { firm_cik: CIK }) do |page|
-  #     # THEN: they should see the firm details
-  #     _(page.firm_title).must_include FIRM_NAME
-  #     _(page.firm_table_element.present?).must_equal true
-  #     _(page.filings_table_element.present?).must_equal true
+    # WHEN: user goes to the project page
+    visit(FirmPage, using_params: { firm_cik: CIK }) do |page|
+      # THEN: they should see the firm details
+      _(page.firm_title).must_include FIRM_NAME
+      _(page.firm_table_element.present?).must_equal true
+      _(page.filings_table_element.present?).must_equal true
       
-  #     # usernames = ['SOA-KunLin', 'Yuan-Yu', 'luyimin']
-  #     # _(usernames.include?(page.contributors[0].username)).must_equal true
-  #     # _(usernames.include?(page.contributors[1].username)).must_equal true
-  #     # _(usernames.include?(page.contributors[3].username)).must_equal true
+      # usernames = ['SOA-KunLin', 'Yuan-Yu', 'luyimin']
+      # _(usernames.include?(page.contributors[0].username)).must_equal true
+      # _(usernames.include?(page.contributors[1].username)).must_equal true
+      # _(usernames.include?(page.contributors[3].username)).must_equal true
 
-  #     _(page.filing_columns).must_equal ['Accession Number', 'Filing Date', 'Form Type', 'Reporting Date', 'Size']
+      _(page.filing_columns).must_equal ['Accession Number', 'Filing Date', 'Form Type', 'Reporting Date', 'Size']
 
-  #     _(page.filing_columns.count).must_equal 5
-  #   end
-  # end
+      _(page.filing_columns.count).must_equal 5
+    end
+  end
 
   it '(HAPPY) should report an error if firm not requested' do
     # GIVEN: user has not requested a firm yet, even though it exists
