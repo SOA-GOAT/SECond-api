@@ -56,7 +56,7 @@ class HomePage
     {
       firm_cik: firm.cik,
       name: firm.name,
-      tickers: firm.tickers,
+      tickers: firm.tickers
     }
   end
 end

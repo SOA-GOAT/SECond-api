@@ -26,7 +26,7 @@ module SECond
     end
 
     configure :app_test do
-      require_relative '../spec/helpers/vcr_helper.rb'
+      require_relative '../spec/helpers/vcr_helper'
       VcrHelper.setup_vcr
       VcrHelper.configure_vcr_for_edgar(recording: :none)
     end

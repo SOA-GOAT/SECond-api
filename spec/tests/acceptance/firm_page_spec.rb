@@ -32,7 +32,7 @@ describe 'Firm Page Acceptance Tests' do
   #     _(page.firm_title).must_include FIRM_NAME
   #     _(page.firm_table_element.present?).must_equal true
   #     _(page.filings_table_element.present?).must_equal true
-      
+
   #     # usernames = ['SOA-KunLin', 'Yuan-Yu', 'luyimin']
   #     # _(usernames.include?(page.contributors[0].username)).must_equal true
   #     # _(usernames.include?(page.contributors[1].username)).must_equal true
