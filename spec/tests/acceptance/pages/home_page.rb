@@ -49,7 +49,7 @@ class HomePage
 
   def add_new_firm(firm_cik)
     self.cik_input = firm_cik
-    self.add_button
+    add_button
   end
 
   def listed_firm(firm)

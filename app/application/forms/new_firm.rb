@@ -4,17 +4,16 @@ require 'dry-validation'
 
 module SECond
   module Forms
+    # Valdate input form for firm cik search
     class NewFirm < Dry::Validation::Contract
-      CIK_REGEX = %r{^\d{,10}$}.freeze
+      CIK_REGEX = %r{/^\d{,10}$/}
 
       params do
         required(:firm_cik).filled(:string)
       end
 
       rule(:firm_cik) do
-        unless CIK_REGEX.match?(value)
-          key.failure('is an invalid cik for a Edgar firm')
-        end
+        key.failure('is an invalid cik for a Edgar firm') unless CIK_REGEX.match?(value)
       end
     end
   end

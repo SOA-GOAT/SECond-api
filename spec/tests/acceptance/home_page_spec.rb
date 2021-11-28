@@ -125,7 +125,6 @@ describe 'Homepage Acceptance Tests' do
 
         # THEN: they should see a warning message
         _(page.warning_message.downcase).must_include 'could not find'
-    
       end
     end
   end

@@ -10,7 +10,6 @@ module SECond
   class App < Roda
     plugin :environments
 
-    # rubocop:disable Lint/ConstantDefinitionInBlock
     # Environment variables setup
     Figaro.application = Figaro::Application.new(
       environment: environment,
@@ -35,6 +34,5 @@ module SECond
     DB = Sequel.connect(ENV['DATABASE_URL'])
     # This method smells of :reek:UncommunicativeMethodName
     def self.DB() = DB # rubocop:disable Naming/MethodName
-    # rubocop:enable Lint/ConstantDefinitionInBlock
   end
 end

@@ -30,7 +30,7 @@ module SECond
           input[:remote_firm] = firm_from_edgar(input)
         end
         Success(input)
-      rescue StandardError => error
+      rescue StandardError
         Failure(error.to_s)
       end
 
@@ -42,7 +42,7 @@ module SECond
             input[:local_firm]
           end
         Success(firm)
-      rescue StandardError => error
+      rescue StandardError
         puts error.backtrace.join("\n")
         Failure('Having trouble accessing the database')
       end
