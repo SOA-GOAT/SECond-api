@@ -6,7 +6,7 @@ module SECond
   module Forms
     # Valdate input form for firm cik search
     class NewFirm < Dry::Validation::Contract
-      CIK_REGEX = %r{/^\d{,10}$/}
+      CIK_REGEX = /^\d{,10}$/
 
       params do
         required(:firm_cik).filled(:string)
