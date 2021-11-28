@@ -4,8 +4,7 @@
 class FirmPage
   include PageObject
 
-  page_url SECond::App.config.APP_HOST +
-           '/firm/<%=params[:firm_cik]%>'
+  page_url "#{SECond::App.config.APP_HOST}/firm/<%=params[:firm_cik]%>"
 
   div(:warning_message, id: 'flash_bar_danger')
   div(:success_message, id: 'flash_bar_success')

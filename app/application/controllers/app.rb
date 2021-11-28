@@ -32,9 +32,7 @@ module SECond
           viewable_firms = []
         else
           firms = result.value!
-          if firms.none?
-            flash.now[:notice] = 'Add a firm cik to get started'
-          end
+          flash.now[:notice] = 'Add a firm cik to get started' if firms.none?
           session[:watching] = firms.map(&:formatted_cik)
           viewable_firms = Views::FirmsList.new(firms)
         end
@@ -70,7 +68,6 @@ module SECond
 
           # GET /firm/{firm_cik}
           routing.get do
-
             session[:watching] ||= []
 
             result = Service::InspectFirm.new.call(
