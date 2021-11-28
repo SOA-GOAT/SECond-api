@@ -26,7 +26,6 @@ describe 'Firm Page Acceptance Tests' do
       page.add_new_firm(good_cik)
     end
 
-<<<<<<< HEAD
     # WHEN: user goes to the project page
     visit(FirmPage, using_params: { firm_cik: CIK }) do |page|
       # THEN: they should see the firm details
@@ -38,19 +37,6 @@ describe 'Firm Page Acceptance Tests' do
       # _(usernames.include?(page.contributors[0].username)).must_equal true
       # _(usernames.include?(page.contributors[1].username)).must_equal true
       # _(usernames.include?(page.contributors[3].username)).must_equal true
-=======
-  #   # WHEN: user goes to the project page
-  #   visit(FirmPage, using_params: { firm_cik: CIK }) do |page|
-  #     # THEN: they should see the firm details
-  #     _(page.firm_title).must_include FIRM_NAME
-  #     _(page.firm_table_element.present?).must_equal true
-  #     _(page.filings_table_element.present?).must_equal true
-
-  #     # usernames = ['SOA-KunLin', 'Yuan-Yu', 'luyimin']
-  #     # _(usernames.include?(page.contributors[0].username)).must_equal true
-  #     # _(usernames.include?(page.contributors[1].username)).must_equal true
-  #     # _(usernames.include?(page.contributors[3].username)).must_equal true
->>>>>>> 246af187d021b10d279f87215a3457ce99c16fec
 
       _(page.filing_columns).must_equal ['Accession Number', 'Filing Date', 'Form Type', 'Reporting Date', 'Size']
 
