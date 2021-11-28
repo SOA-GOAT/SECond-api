@@ -9,17 +9,20 @@ module VcrHelper
   EDGAR_CASSETTE = 'edgar_api'
 
   def self.setup_vcr
-    VCR.configure do |config|
-      config.cassette_library_dir = CASSETTES_FOLDER
-      config.hook_into :webmock
+    VCR.configure do |vcr_config|
+      vcr_config.cassette_library_dir = CASSETTES_FOLDER
+      vcr_config.hook_into :webmock
+      vcr_config.ignore_localhost = true # for acceptance tests
     end
   end
 
-  def self.configure_vcr_for_github
+  # Unavoidable :reek:TooManyStatements for VCR configuration
+  def self.configure_vcr_for_edgar(recording: :new_episodes)
     VCR.insert_cassette(
       EDGAR_CASSETTE,
-      record: :new_episodes,
-      match_requests_on: %i[method uri headers]
+      record: recording,
+      match_requests_on: %i[method uri headers],
+      allow_playback_repeats: true
     )
   end
 

@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../helpers/spec_helper'
-require_relative '../../helpers/database_helper'
-require_relative '../../helpers/vcr_helper'
+require_relative '../../../helpers/spec_helper'
+require_relative '../../../helpers/database_helper'
+require_relative '../../../helpers/vcr_helper'
 
 describe 'Test Readability score Mapper and Gateway' do
   VcrHelper.setup_vcr
 
   before do
-    VcrHelper.configure_vcr_for_github
+    VcrHelper.configure_vcr_for_edgar
     DatabaseHelper.wipe_database
 
     edgar_firm = SECond::Edgar::FirmMapper
