@@ -17,7 +17,7 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
     - Rakefile
-    - app/controllers/**/*.rb # Roda's nested controllers require large blocks
+    - app/application/controllers/**/*.rb # Roda's nested controllers require large blocks
     - spec/**/* # Minitest's nested test structure requires large blocks
     - Rakefile # Rake namespaces produce large blocks
 
@@ -50,3 +50,5 @@ Style/ExplicitBlockArgument:
   Exclude:
     - app/presentation/view_objects/firms_list.rb
     - app/presentation/view_objects/filing_list.rb
+
+

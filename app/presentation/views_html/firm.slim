@@ -1,10 +1,10 @@
 .container.top-buffer
   .row.d-flex.justify-content-center
-    h2
-      span.edgar.firm
+    h2 id="firm-fullname"
+      span.edgar.firm 
         = firm.name
   .container.d-flex.flex-column.bg-light.rounded.custom-container-width.top-buffer
-    table.table
+    table.table id="firm-table"
       thead
       tbody
         tr
@@ -32,7 +32,7 @@
             - firm.tickers.split.each do |ticker|
               = ticker
   .container.d-flex.flex-column.bg-light.rounded.custom-container-width.top-buffer
-    table.table id="filings_table"
+    table.table id="filings-table"
       thead
         th.filing.att Accession Number
         th.filing.att Form Type
