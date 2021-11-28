@@ -17,6 +17,6 @@ class FirmPage
     filing_columns = filings_table_element.thead.ths.select do |col|
       col.attribute(:class).split.sort == %w[att filing]
     end
-    filing_columns
+    filing_columns.map {|col| col.text}
   end
 end

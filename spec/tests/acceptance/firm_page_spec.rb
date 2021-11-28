@@ -38,7 +38,7 @@ describe 'Firm Page Acceptance Tests' do
       # _(usernames.include?(page.contributors[1].username)).must_equal true
       # _(usernames.include?(page.contributors[3].username)).must_equal true
 
-      _(page.filing_columns).must_equal ['Accession Number', 'Filing Date', 'Form Type', 'Reporting Date', 'Size']
+      _(page.filing_columns).must_equal ['Accession Number', 'Form Type', 'Filing Date', 'Reporting Date', 'Size']
 
       _(page.filing_columns.count).must_equal 5
     end
