@@ -7,7 +7,7 @@
         - SECond::Edgar::FilingMapper#load_several
         - SECond::Edgar::EdgarApi#download_submission_url
         - SECond::Edgar::EdgarApi#submission_data
-        - SECond::Service::AddFirm#find_firm
+        - SECond::Service::AddFirm#store_firm
     UtilityFunction:
       enabled: false
     MissingSafeMethod:
