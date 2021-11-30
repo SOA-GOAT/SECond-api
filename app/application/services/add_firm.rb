@@ -14,12 +14,15 @@ module SECond
 
       private
 
+      DB_ERR_MSG = 'Having trouble accessing the database'
+      EG_NOT_FOUND_MSG = 'Could not find that firm on Edgar'
+
       def format_cik(input)
         if input.success?
           firm_cik = format('%010d', input[:firm_cik].to_i)
           Success(firm_cik: firm_cik)
         else
-          Failure("CIK #{input.errors.messages.first}")
+          Failure(Response::ApiResult.new(status: :bad_request, message: "CIK #{input.errors.messages.first}"))
         end
       end
 
@@ -31,7 +34,7 @@ module SECond
         end
         Success(input)
       rescue StandardError => err
-        Failure(err.to_s)
+        Failure(Response::ApiResult.new(status: :not_found, message: err.to_s))
       end
 
       def store_firm(input)
@@ -41,10 +44,10 @@ module SECond
           else
             input[:local_firm]
           end
-        Success(firm)
+        Success(Response::ApiResult.new(status: :created, message: firm))
       rescue StandardError => err
         puts err.backtrace.join("\n")
-        Failure('Having trouble accessing the database')
+        Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERR_MSG))
       end
 
       # following are support methods that other services could use
@@ -52,7 +55,7 @@ module SECond
       def firm_from_edgar(input)
         Edgar::FirmMapper.new.find(input[:firm_cik])
       rescue StandardError
-        raise 'Could not find that firm on Edgar'
+        raise EG_NOT_FOUND_MSG
       end
 
       def firm_in_database(input)
