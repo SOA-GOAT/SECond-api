@@ -5,10 +5,10 @@ require 'roar/json'
 
 require_relative 'filing_representer'
 
-# Represents essential Repo information for API output
+# Represents essential Firm information for API output
 module SECond
   module Representer
-    # Represent a Project entity as Json
+    # Represent a Firm entity as Json
     class Firm < Roar::Decorator
       include Roar::JSON
       include Roar::Hypermedia
