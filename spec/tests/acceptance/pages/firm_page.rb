@@ -4,7 +4,7 @@
 class FirmPage
   include PageObject
 
-  page_url SECond::App.config.APP_HOST + '/firm/<%=params[:firm_cik]%>'
+  page_url "#{SECond::App.config.APP_HOST}/firm/<%=params[:firm_cik]%>"
 
   div(:warning_message, id: 'flash_bar_danger')
   div(:success_message, id: 'flash_bar_success')
@@ -17,6 +17,6 @@ class FirmPage
     filing_columns = filings_table_element.thead.ths.select do |col|
       col.attribute(:class).split.sort == %w[att filing]
     end
-    filing_columns.map {|col| col.text}
+    filing_columns.map(&:text)
   end
 end
