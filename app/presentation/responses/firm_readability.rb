@@ -3,6 +3,6 @@
 module SECond
   module Response
     # Readability for a filing of a filing
-    FirmFilingReadability = Struct.new(:firm, :filing)
+    FirmReadability = Struct.new(:firm_rdb)
   end
 end

@@ -16,9 +16,10 @@ module SECond
 
       DB_ERR_MSG = 'Having trouble accessing the database'
       EG_NOT_FOUND_MSG = 'Could not find that firm on Edgar'
+      CIK_REGEX = /^\d{,10}$/
 
       def format_cik(input)
-        if input.success?
+        if CIK_REGEX.match?(input[:firm_cik])
           firm_cik = format('%010d', input[:firm_cik].to_i)
           Success(firm_cik: firm_cik)
         else
