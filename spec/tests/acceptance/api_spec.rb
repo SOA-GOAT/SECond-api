@@ -6,7 +6,7 @@ require_relative '../../helpers/database_helper'
 require 'rack/test'
 
 def app
-  CodePraise::App
+  SECond::App
 end
 
 describe 'Test API routes' do

@@ -64,3 +64,5 @@ coverage/*
 
 # Ignore database files.
 *.db
+
+spec/fixtures/cassettes/edgar_api.yml
