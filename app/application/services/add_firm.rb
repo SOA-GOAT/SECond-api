@@ -35,8 +35,8 @@ module SECond
           input[:remote_firm] = firm_from_edgar(input)
         end
         Success(input)
-      rescue StandardError => err
-        Failure(Response::ApiResult.new(status: :not_found, message: err.to_s))
+      rescue StandardError => e
+        Failure(Response::ApiResult.new(status: :not_found, message: e.to_s))
       end
 
       def store_firm(input)
@@ -47,8 +47,8 @@ module SECond
             input[:local_firm]
           end
         Success(Response::ApiResult.new(status: :created, message: firm))
-      rescue StandardError => err
-        puts err.backtrace.join("\n")
+      rescue StandardError => e
+        puts e.backtrace.join("\n")
         Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERR_MSG))
       end
 

@@ -51,4 +51,5 @@ Style/ExplicitBlockArgument:
     - app/presentation/view_objects/firms_list.rb
     - app/presentation/view_objects/filing_list.rb
 
-
+Style/OpenStructUse:
+  Enabled: false
