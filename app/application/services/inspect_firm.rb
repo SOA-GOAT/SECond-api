@@ -50,7 +50,6 @@ module SECond
             Success(Response::ApiResult.new(status: :ok, message: rdb))
           end
       rescue StandardError
-        puts 'yo 2'
         Failure(Response::ApiResult.new(status: :not_found, message: NO_FILING_ERR))
       end
     end

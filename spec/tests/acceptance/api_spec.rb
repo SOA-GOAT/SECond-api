@@ -23,16 +23,16 @@ describe 'Test API routes' do
     VcrHelper.eject_vcr
   end
 
-  # describe 'Root route' do
-  #   it 'should successfully return root information' do
-  #     get '/'
-  #     _(last_response.status).must_equal 200
+  describe 'Root route' do
+    it 'should successfully return root information' do
+      get '/'
+      _(last_response.status).must_equal 200
 
-  #     body = JSON.parse(last_response.body)
-  #     _(body['status']).must_equal 'ok'
-  #     _(body['message']).must_include 'api/v1'
-  #   end
-  # end
+      body = JSON.parse(last_response.body)
+      _(body['status']).must_equal 'ok'
+      _(body['message']).must_include 'api/v1'
+    end
+  end
 
   describe 'Inspect firm route' do
     it 'should be able to inspect a firm route' do
@@ -53,110 +53,82 @@ describe 'Test API routes' do
       # _(firm_info['folder']['base_files'].count).must_equal 2
     end
 
-    # it 'should be able to appraise a firm subfolder' do
-    #   SECond::Service::AddFirm.new.call(
-    #     firm_cik: CIK
-    #   )
+    it 'should be report error for an invalid firm' do
+      #  SECond::Service::AddFirm.new.call(
+      #    firm_cik: '0000000000'  
+      #  )
 
-    #   get "/api/v1/projects/#{USERNAME}/#{PROJECT_NAME}/spec"
-    #   _(last_response.status).must_equal 200
-    #   firm_info = JSON.parse last_response.body
-    #   _(firm_info.keys.sort).must_equal %w[folder project]
-    #   _(firm_info['project']['name']).must_equal PROJECT_NAME
-    #   _(firm_info['project']['owner']['username']).must_equal USERNAME
-    #   _(firm_info['project']['contributors'].count).must_equal 3
-    #   _(firm_info['folder']['path']).must_equal 'spec'
-    #   _(firm_info['folder']['subfolders'].count).must_equal 1
-    #   _(firm_info['folder']['line_count']).must_equal 151
-    #   _(firm_info['folder']['base_files'].count).must_equal 3
-    # end
+      get "/api/v1/firm/#{BAD_CIK}"
+      _(last_response.status).must_equal 404
+      _(JSON.parse(last_response.body)['status']).must_include 'not'
+    end
+  end
 
-    # it 'should be report error for an invalid subfolder' do
-    #   SECond::Service::AddFirm.new.call(
-    #     owner_name: USERNAME, project_name: PROJECT_NAME
-    #   )
+  describe 'Add firms route' do
+    it 'should be able to add a project' do
+      post "api/v1/firm/#{CIK}"
 
-    #   get "/api/v1/projects/#{USERNAME}/#{PROJECT_NAME}/foobar"
-    #   _(last_response.status).must_equal 404
-    #   _(JSON.parse(last_response.body)['status']).must_include 'not'
-    # end
+      _(last_response.status).must_equal 201
 
-  #   it 'should be report error for an invalid firm' do
-  #     #  SECond::Service::AddFirm.new.call(
-  #     #    firm_cik: '0000000000'  
-  #     #  )
+      firm = JSON.parse last_response.body
+      _(firm['name']).must_equal FIRM_NAME
 
-  #     get "/api/v1/firm/#{BAD_CIK}"
-  #     _(last_response.status).must_equal 404
-  #     _(JSON.parse(last_response.body)['status']).must_include 'not'
-  #   end
-  # end
+      firm = SECond::Representer::Firm.new(
+        SECond::Representer::OpenStructWithLinks.new
+      ).from_json last_response.body
+      _(firm.links['self'].href).must_include 'firm'
+    end
 
-  # describe 'Add firms route' do
-  #   it 'should be able to add a project' do
-  #     post "api/v1/firm/#{CIK}"
+    it 'should report error for invalid firm' do
+      post 'api/v1/firm/0000000000'
 
-  #     _(last_response.status).must_equal 201
+      _(last_response.status).must_equal 404
 
-  #     firm = JSON.parse last_response.body
-  #     _(firm['name']).must_equal FIRM_NAME
+      response = JSON.parse(last_response.body)
+      _(response['message']).must_include 'not'
+    end
+  end
 
-  #     firm = SECond::Representer::Firm.new(
-  #       SECond::Representer::OpenStructWithLinks.new
-  #     ).from_json last_response.body
-  #     _(firm.links['self'].href).must_include 'firm'
-  #   end
+  describe 'Get firms list' do
+    it 'should successfully return firm lists' do
+      SECond::Service::AddFirm.new.call(
+        firm_cik: CIK
+      )
 
-  #   it 'should report error for invalid firm' do
-  #     post 'api/v1/firm/0000000000'
+      list = ["#{CIK}"]
+      encoded_list = SECond::Request::EncodedFirmList.to_encoded(list)
 
-  #     _(last_response.status).must_equal 404
+      get "/api/v1/firm?list=#{encoded_list}"
+      _(last_response.status).must_equal 200
 
-  #     response = JSON.parse(last_response.body)
-  #     _(response['message']).must_include 'not'
-  #   end
-  # end
+      response = JSON.parse(last_response.body)
+      firms = response['firms']
+      _(firms.count).must_equal 1
+      firm = firms.first
+      _(firm['name']).must_equal FIRM_NAME
+      #_(firm['owner']['username']).must_equal USERNAME
+      #_(firm['contributors'].count).must_equal 3
+    end
 
-  # describe 'Get firms list' do
-  #   it 'should successfully return firm lists' do
-  #     SECond::Service::AddFirm.new.call(
-  #       firm_cik: CIK
-  #     )
+    it 'should return empty lists if none found' do
+      list = ['0000000000']
+      encoded_list = SECond::Request::EncodedFirmList.to_encoded(list)
 
-  #     list = ["#{CIK}"]
-  #     encoded_list = SECond::Request::EncodedFirmList.to_encoded(list)
+      get "/api/v1/firm?list=#{encoded_list}"
+      _(last_response.status).must_equal 200
 
-  #     get "/api/v1/firm?list=#{encoded_list}"
-  #     _(last_response.status).must_equal 200
+      response = JSON.parse(last_response.body)
+      firms = response['firms']
+      _(firms).must_be_kind_of Array
+      _(firms.count).must_equal 0
+    end
 
-  #     response = JSON.parse(last_response.body)
-  #     firms = response['firms']
-  #     _(firms.count).must_equal 1
-  #     firm = firms.first
-  #     _(firm['name']).must_equal FIRM_NAME
-  #     #_(firm['owner']['username']).must_equal USERNAME
-  #     #_(firm['contributors'].count).must_equal 3
-  #   end
+    it 'should return error if not list provided' do
+      get '/api/v1/firm'
+      _(last_response.status).must_equal 400
 
-  #   it 'should return empty lists if none found' do
-  #     list = ['0000000000']
-  #     encoded_list = SECond::Request::EncodedFirmList.to_encoded(list)
-
-  #     get "/api/v1/firm?list=#{encoded_list}"
-  #     _(last_response.status).must_equal 200
-
-  #     response = JSON.parse(last_response.body)
-  #     firms = response['firms']
-  #     _(firms).must_be_kind_of Array
-  #     _(firms.count).must_equal 0
-  #   end
-
-  #   it 'should return error if not list provided' do
-  #     get '/api/v1/firm'
-  #     _(last_response.status).must_equal 400
-
-  #     response = JSON.parse(last_response.body)
-  #     _(response['message']).must_include 'list'
-  #   end
+      response = JSON.parse(last_response.body)
+      _(response['message']).must_include 'list'
+    end
   end
 end

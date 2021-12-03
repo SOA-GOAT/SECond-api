@@ -29,7 +29,7 @@ module SECond
         Repository::For.klass(Entity::Firm).find_ciks(input[:list])
         .then { |firms| Response::FirmsList.new(firms) }
         .then { |list| Response::ApiResult.new(status: :ok, message: list) }
-        .then { |result| Sucess(result)}
+        .then { |result| Success(result)}
       rescue StandardError
         Failure(
           Response::ApiResult.new(status: :internal_error, message: DB_ERR)

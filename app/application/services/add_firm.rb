@@ -30,7 +30,6 @@ module SECond
 
       def find_firm(input)
         firm = firm_in_database(input)
-        puts firm
         if (firm)
           input[:local_firm] = firm
         else
@@ -38,7 +37,6 @@ module SECond
         end
         Success(input)
       rescue StandardError => err
-        puts 'what are doing ERR @@@'
         Failure(Response::ApiResult.new(status: :not_found, message: err.to_s))
       end
 
