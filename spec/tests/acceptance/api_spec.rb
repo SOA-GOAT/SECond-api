@@ -55,7 +55,7 @@ describe 'Test API routes' do
 
     it 'should be report error for an invalid firm' do
       #  SECond::Service::AddFirm.new.call(
-      #    firm_cik: '0000000000'  
+      #    firm_cik: '0000000000'
       #  )
 
       get "/api/v1/firm/#{BAD_CIK}"
@@ -95,7 +95,8 @@ describe 'Test API routes' do
         firm_cik: CIK
       )
 
-      list = ["#{CIK}"]
+      # list = ["#{CIK}"]
+      list = [CIK.to_s]
       encoded_list = SECond::Request::EncodedFirmList.to_encoded(list)
 
       get "/api/v1/firm?list=#{encoded_list}"
@@ -106,8 +107,8 @@ describe 'Test API routes' do
       _(firms.count).must_equal 1
       firm = firms.first
       _(firm['name']).must_equal FIRM_NAME
-      #_(firm['owner']['username']).must_equal USERNAME
-      #_(firm['contributors'].count).must_equal 3
+      # _(firm['owner']['username']).must_equal USERNAME
+      # _(firm['contributors'].count).must_equal 3
     end
 
     it 'should return empty lists if none found' do

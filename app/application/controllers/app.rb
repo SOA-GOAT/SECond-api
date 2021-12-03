@@ -11,7 +11,6 @@ module SECond
 
     use Rack::MethodOverride # for other HTTP verbs (with plugin all_verbs)
 
-    # rubocop:disable Metrics/BlockLength
     route do |routing|
       response['Content-Type'] = 'application/json'
       # GET /
@@ -29,7 +28,6 @@ module SECond
       routing.on 'api/v1' do
         routing.on 'firm' do
           routing.on String do |firm_cik|
-
             # GET /firm/{firm_cik}
             routing.get do
               path_request = Request::FirmPath.new(
@@ -52,7 +50,7 @@ module SECond
                 result.value!.message
               ).to_json
             end
-            
+
             # POST /firm/
             routing.post do
               result = Service::AddFirm.new.call(
@@ -83,12 +81,11 @@ module SECond
 
               http_response = Representer::HttpResponse.new(result.value!)
               response.status = http_response.http_status_code
-              Representer::FirmsList.new(result.value!.message).to_json    
+              Representer::FirmsList.new(result.value!.message).to_json
             end
           end
         end
       end
     end
-    # rubocop:enable Metrics/BlockLength
   end
 end

@@ -7,7 +7,7 @@ module SECond
     # Retrieves array of all listed firm entities
     class ListFirms
       include Dry::Transaction
-      
+
       step :validate_list
       step :retrieve_firms
 
@@ -27,9 +27,9 @@ module SECond
 
       def retrieve_firms(input)
         Repository::For.klass(Entity::Firm).find_ciks(input[:list])
-        .then { |firms| Response::FirmsList.new(firms) }
-        .then { |list| Response::ApiResult.new(status: :ok, message: list) }
-        .then { |result| Success(result)}
+          .then { |firms| Response::FirmsList.new(firms) }
+          .then { |list| Response::ApiResult.new(status: :ok, message: list) }
+          .then { |result| Success(result) }
       rescue StandardError
         Failure(
           Response::ApiResult.new(status: :internal_error, message: DB_ERR)

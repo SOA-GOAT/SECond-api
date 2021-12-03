@@ -29,8 +29,7 @@ module SECond
       end
 
       def find_firm(input)
-        firm = firm_in_database(input)
-        if (firm)
+        if (firm = firm_in_database(input))
           input[:local_firm] = firm
         else
           input[:remote_firm] = firm_from_edgar(input)
@@ -62,7 +61,7 @@ module SECond
       end
 
       def firm_in_database(input)
-        Repository::For.klass(Entity::Firm).find_cik(input[:firm_cik]) 
+        Repository::For.klass(Entity::Firm).find_cik(input[:firm_cik])
       end
     end
   end

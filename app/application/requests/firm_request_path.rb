@@ -9,9 +9,8 @@ module SECond
         @request = request
         @path = request.remaining_path
       end
-  
+
       attr_reader :firm_cik
     end
   end
 end
-  

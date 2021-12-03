@@ -44,7 +44,7 @@ module SECond
       def calculate_readability(input)
         input[:firm_rdb] = Mapper::Readability
           .new.for_firm(input[:requested].firm_cik)
-          
+
         Response::FirmReadability.new(input[:firm_rdb])
           .then do |rdb|
             Success(Response::ApiResult.new(status: :ok, message: rdb))
