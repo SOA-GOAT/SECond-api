@@ -43,10 +43,14 @@ module SECond
 
       def calculate_readability(input)
         input[:firm_rdb] = Mapper::Readability
-          .new.for_firm(input[:requested])
-        firm_rdb = Response::FirmReadability.new(input[:firm_rdb])
-        Success(Response::ApiResult.new(status: :ok, message: firm_rdb))
+          .new.for_firm(input[:requested].firm_cik)
+          
+        Response::FirmReadability.new(input[:firm_rdb])
+          .then do |rdb|
+            Success(Response::ApiResult.new(status: :ok, message: rdb))
+          end
       rescue StandardError
+        puts 'yo 2'
         Failure(Response::ApiResult.new(status: :not_found, message: NO_FILING_ERR))
       end
     end

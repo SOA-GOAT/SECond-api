@@ -15,6 +15,7 @@ require 'webmock'
 require_relative '../../init'
 
 CIK = '0000320193'
+BAD_CIK = '0000000000'
 FIRM_NAME = 'Apple Inc.'
 CORRECT = YAML.safe_load(File.read('spec/fixtures/edgar_results.yml'))
 

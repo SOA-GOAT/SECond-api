@@ -21,20 +21,24 @@ module SECond
       def format_cik(input)
         if CIK_REGEX.match?(input[:firm_cik])
           firm_cik = format('%010d', input[:firm_cik].to_i)
-          Success(firm_cik: firm_cik)
+          input[:firm_cik] = firm_cik
+          Success(input)
         else
           Failure(Response::ApiResult.new(status: :bad_request, message: "CIK #{input.errors.messages.first}"))
         end
       end
 
       def find_firm(input)
-        if (firm = firm_in_database(input))
+        firm = firm_in_database(input)
+        puts firm
+        if (firm)
           input[:local_firm] = firm
         else
           input[:remote_firm] = firm_from_edgar(input)
         end
         Success(input)
       rescue StandardError => err
+        puts 'what are doing ERR @@@'
         Failure(Response::ApiResult.new(status: :not_found, message: err.to_s))
       end
 
@@ -60,7 +64,7 @@ module SECond
       end
 
       def firm_in_database(input)
-        Repository::For.klass(Entity::Firm).find_cik(input[:firm_cik])
+        Repository::For.klass(Entity::Firm).find_cik(input[:firm_cik]) 
       end
     end
   end

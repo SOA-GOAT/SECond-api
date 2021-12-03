@@ -5,12 +5,12 @@ module SECond
     # Application value for the path of a requested frim
     class FirmPath
       def initialize(cik, request)
-        @cik = cik
+        @firm_cik = cik
         @request = request
         @path = request.remaining_path
       end
   
-      attr_reader :cik
+      attr_reader :firm_cik
     end
   end
 end
