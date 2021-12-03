@@ -19,8 +19,9 @@ module SECond
       CIK_REGEX = /^\d{,10}$/
 
       def format_cik(input)
-        if CIK_REGEX.match?(input[:firm_cik])
-          firm_cik = format('%010d', input[:firm_cik].to_i)
+        input_cik = input[:firm_cik]
+        if CIK_REGEX.match?(input_cik)
+          firm_cik = format('%010d', input_cik.to_i)
           input[:firm_cik] = firm_cik
           Success(input)
         else

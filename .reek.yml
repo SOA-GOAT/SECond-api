@@ -14,6 +14,21 @@
       exclude:
         - SECond::FirmFiling
         - SECond::Submission::LocalFirmSubmissions
+    Attribute:
+      exclude:
+        - SECond::Representer::OpenStructWithLinks#links
+    FeatureEnvy:
+      exclude:
+        - SECond::Service::ListFirms#validate_list
+        - SECond::Service::InspectFirm#calculate_readability
+        - SECond::Service::AddFirm#format_cik
+    UncommunicativeVariableName:
+      exclude:
+        - SECond::Service::AddFirm#find_firm
+        - SECond::Service::AddFirm#store_firm
+    RepeatedConditional:
+      exclude:
+        - SECond::App
 
   exclude_paths:
     - _snippets
