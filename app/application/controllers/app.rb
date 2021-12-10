@@ -8,6 +8,7 @@ module SECond
     plugin :halt
     plugin :flash
     plugin :all_verbs # recognizes HTTP verbs beyond GET/POST (e.g., DELETE)
+    plugin :caching
 
     use Rack::MethodOverride # for other HTTP verbs (with plugin all_verbs)
 
@@ -30,6 +31,8 @@ module SECond
           routing.on String do |firm_cik|
             # GET /firm/{firm_cik}
             routing.get do
+              response.cache_control public: true, max_age: 300
+
               path_request = Request::FirmPath.new(
                 firm_cik, request
               )
