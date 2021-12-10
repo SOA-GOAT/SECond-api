@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-folders = %w[submission edgar database]
+folders = %w[edgar database submission cache]
 folders.each do |folder|
   require_relative "#{folder}/init.rb"
 end
