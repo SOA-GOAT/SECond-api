@@ -71,3 +71,9 @@ group :development do
   gem 'reek'
   gem 'rubocop'
 end
+
+# Caching
+gem 'rack-cache', '~> 1.13'
+gem 'redis', '~> 4.5'
+gem 'redis-rack-cache', '~> 2.2'
+
