@@ -21,7 +21,9 @@ module SECond
     use Rack::Session::Cookie, secret: config.SESSION_SECRET
 
     configure :development, :test, :app_test do
+      puts "db file should be at: #{ENV['DB_FILENAME']}"
       ENV['DATABASE_URL'] = "sqlite://#{config.DB_FILENAME}"
+      puts "connecting to: #{ENV['DATABASE_URL']}"
     end
 
     configure :app_test do
