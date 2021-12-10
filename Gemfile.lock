@@ -118,6 +118,12 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.5.1)
+    redis-rack-cache (2.2.1)
+      rack-cache (>= 1.10, < 2)
+      redis-store (>= 1.6, < 2)
+    redis-store (1.9.0)
+      redis (>= 4, < 5)
     reek (6.0.6)
       kwalify (~> 0.7.0)
       parser (~> 3.0.0)
@@ -181,9 +187,11 @@ DEPENDENCIES
   pry
   puma (~> 5.5)
   rack (~> 2)
-  rack-cache
+  rack-cache (~> 1.13)
   rack-test
   rake (~> 13.0)
+  redis (~> 4.5)
+  redis-rack-cache (~> 2.2)
   reek
   rerun (~> 0)
   roar (~> 1.1)

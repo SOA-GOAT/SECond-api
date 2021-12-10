@@ -61,10 +61,6 @@ end
 # DEBUGGING
 gem 'pry'
 
-# APPLICATION LAYER
-# Web application related 
-gem 'rack-cache'
-
 # QUALITY
 group :development do
   gem 'flog'
