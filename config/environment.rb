@@ -4,7 +4,7 @@ require 'figaro'
 require 'roda'
 require 'sequel'
 require 'delegate' # needed until Rack 2.3 fixes delegateclass bug
-require 'rack/cache' 
+require 'rack/cache'
 require 'redis-rack-cache'
 
 module SECond
