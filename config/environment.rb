@@ -4,7 +4,7 @@ require 'figaro'
 require 'roda'
 require 'sequel'
 require 'delegate' # needed until Rack 2.3 fixes delegateclass bug
-require 'rack/cache' 
+require 'rack/cache'
 require 'redis-rack-cache'
 
 module SECond
@@ -31,8 +31,8 @@ module SECond
 
       use Rack::Cache,
           verbose: true,
-          metastore: config.REDISCLOUD_URL + '/0/metastore',
-          entitystore: config.REDISCLOUD_URL + '/0/entitystore'
+          metastore: "#{config.REDISCLOUD_URL}/0/metastore",
+          entitystore: "#{config.REDISCLOUD_URL}/0/entitystore"
     end
 
     configure :development do

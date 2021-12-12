@@ -72,4 +72,3 @@ end
 gem 'rack-cache', '~> 1.13'
 gem 'redis', '~> 4.5'
 gem 'redis-rack-cache', '~> 2.2'
-
