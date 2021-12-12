@@ -4,6 +4,8 @@ require 'figaro'
 require 'roda'
 require 'sequel'
 require 'delegate' # needed until Rack 2.3 fixes delegateclass bug
+require 'rack/cache'
+require 'redis-rack-cache'
 
 module SECond
   # Configuration for the App
@@ -24,6 +26,22 @@ module SECond
       puts "db file should be at: #{ENV['DB_FILENAME']}"
       ENV['DATABASE_URL'] = "sqlite://#{config.DB_FILENAME}"
       puts "connecting to: #{ENV['DATABASE_URL']}"
+    end
+
+    configure :production do
+      # Set DATABASE_URL environment variable on production platform
+
+      use Rack::Cache,
+          verbose: true,
+          metastore: "#{config.REDISCLOUD_URL}/0/metastore",
+          entitystore: "#{config.REDISCLOUD_URL}/0/entitystore"
+    end
+
+    configure :development do
+      use Rack::Cache,
+          verbose: true,
+          metastore: 'file:_cache/rack/meta',
+          entitystore: 'file:_cache/rack/body'
     end
 
     configure :app_test do
