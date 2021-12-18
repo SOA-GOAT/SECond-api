@@ -8,8 +8,8 @@ module SECond
     class InspectFirm
       include Dry::Transaction
 
-      step :retrieve_remote_firm
-      step :download_remote
+      step :find_firm_details
+      step :request_downloading_worker
       step :calculate_readability
 
       private
@@ -18,8 +18,9 @@ module SECond
       DB_ERR = 'Having trouble accessing the database'
       DOWNLOAD_ERR = 'Could not download this firm'
       NO_FILING_ERR = 'Could not find that filing'
+      PROCESSING_MSG = 'Processing the summary request'
 
-      def retrieve_remote_firm(input)
+      def find_firm_details(input)
         input[:firm] = Repository::For.klass(Entity::Firm).find_cik(input[:requested].firm_cik)
 
         if input[:firm]
@@ -31,13 +32,16 @@ module SECond
         Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERR))
       end
 
-      def download_remote(input)
+      def request_downloading_worker(input)
         firm_filings = FirmFiling.new(input[:firm])
-        firm_filings.download! unless firm_filings.exists_locally?
+        return Success(input.merge(firm_filings: firm_filings)) if firm_filings.exists_locally?
 
-        Success(input.merge(firm_filings: firm_filings))
-      rescue StandardError
-        puts error.backtrace.join("\n")
+        Messaging::Queue
+          .new(App.config.DOWNLOAD_QUEUE_URL, App.config)
+          .send(Representer::Firm.new(input[:firm]).to_json)
+        Failure(Response::ApiResult.new(status: :processing, message: PROCESSING_MSG))
+      rescue StandardError => e
+        print_error(e)
         Failure(Response::ApiResult.new(status: :internal_error, message: DOWNLOAD_ERR))
       end
 
@@ -51,6 +55,12 @@ module SECond
           end
       rescue StandardError
         Failure(Response::ApiResult.new(status: :not_found, message: NO_FILING_ERR))
+      end
+
+      # Helper methods for steps
+
+      def print_error(error)
+        puts [error.inspect, error.backtrace].flatten.join("\n")
       end
     end
   end

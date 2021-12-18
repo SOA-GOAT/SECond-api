@@ -8,6 +8,7 @@
         - SECond::Edgar::EdgarApi#download_submission_url
         - SECond::Edgar::EdgarApi#submission_data
         - SECond::Service::AddFirm#store_firm
+        - SECond::Service::InspectFirm#request_downloading_worker
     UtilityFunction:
       enabled: false
     MissingSafeMethod:
@@ -22,13 +23,19 @@
         - SECond::Service::ListFirms#validate_list
         - SECond::Service::InspectFirm#calculate_readability
         - SECond::Service::AddFirm#format_cik
+        - SECond::Service::InspectFirm#print_error
+        - SECond::Messaging::Queue#initialize
     UncommunicativeVariableName:
       exclude:
         - SECond::Service::AddFirm#find_firm
         - SECond::Service::AddFirm#store_firm
+        - SECond::Service::InspectFirm#request_downloading_worker
     RepeatedConditional:
       exclude:
         - SECond::App
+    DuplicateMethodCall:
+      exclude:
+        - SECond::Service::InspectFirm#request_downloading_worker
 
   exclude_paths:
     - _snippets

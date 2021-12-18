@@ -68,3 +68,5 @@ coverage/*
 spec/fixtures/cassettes/edgar_api.yml
 
 _cache/
+
+config/secrets.yml

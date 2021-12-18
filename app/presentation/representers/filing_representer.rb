@@ -17,8 +17,8 @@ module SECond
       property :accession_number
       property :form_type
       property :filing_date
-      property :reporting_date
-      property :primary_document
+      # property :reporting_date
+      # property :primary_document
       property :size
     end
   end

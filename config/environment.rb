@@ -15,7 +15,7 @@ module SECond
     # Environment variables setup
     Figaro.application = Figaro::Application.new(
       environment: environment,
-      path: File.expand_path('config/secrets_example.yml')
+      path: File.expand_path('config/secrets.yml')
     )
     Figaro.load
     def self.config() = Figaro.env
