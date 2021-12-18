@@ -44,7 +44,7 @@ describe 'Test API routes' do
       get "/api/v1/firm/#{CIK}"
       _(last_response.status).must_equal 202
 
-      5.times { sleep(1) and print('.') }
+      5.times { sleep(15) and print('_') }
 
       get "/api/v1/firm/#{CIK}"
       _(last_response.status).must_equal 200

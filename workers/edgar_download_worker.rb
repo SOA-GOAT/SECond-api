@@ -27,7 +27,7 @@ class EdgarDownloadWorker
   def perform(_sqs_msg, request)
     firm = SECond::Representer::Firm
       .new(OpenStruct.new).from_json(request)
-    SECond::FirmFiling.new(firm).download
+    SECond::FirmFiling.new(firm).download!
   rescue SECond::FirmFiling::Errors::CannotOverwriteLocalFirmSubmission
     puts 'DOWNLOAD EXISTS -- ignoring request'
   end
