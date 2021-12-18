@@ -17,6 +17,7 @@ describe 'Test API routes' do
   before do
     VcrHelper.configure_vcr_for_edgar
     DatabaseHelper.wipe_database
+    SECond::Repository::FilingStore.wipe
   end
 
   after do
@@ -39,6 +40,11 @@ describe 'Test API routes' do
       SECond::Service::AddFirm.new.call(
         firm_cik: CIK
       )
+
+      get "/api/v1/firm/#{CIK}"
+      _(last_response.status).must_equal 202
+
+      5.times { sleep(1) and print('.') }
 
       get "/api/v1/firm/#{CIK}"
       _(last_response.status).must_equal 200
