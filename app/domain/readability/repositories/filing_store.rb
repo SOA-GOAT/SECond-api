@@ -7,7 +7,7 @@ module SECond
     # Collection of all local edgar firm filings download
     class FilingStore
       def self.all
-        Dir.glob(App.config.TENKSTORE_PATH + '/*')
+        Dir.glob("#{App.config.TENKSTORE_PATH}/*")
       end
 
       def self.wipe

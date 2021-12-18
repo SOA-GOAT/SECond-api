@@ -203,6 +203,7 @@ namespace :queues do
   end
 end
 
+# rubocop:disable Layout/LineLength
 namespace :worker do
   namespace :run do
     desc 'Run the background downloading worker in development mode'
@@ -221,6 +222,7 @@ namespace :worker do
     end
   end
 end
+# rubocop:enable Layout/LineLength
 
 desc 'Run application console'
 task :console do

@@ -39,7 +39,6 @@ module SECond
         Messaging::Queue
           .new(App.config.DOWNLOAD_QUEUE_URL, App.config)
           .send(Representer::Firm.new(input[:firm]).to_json)
-                
         Failure(Response::ApiResult.new(status: :processing, message: PROCESSING_MSG))
       rescue StandardError => e
         print_error(e)
