@@ -43,7 +43,7 @@ gem 'concurrent-ruby', '~> 1.1'
 
 # WORKER
 gem 'shoryuken', '~> 5.3'
-gem 'faye', '~> 1.4'
+gem 'faye', '~> 1'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.4'

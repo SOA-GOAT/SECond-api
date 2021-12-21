@@ -5,7 +5,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.541.0)
+    aws-partitions (1.542.0)
     aws-sdk-core (3.124.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -128,7 +128,7 @@ GEM
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
     method_source (1.0.0)
-    minitest (5.14.4)
+    minitest (5.15.0)
     minitest-rg (5.2.0)
       minitest (~> 5.0)
     multi_json (1.15.0)
@@ -172,7 +172,7 @@ GEM
     rexml (3.2.5)
     roar (1.1.1)
       representable (~> 3.0)
-    roda (3.50.0)
+    roda (3.51.0)
       rack
     rubocop (0.7.2)
       rainbow (>= 1.1.4)
@@ -208,10 +208,6 @@ GEM
     websocket-extensions (0.1.5)
 
 PLATFORMS
-  arm64-darwin-20
-  arm64-darwin-21
-  x86_64-darwin-19
-  x86_64-darwin-20
   x86_64-linux
 
 DEPENDENCIES
@@ -222,7 +218,7 @@ DEPENDENCIES
   dry-transaction (~> 0.13)
   dry-types (~> 1.5)
   dry-validation (~> 1.7)
-  faye (~> 1.4)
+  faye (~> 1)
   figaro (~> 1.2)
   flog
   hirb (~> 0)
@@ -256,4 +252,4 @@ RUBY VERSION
    ruby 3.0.2p107
 
 BUNDLED WITH
-   2.2.22
+   2.2.31
