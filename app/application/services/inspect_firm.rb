@@ -34,7 +34,7 @@ module SECond
       end
 
       def request_downloading_worker(input)
-        firm_filings = FirmFiling.new(input[:firm])
+        firm_filings = FirmFiling.new(input[:firm], input[:config])
         return Success(input.merge(firm_filings: firm_filings)) if firm_filings.exists_locally?
 
         Messaging::Queue
@@ -72,6 +72,7 @@ module SECond
         Response::DownloadRequest.new(input[:firm], input[:request_id])
            .then { Representer::DownloadRequest.new(_1) }
            .then(&:to_json)
+      end
     end
   end
 end

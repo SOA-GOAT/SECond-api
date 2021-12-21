@@ -6,7 +6,7 @@ module EdgarDownload
     DOWNLOAD_PROGRESS = {
       'STARTED'     => 15,
       'Downloading' => 30,
-      'remote' .    => 70,
+      'remote'      => 70,
       'Receiving'   => 85,
       'Resolving'   => 95,
       'Checking'    => 100,
