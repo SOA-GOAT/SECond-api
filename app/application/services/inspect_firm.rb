@@ -34,17 +34,17 @@ module SECond
       end
 
       def request_downloading_worker(input)
-        firm_filings = FirmFiling.new(input[:firm], input[:config])
+        firm_filings = FirmFiling.new(input[:firm], App.config)
         return Success(input.merge(firm_filings: firm_filings)) if firm_filings.exists_locally?
 
         Messaging::Queue
           .new(App.config.DOWNLOAD_QUEUE_URL, App.config)
           .send(download_request_json(input))
 
-        Failure(Response::ApiResult.new(
-          status: :processing, 
-          message: { request_id: input[:request_id], msg: PROCESSING_MSG }
-        ))
+          Failure(Response::ApiResult.new(
+            status: :processing, 
+            message: { request_id: input[:request_id], msg: PROCESSING_MSG }
+          ))
       rescue StandardError => e
         print_error(e)
         Failure(Response::ApiResult.new(status: :internal_error, message: DOWNLOAD_ERR))
