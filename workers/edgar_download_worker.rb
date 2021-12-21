@@ -3,6 +3,7 @@
 require_relative '../app/domain/init'
 require_relative '../app/application/requests/init'
 require_relative '../app/infrastructure/edgar/init'
+require_relative '../app/infrastructure/submission/init'
 require_relative '../app/presentation/representers/init'
 require_relative 'download_monitor'
 require_relative 'job_reporter'
