@@ -18,8 +18,9 @@ module SECond
       DB_ERR = 'Having trouble accessing the database'
       DOWNLOAD_ERR = 'Could not download this firm'
       NO_FILING_ERR = 'Could not find that filing'
-      PROCESSING_MSG = 'Processing the summary request'
+      PROCESSING_MSG = 'Inspecting firm'
 
+      # input hash keys expected: :firm, :requested, :config
       def find_firm_details(input)
         input[:firm] = Repository::For.klass(Entity::Firm).find_cik(input[:requested].firm_cik)
 
@@ -33,13 +34,15 @@ module SECond
       end
 
       def request_downloading_worker(input)
-        firm_filings = FirmFiling.new(input[:firm])
+        firm_filings = FirmFiling.new(input[:firm], App.config)
         return Success(input.merge(firm_filings: firm_filings)) if firm_filings.exists_locally?
 
         Messaging::Queue
           .new(App.config.DOWNLOAD_QUEUE_URL, App.config)
-          .send(Representer::Firm.new(input[:firm]).to_json)
-        Failure(Response::ApiResult.new(status: :processing, message: PROCESSING_MSG))
+          .send(download_request_json(input))
+
+        Failure(Response::ApiResult
+          .new(status: :processing, message: { request_id: input[:request_id], msg: PROCESSING_MSG }))
       rescue StandardError => e
         print_error(e)
         Failure(Response::ApiResult.new(status: :internal_error, message: DOWNLOAD_ERR))
@@ -61,6 +64,12 @@ module SECond
 
       def print_error(error)
         puts [error.inspect, error.backtrace].flatten.join("\n")
+      end
+
+      def download_request_json(input)
+        Response::DownloadRequest.new(input[:firm], input[:request_id])
+          .then { Representer::DownloadRequest.new(_1) }
+          .then(&:to_json)
       end
     end
   end

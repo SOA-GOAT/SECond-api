@@ -33,12 +33,16 @@ module SECond
             routing.get do
               response.cache_control public: true, max_age: 300
 
+              request_id = [request.env, request.path, Time.now.to_f].hash
+
               path_request = Request::FirmPath.new(
                 firm_cik, request
               )
 
               result = Service::InspectFirm.new.call(
-                requested: path_request
+                requested: path_request,
+                request_id: request_id,
+                config: App.config
               )
 
               if result.failure?

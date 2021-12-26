@@ -9,10 +9,10 @@ module SECond
       CannotOverwriteLocalFirmSubmission = Class.new(StandardError)
     end
 
-    def initialize(firm, config = SECond::App.config)
+    def initialize(firm, config)
       @firm = firm
       # remote = Submission::RemoteFirmSubmission.new(@firm.http_url)
-      @local = Submission::LocalFirmSubmissions.new(firm.filings, config.TENKSTORE_PATH)
+      @local = SECond::Submission::LocalFirmSubmissions.new(firm.filings, config.TENKSTORE_PATH)
     end
 
     def local

@@ -17,7 +17,7 @@ describe 'Test Readability score Mapper and Gateway' do
     @firm = SECond::Repository::For.entity(edgar_firm)
       .create(edgar_firm)
 
-    @firm_filings = SECond::FirmFiling.new(@firm)
+    @firm_filings = SECond::FirmFiling.new(@firm, SECond::App.config)
     @firm_filings.download! unless @firm_filings.exists_locally?
 
     @root = SECond::Mapper::Readability.new.for_firm(@firm.cik)

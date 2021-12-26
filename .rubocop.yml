@@ -25,6 +25,7 @@ Metrics/MethodLength:
   Enabled: true
   Exclude:
     - app/domain/firms/repositories/filings.rb # Rebuild filing entity requires large blocks
+    - app/application/services/inspect_firm.rb
     
 Metrics/AbcSize:
   Enabled: true
