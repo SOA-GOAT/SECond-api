@@ -41,10 +41,8 @@ module SECond
           .new(App.config.DOWNLOAD_QUEUE_URL, App.config)
           .send(download_request_json(input))
 
-          Failure(Response::ApiResult.new(
-            status: :processing, 
-            message: { request_id: input[:request_id], msg: PROCESSING_MSG }
-          ))
+        Failure(Response::ApiResult
+          .new(status: :processing, message: { request_id: input[:request_id], msg: PROCESSING_MSG }))
       rescue StandardError => e
         print_error(e)
         Failure(Response::ApiResult.new(status: :internal_error, message: DOWNLOAD_ERR))
@@ -70,8 +68,8 @@ module SECond
 
       def download_request_json(input)
         Response::DownloadRequest.new(input[:firm], input[:request_id])
-           .then { Representer::DownloadRequest.new(_1) }
-           .then(&:to_json)
+          .then { Representer::DownloadRequest.new(_1) }
+          .then(&:to_json)
       end
     end
   end

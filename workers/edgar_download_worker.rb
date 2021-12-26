@@ -13,6 +13,7 @@ require 'shoryuken'
 
 # Shoryuken worker class to download filings in parallel
 module EdgarDownload
+  # Shoryuken worker class to download filings in parallel
   class Worker
     # Environment variables setup
     Figaro.application = Figaro::Application.new(
