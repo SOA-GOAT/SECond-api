@@ -57,7 +57,7 @@ module SECond
               ).to_json
             end
 
-            # POST /firm/
+            # POST /firm/{firm_cik}
             routing.post do
               result = Service::AddFirm.new.call(
                 firm_cik: firm_cik
