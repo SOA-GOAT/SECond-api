@@ -21,7 +21,7 @@ module SECond
         result_response = Representer::HttpResponse.new(
           Response::ApiResult.new(status: :ok, message: message)
         )
-
+        print 'I am home'
         response.status = result_response.http_status_code
         result_response.to_json
       end
@@ -32,13 +32,12 @@ module SECond
             # GET /firm/{firm_cik}
             routing.get do
               response.cache_control public: true, max_age: 300
-
               request_id = [request.env, request.path, Time.now.to_f].hash
 
               path_request = Request::FirmPath.new(
                 firm_cik, request
               )
-
+              puts 'working!!!'
               result = Service::InspectFirm.new.call(
                 requested: path_request,
                 request_id: request_id,

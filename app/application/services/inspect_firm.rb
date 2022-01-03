@@ -27,16 +27,19 @@ module SECond
         if input[:firm]
           Success(input)
         else
+          puts 'find firm detail err'
           Failure(Response::ApiResult.new(status: :not_found, message: NO_FIRM_ERR))
         end
       rescue StandardError
+        puts 'put put put stand'
         Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERR))
       end
 
       def request_downloading_worker(input)
+        puts 'here'
         firm_filings = FirmFiling.new(input[:firm], App.config)
         return Success(input.merge(firm_filings: firm_filings)) if firm_filings.exists_locally?
-
+        puts "Hello Worker"
         Messaging::Queue
           .new(App.config.DOWNLOAD_QUEUE_URL, App.config)
           .send(download_request_json(input))
@@ -44,6 +47,7 @@ module SECond
         Failure(Response::ApiResult
           .new(status: :processing, message: { request_id: input[:request_id], msg: PROCESSING_MSG }))
       rescue StandardError => e
+        puts 'yo err'
         print_error(e)
         Failure(Response::ApiResult.new(status: :internal_error, message: DOWNLOAD_ERR))
       end
