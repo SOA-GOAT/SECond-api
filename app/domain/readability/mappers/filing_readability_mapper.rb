@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# require_relative 'blame_contributor'
+require 'nokogiri'
 
 module SECond
   module Mapper
@@ -26,7 +26,9 @@ module SECond
 
         # convert fiiling into sentnces
         content = file.read
-        content.split(/\.|\?|!/)
+        document = Nokogiri::HTML(content).text
+
+        sentences = document.split(/(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?|\!)\s/)
       end
 
       def sentences_summaries
