@@ -3,7 +3,7 @@
 module SECond
   module Mapper
     # Git contributions parsing and reporting services
-    class Readability
+    class ReadabilityScore
       def initialize; end
 
       # To be rename...

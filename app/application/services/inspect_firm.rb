@@ -53,7 +53,7 @@ module SECond
       end
 
       def calculate_readability(input)
-        input[:firm_rdb] = Mapper::Readability
+        input[:firm_rdb] = Mapper::ReadabilityScore
           .new.for_firm(input[:requested].firm_cik)
 
         Response::FirmReadability.new(input[:firm_rdb])

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'nokogiri'
+require 'rubygems'
+require 'readability'
 
 module SECond
   module Mapper
@@ -25,7 +27,8 @@ module SECond
         file = File.open(filing_path)
 
         # convert fiiling into sentnces
-        content = file.read
+        source = file.read
+        content = Readability::Document.new(source).content
         document = Nokogiri::HTML(content).text
 
         sentences = document.split(/(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?|\!)\s/)
