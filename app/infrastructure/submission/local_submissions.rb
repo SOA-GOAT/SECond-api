@@ -17,18 +17,18 @@ module SECond
       attr_reader :edgar_tenk_path
 
       def initialize(firm_filings, tenkstore_path)
-        @firm_filings = firm_filings
+        @firm_filings = firm_filings.select { |filing| filing.form_type.include? '10-K' }
         @cik = firm_filings[0].cik
         @edgar_tenk_path = [tenkstore_path, @cik].join('/')
       end
 
-      def select_tenk
-        @firm_filings.select { |filing| filing.form_type.include? '10-K' }
-      end
+      # def select_tenk
+      #   @firm_filings.select { |filing| filing.form_type.include? '10-K' }
+      # end
 
       def download_tenk
         api = Edgar::EdgarApi.new
-        select_tenk.each do |tenk|
+        @firm_filings.each do |tenk|
           api.download_submission_url(@cik, tenk.accession_number)
         end
         # @remote.local_clone(@edgar_tenk_path) { |line| yield line if block_given? }

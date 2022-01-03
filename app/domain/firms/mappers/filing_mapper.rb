@@ -11,9 +11,10 @@ module SECond
 
       # :reek:FeatureEnvy
       def load_several(cik)
-        filing_hash = @gateway.submission_data(cik)
+        filing_hash = @gateway.submission_data(cik)        
         keys = filing_hash.keys
         size = filing_hash['accessionNumber'].size
+
         (0..size - 1).map do |index|
           data = {}
           keys.each { |key| data[key] = filing_hash[key][index] }

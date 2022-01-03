@@ -60,7 +60,9 @@ module SECond
         end
 
         def filings
-          @filing_mapper.load_several(@data['cik'])
+          all_filings = @filing_mapper.load_several(@data['cik'])
+          tenk_filings = all_filings.select { |filing| filing.form_type == '10-K' }
+          tenk_filings
         end
       end
     end
