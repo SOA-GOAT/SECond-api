@@ -82,3 +82,5 @@ gem 'redis', '~> 4.5'
 gem 'redis-rack-cache', '~> 2.2'
 
 gem 'nokogiri'
+
+gem "ruby-readability", "~> 0.7.0"
