@@ -7,11 +7,8 @@ require 'dry-struct'
 
 module SECond
   module Entity
-    # Entity for a sentence in paragraph
+    # Entity for a sentence in filing
     class SentenceReadability
-      #  NOT_READABLE = 0
-      #  READABLE = 1
-      # length是一句話有幾個字，number是第幾句
       attr_reader :sentence
 
       def initialize(sentence:)

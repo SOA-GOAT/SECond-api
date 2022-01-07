@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+require 'sentiment_lib'
+
 module SECond
   module Entity
     # Entity for file contributions
     class FilingReadability
       include Mixins::ReadabilityCalculator
-      # paragraphs 是 filing 有幾段
       attr_reader :sentences
       attr_reader :filing_rdb
 
@@ -22,6 +23,12 @@ module SECond
 
       def size
         @sentences.size
+      end
+
+      def sentiment_score
+        document = @sentences.join(' ')
+        analyzer = SentimentLib::Analyzer.new(:strategy => SentimentLib::Analysis::Strategies::FinancialDictStrategy.new)
+        analyzer.analyze(document)
       end
     end
   end
