@@ -18,7 +18,7 @@ module SECond
       property :form_type
       property :filing_date
       # property :reporting_date
-      # property :primary_document
+      property :primary_document
       property :size
     end
   end
