@@ -85,3 +85,6 @@ gem 'nokogiri'
 
 gem "ruby-readability", "~> 0.7.0"
 gem 'sentiment_lib'
+
+gem 'stopwords-filter', require: 'stopwords'
+gem 'words_counted'
