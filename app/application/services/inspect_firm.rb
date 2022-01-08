@@ -53,12 +53,12 @@ module SECond
       end
 
       def calculate_readability(input)
-        input[:firm_rdb] = Mapper::ReadabilityScore
+        input[:firm_rdb] = Mapper::TextualAttributeScore
           .new.for_firm(input[:requested].firm_cik)
 
         input[:aver_firm_rdb] = input[:firm_rdb].aver_firm_rdb
 
-        Response::FirmReadability.new(input[:firm_rdb], input[:aver_firm_rdb])
+        Response::FirmTextualAttribute.new(input[:firm_rdb], input[:aver_firm_rdb])
           .then do |rdb|
             Success(Response::ApiResult.new(status: :ok, message: rdb))
           end

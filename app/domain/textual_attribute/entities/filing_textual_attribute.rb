@@ -5,7 +5,7 @@ require 'sentiment_lib'
 module SECond
   module Entity
     # Entity for file contributions
-    class FilingReadability
+    class FilingTextualAttribute
       include Mixins::ReadabilityCalculator
       attr_reader :sentences
       attr_reader :filing_rdb

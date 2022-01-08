@@ -20,7 +20,7 @@ describe 'Test Readability score Mapper and Gateway' do
     @firm_filings = SECond::FirmFiling.new(@firm, SECond::App.config)
     @firm_filings.download! unless @firm_filings.exists_locally?
 
-    @root = SECond::Mapper::ReadabilityScore.new.for_firm(@firm.cik)
+    @root = SECond::Mapper::TextualAttributeScore.new.for_firm(@firm.cik)
   end
 
   after do
@@ -34,7 +34,7 @@ describe 'Test Readability score Mapper and Gateway' do
   end
 
   it 'HAPPY: should get accurate readability summary for filings' do
-    # averageforms = SECond::Mapper::ReadabilityScore.new(@firm).for_firm('')
+    # averageforms = SECond::Mapper::TextualAttributeScore.new(@firm).for_firm('')
     filing = @root.filings[0]
     _(filing.size).must_equal 97_082
     _(filing.filing_rdbscore).must_equal 327

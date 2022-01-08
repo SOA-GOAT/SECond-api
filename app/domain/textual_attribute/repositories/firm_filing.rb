@@ -11,7 +11,6 @@ module SECond
 
     def initialize(firm, config)
       @firm = firm
-      # remote = Submission::RemoteFirmSubmission.new(@firm.http_url)
       @local = SECond::Submission::LocalFirmSubmissions.new(firm.filings, config.TENKSTORE_PATH)
     end
 

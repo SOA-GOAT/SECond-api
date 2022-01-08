@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-folders = %w[firms readability]
+folders = %w[firms textual_attribute]
 folders.each do |folder|
   require_relative "#{folder}/init"
 end

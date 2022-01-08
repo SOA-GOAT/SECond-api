@@ -3,7 +3,7 @@
 module SECond
   module Entity
     # Aggregate root for contributions domain
-    class FirmReadability < SimpleDelegator
+    class FirmTextualAttribute < SimpleDelegator
       include Mixins::ReadabilityCalculator
 
       attr_reader :filings

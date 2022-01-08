@@ -8,7 +8,7 @@ require 'dry-struct'
 module SECond
   module Entity
     # Entity for a sentence in filing
-    class SentenceReadability
+    class SentenceTextualAttribute
       attr_reader :sentence
 
       def initialize(sentence:)

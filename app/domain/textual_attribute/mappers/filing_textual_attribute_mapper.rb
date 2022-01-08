@@ -6,14 +6,14 @@ require 'readability'
 
 module SECond
   module Mapper
-    # Summarizes a single file's contributions by team members
-    class FilingReadability
+    # Summarizes a single file's textual attribute
+    class FilingTextualAttribute
       def initialize(filing)
         @filing = filing
       end
 
       def build_entity
-        Entity::FilingReadability.new(
+        Entity::FilingTextualAttribute.new(
           sentences: sentences_summaries
         )
       end
@@ -37,7 +37,7 @@ module SECond
       def sentences_summaries
         sentences = split_into_sentences
         sentences.each do |sentence|
-          Mapper::SentenceReadability.new(sentence).to_entity
+          Mapper::SentenceTextualAttribute.new(sentence).to_entity
         end
       end
     end
