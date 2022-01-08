@@ -31,7 +31,7 @@ module SECond
           routing.on String do |firm_cik|
             # GET /firm/{firm_cik}
             routing.get do
-              response.cache_control public: true, max_age: 300
+              # response.cache_control public: true, max_age: 300
               request_id = [request.env, request.path, Time.now.to_f].hash
 
               path_request = Request::FirmPath.new(
