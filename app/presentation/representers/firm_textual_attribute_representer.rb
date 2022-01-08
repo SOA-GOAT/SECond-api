@@ -12,7 +12,7 @@ module SECond
     class FirmTextualAttribute < Roar::Decorator
       include Roar::JSON
 
-      collection :filings_rdb, extend: Representer::FilingTextualAttribute, class: OpenStruct
+      collection :filings_textual_attribute, extend: Representer::FilingTextualAttribute, class: OpenStruct
       property :aver_firm_rdb
     end
   end

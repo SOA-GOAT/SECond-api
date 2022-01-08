@@ -3,6 +3,6 @@
 module SECond
   module Response
     # Readability for a filing of a filing
-    FirmTextualAttribute = Struct.new(:filings_rdb, :aver_firm_rdb)
+    FirmTextualAttribute = Struct.new(:filings_textual_attribute, :aver_firm_rdb)
   end
 end
