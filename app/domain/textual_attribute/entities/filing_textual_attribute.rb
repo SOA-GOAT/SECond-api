@@ -28,7 +28,7 @@ module SECond
       def sentiment_score
         document = @sentences.join(' ')
         analyzer = SentimentLib::Analyzer.new(:strategy => SentimentLib::Analysis::Strategies::FinancialDictStrategy.new)
-        analyzer.analyze(document)
+        analyzer.analyze(document).to_i
       end
     end
   end
