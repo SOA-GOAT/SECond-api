@@ -8,16 +8,23 @@ module SECond
 
       attr_reader :filings
       attr_reader :aver_firm_rdb
+      attr_reader :aver_firm_sentiment
 
       def initialize(filings:)
         # super(Types::HashedArrays.new)
         super @filings = filings
         @aver_firm_rdb = aver_firm_readability
+        @aver_firm_sentiment = aver_firm_sentiment
       end
 
       # :reek:FeatureEnvy
       def aver_firm_readability
         scores = @filings.map(&:filing_rdbscore)
+        scores.sum / scores.size
+      end
+
+      def aver_firm_sentiment
+        scores = @filings.map(&:sentiment_score)
         scores.sum / scores.size
       end
 

@@ -10,7 +10,7 @@ module SECond
 
       step :find_firm_details
       step :request_downloading_worker
-      step :calculate_readability
+      step :calculate_textual_attribute
 
       private
 
@@ -52,13 +52,14 @@ module SECond
         Failure(Response::ApiResult.new(status: :internal_error, message: DOWNLOAD_ERR))
       end
 
-      def calculate_readability(input)
-        input[:firm_rdb] = Mapper::TextualAttributeScore
+      def calculate_textual_attribute(input)
+        input[:firm_textual_attribute] = Mapper::TextualAttributeScore
           .new.for_firm(input[:requested].firm_cik)
 
-        input[:aver_firm_rdb] = input[:firm_rdb].aver_firm_rdb
+        input[:aver_firm_rdb] = input[:firm_textual_attribute].aver_firm_rdb
+        input[:aver_firm_sentiment] = input[:firm_textual_attribute].aver_firm_sentiment
 
-        Response::FirmTextualAttribute.new(input[:firm_rdb], input[:aver_firm_rdb])
+        Response::FirmTextualAttribute.new(input[:firm_textual_attribute], input[:aver_firm_rdb], input[:aver_firm_sentiment])
           .then do |rdb|
             Success(Response::ApiResult.new(status: :ok, message: rdb))
           end
