@@ -218,6 +218,7 @@ GEM
     simplecov_json_formatter (0.1.3)
     sqlite3 (1.4.2)
     stemmer (1.0.1)
+    stopwords-filter (0.7.0)
     thor (1.1.0)
     trailblazer-option (0.1.2)
     uber (0.1.0)
@@ -233,6 +234,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    words_counted (1.0.3)
 
 PLATFORMS
   arm64-darwin-20
@@ -277,8 +279,10 @@ DEPENDENCIES
   shoryuken (~> 5.3)
   simplecov (~> 0)
   sqlite3 (~> 1.4)
+  stopwords-filter
   vcr (~> 6.0)
   webmock (~> 3.0)
+  words_counted
 
 RUBY VERSION
    ruby 3.0.2p107
