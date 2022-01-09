@@ -4,7 +4,7 @@ module SECond
   module Entity
     # Aggregate root for contributions domain
     class FirmTextualAttribute < SimpleDelegator
-      include Mixins::ReadabilityCalculator
+      include Mixins::WordFrequencyCalculator
 
       attr_reader :filings
       attr_reader :aver_firm_rdb
@@ -24,7 +24,7 @@ module SECond
       end
 
       def aver_firm_sentiment
-        scores = @filings.map(&:sentiment_score)
+        scores = @filings.map(&:filing_sentiment)
         scores.sum / scores.size
       end
 
