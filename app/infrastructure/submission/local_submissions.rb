@@ -20,6 +20,7 @@ module SECond
         @firm_filings = firm_filings.select { |filing| filing.form_type.include? '10-K' }
         @cik = firm_filings[0].cik
         @edgar_tenk_path = [tenkstore_path, @cik].join('/')
+        puts @edgar_tenk_path
       end
 
       # def select_tenk
