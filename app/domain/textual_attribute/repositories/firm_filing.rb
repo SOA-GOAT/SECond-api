@@ -24,7 +24,8 @@ module SECond
     end
 
     def exists_locally?
-      @local.exists?
+      puts "exist??? #{@local.exists?}"
+      puts @local.exists?
     end
 
     # Deliberately :reek:MissingSafeMethod for file system changes
