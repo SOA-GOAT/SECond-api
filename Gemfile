@@ -80,3 +80,11 @@ end
 gem 'rack-cache', '~> 1.13'
 gem 'redis', '~> 4.5'
 gem 'redis-rack-cache', '~> 2.2'
+
+gem 'nokogiri'
+
+gem "ruby-readability", "~> 0.7.0"
+gem 'sentiment_lib'
+
+gem 'stopwords-filter', require: 'stopwords'
+gem 'words_counted'

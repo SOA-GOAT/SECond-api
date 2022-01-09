@@ -21,7 +21,7 @@ module SECond
         result_response = Representer::HttpResponse.new(
           Response::ApiResult.new(status: :ok, message: message)
         )
-
+        print 'I am home'
         response.status = result_response.http_status_code
         result_response.to_json
       end
@@ -31,14 +31,13 @@ module SECond
           routing.on String do |firm_cik|
             # GET /firm/{firm_cik}
             routing.get do
-              response.cache_control public: true, max_age: 300
-
+              # response.cache_control public: true, max_age: 300
               request_id = [request.env, request.path, Time.now.to_f].hash
 
               path_request = Request::FirmPath.new(
                 firm_cik, request
               )
-
+              puts 'working!!!'
               result = Service::InspectFirm.new.call(
                 requested: path_request,
                 request_id: request_id,
@@ -53,12 +52,12 @@ module SECond
               http_response = Representer::HttpResponse.new(result.value!)
               response.status = http_response.http_status_code
 
-              Representer::FirmReadability.new(
+              Representer::FirmTextualAttribute.new(
                 result.value!.message
               ).to_json
             end
 
-            # POST /firm/
+            # POST /firm/{firm_cik}
             routing.post do
               result = Service::AddFirm.new.call(
                 firm_cik: firm_cik

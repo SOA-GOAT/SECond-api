@@ -42,6 +42,7 @@ module SECond
 
         File.open("#{filepath}/#{accession_number}.txt", 'wb') do |file|
           file.write(submission.body)
+          puts accession_number
         end
       end
 
@@ -60,7 +61,9 @@ module SECond
         def get(url)
           http_response =
             HTTP.headers('Accept'     => '*/*',
-                         'Connection' => 'keep-alive').get(url)
+                         'Connection' => 'keep-alive')
+                .via("#{ENV['PROXY_IP']}", 3128, "#{ENV['PROXY_USER']}", "#{ENV['PROXY_PASSWD']}")
+                .get(url)
 
           Response.new(http_response).tap do |response|
             raise(response.error) unless response.successful?

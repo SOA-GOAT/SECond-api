@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'filing_readability_mapper'
+require_relative 'filing_textual_attribute_mapper'
 
 module SECond
   module Mapper
-    # Summarizes readability for an entire firm
-    class FirmReadability
+    # Summarizes textual attribute for an entire firm
+    class FirmTextualAttribute
       attr_reader :filings
 
       def initialize(filings)
@@ -13,14 +13,14 @@ module SECond
       end
 
       def build_entity
-        Entity::FirmReadability.new(
+        Entity::FirmTextualAttribute.new(
           filings: filings_summaries
         )
       end
 
       def filings_summaries
         @filings.map do |filing|
-          Mapper::FilingReadability.new(filing).build_entity
+          Mapper::FilingTextualAttribute.new(filing).build_entity
         end
       end
     end

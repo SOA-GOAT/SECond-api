@@ -8,10 +8,6 @@ module SECond
         super @sentences = sentences
       end
 
-      # def add_score(sentence)
-      #   self[sentence] += sentence.readability_score
-      # end
-
       def readability_score
         (aver_sentence_length**2) / 35
       end

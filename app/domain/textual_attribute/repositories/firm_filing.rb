@@ -11,7 +11,6 @@ module SECond
 
     def initialize(firm, config)
       @firm = firm
-      # remote = Submission::RemoteFirmSubmission.new(@firm.http_url)
       @local = SECond::Submission::LocalFirmSubmissions.new(firm.filings, config.TENKSTORE_PATH)
     end
 
@@ -25,7 +24,8 @@ module SECond
     end
 
     def exists_locally?
-      @local.exists?
+      puts "exist??? #{@local.exists?}"
+      puts @local.exists?
     end
 
     # Deliberately :reek:MissingSafeMethod for file system changes

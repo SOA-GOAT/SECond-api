@@ -9,17 +9,13 @@ module SECond
     # USAGE:
     #   filing = Database::FilingOrm.find(1)
     #   Representer::Filing.new(filing).to_json
-    class Filing < Roar::Decorator
+    class DownloadFiling < Roar::Decorator
       include Roar::JSON
 
       property :id
       property :cik
       property :accession_number
       property :form_type
-      property :filing_date
-      # property :reporting_date
-      property :primary_document
-      property :size
     end
   end
 end
