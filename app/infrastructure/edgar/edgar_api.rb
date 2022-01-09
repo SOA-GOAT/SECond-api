@@ -42,6 +42,7 @@ module SECond
 
         File.open("#{filepath}/#{accession_number}.txt", 'wb') do |file|
           file.write(submission.body)
+          puts accession_number
         end
       end
 
