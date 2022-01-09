@@ -43,8 +43,8 @@ module EdgarDownload
 
       # Keep sending finished status to any latecoming subscribers
       job.report_each_second(5) { DownloadMonitor.finished_percent }
-    rescue SECond::FirmFiling::Errors::CannotOverwriteLocalFirmSubmission
-      puts 'DOWNLOAD EXISTS -- ignoring request'
+    #rescue SECond::FirmFiling::Errors::CannotOverwriteLocalFirmSubmission
+    #  puts 'DOWNLOAD EXISTS -- ignoring request'
     end
   end
 end
